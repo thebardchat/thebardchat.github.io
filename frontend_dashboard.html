@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTRA DASHBOARD - Connected</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00ff88;
+            --secondary: #ff0066;
+            --accent: #0066ff;
+            --warning: #ffaa00;
+            --danger: #ff3366;
+            --success: #00ff88;
+            --dark: #0a0a0f;
+            --dark-2: #151520;
+            --dark-3: #202030;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff00;
+            --text: #ffffff;
+            --text-muted: #aaaacc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 102, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 50%, var(--dark-3) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background grid animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.03) 25%, rgba(0, 255, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.03) 75%, rgba(0, 255, 255, 0.03) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.03) 25%, rgba(0, 255, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.03) 75%, rgba(0, 255, 255, 0.03) 76%, transparent 77%, transparent);
+            background-size: 30px 30px;
+            animation: grid-move 20s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+
+        /* Login Modal */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .login-form {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            width: 400px;
+            text-align: center;
+        }
+
+        .login-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.2);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            border: none;
+            border-radius: 10px;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: var(--danger);
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Connection Status */
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 10px 15px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--danger);
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.connected {
+            background: var(--success);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Header Section */
+        .header {
+            padding: 20px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+            animation: header-scan 4s linear infinite;
+        }
+
+        @keyframes header-scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), var(--neon-cyan), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--primary);
+            animation: logo-pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes logo-pulse {
+            0% { filter: brightness(1) drop-shadow(0 0 10px var(--primary)); }
+            100% { filter: brightness(1.2) drop-shadow(0 0 20px var(--primary)); }
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 15px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+        }
+
+        .logout-btn {
+            background: var(--danger);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .system-stats {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 15px 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            min-width: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.3;
+            animation: stat-sweep 3s linear infinite;
+        }
+
+        @keyframes stat-sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--dark-2);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: var(--dark);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+            font-weight: 700;
+        }
+
+        .nav-btn:hover:not(.active) {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .grid-overview {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+
+        .grid-full {
+            grid-template-columns: 1fr;
+        }
+
+        /* Widget System */
+        .widget {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .widget:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 255, 136, 0.3);
+            border-color: var(--primary);
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .widget-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .widget-icon {
+            font-size: 1.6rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 8px var(--primary));
+        }
+
+        .btn {
+            background: var(--primary);
+            border: none;
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Real-time stats */
+        .realtime-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .realtime-stat {
+            background: var(--dark-2);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .realtime-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            animation: loading-bar 3s ease-in-out infinite;
+        }
+
+        @keyframes loading-bar {
+            0%, 100% { transform: scaleX(0); }
+            50% { transform: scaleX(1); }
+        }
+
+        .realtime-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 8px;
+        }
+
+        .realtime-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Activity Feed */
+        .activity-feed {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            background: var(--dark-2);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            background: var(--dark-3);
+            transform: translateX(5px);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--glass-border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Tab content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .system-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Connection Status -->
+    <div class="connection-status">
+        <div class="status-dot" id="connectionDot"></div>
+        <span id="connectionText">Connecting...</span>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-form">
+            <div class="login-title">ULTRA DASHBOARD</div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-input" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <div id="loginError" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">ULTRA DASH</div>
+            <div class="header-actions">
+                <div class="user-info">
+                    <span>👤</span>
+                    <span id="currentUser">User</span>
+                </div>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+            <div class="system-stats">
+                <div class="stat">
+                    <div class="stat-value" id="cpu">--</div>
+                    <div class="stat-label">CPU</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="memory">--</div>
+                    <div class="stat-label">Memory</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="network">--</div>
+                    <div class="stat-label">Network</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="uptime">--</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="switchTab('overview')">🎯 Overview</button>
+            <button class="nav-btn" onclick="switchTab('analytics')">📊 Analytics</button>
+            <button class="nav-btn" onclick="switchTab('performance')">⚡ Performance</button>
+            <button class="nav-btn" onclick="switchTab('monitoring')">📡 Monitoring</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="dashboard-grid grid-overview">
+                <!-- System Performance -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <span class="widget-icon">⚡</span>
+                            Live System Metrics
+                        </div>
+                        <button class="btn" onclick="refreshDashboard()">Refresh</button>
+                    </div>
+                    <div class="realtime-grid">
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="activeUsers">--</div>
+                            <div class="realtime-label">Active Users</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="requestsPerMin">--</div>
+                            <div class="realtime-label">Requests/min</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="errorRate">--</div>
+                            <div class="realtime-label">Error Rate</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="responseTime">--</div>
+                            <div class="realtime-label">Response Time</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Feed -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <span class="widget-icon">📡</span>
+                            System Activity
+                        </div>
+                    </div>
+                    <div class="activity-feed" id="activityFeed">
+                        <div class="loading-spinner"></div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Stats -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <span class="widget-icon">📊</span>
+                            Dashboard Statistics
+                        </div>
+                    </div>
+                    <div class="realtime-grid">
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="totalUsers">--</div>
+                            <div class="realtime-label">Total Users</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="systemHealth">--</div>
+                            <div class="realtime-label">System Health</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="avgResponseTime">--</div>
+                            <div class="realtime-label">Avg Response</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="uptimePercentage">--</div>
+                            <div class="realtime-label">Uptime</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Tab -->
+        <div id="analytics" class="tab-content">
+            <div class="dashboard-grid grid-overview">
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <span class="widget-icon">📈</span>
+                            Performance Analytics
+                        </div>
+                    </div>
+                    <div style="padding: 40px; text-align: center; color: var(--text-muted);">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">📊</div>
+                        <div>Analytics data from API</div>
+                        <div style="margin-top: 10px;">Connected to FastAPI backend</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Tab -->
+        <div id="performance" class="tab-content">
+            <div class="dashboard-grid grid-overview">
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <span class="widget-icon">⚡</span>
+                            Real-time Performance
+                        </div>
+                    </div>
+                    <div class="realtime-grid">
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="perfCpu">--</div>
+                            <div class="realtime-label">CPU Usage</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="perfMemory">--</div>
+                            <div class="realtime-label">Memory</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="perfNetwork">--</div>
+                            <div class="realtime-label">Network</div>
+                        </div>
+                        <div class="realtime-stat">
+                            <div class="realtime-value" id="perfUsers">--</div>
+                            <div class="realtime-label">Users</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monitoring Tab -->
+        <div id="monitoring" class="tab-content">
+            <div class="dashboard-grid grid-overview">
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <span class="widget-icon">📡</span>
+                            System Monitoring
+                        </div>
+                    </div>
+                    <div style="padding: 40px; text-align: center; color: var(--text-muted);">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">🔍</div>
+                        <div>Monitoring data from API</div>
+                        <div style="margin-top: 10px; color: var(--primary);">WebSocket Connected</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:8000';
+        const WS_URL = 'ws://localhost:8000/ws';
+        
+        // Global variables
+        let authToken = localStorage.getItem('authToken');
+        let websocket = null;
+        let currentUser = localStorage.getItem('currentUser');
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            if (authToken && currentUser) {
+                hideLoginModal();
+                initializeDashboard();
+            } else {
+                showLoginModal();
+            }
+        });
+
+        // Authentication Functions
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function hideLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('currentUser').textContent = currentUser || 'User';
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            try {
+                const formData = new FormData();
+                formData.append('username', username);
+                formData.append('password', password);
+                
+                const response = await fetch(`${API_BASE_URL}/api/auth/token`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    authToken = data.access_token;
+                    currentUser = username;
+                    
+                    localStorage.setItem('authToken', authToken);
+                    localStorage.setItem('currentUser', currentUser);
+                    
+                    hideLoginModal();
+                    initializeDashboard();
+                    showNotification('Login successful!', 'success');
+                } else {
+                    errorDiv.textContent = 'Invalid username or password';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                errorDiv.textContent = 'Connection error. Please try again.';
+            }
+        });
+
+        function logout() {
+            authToken = null;
+            currentUser = null;
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('currentUser');
+            
+            if (websocket) {
+                websocket.close();
+                websocket = null;
+            }
+            
+            showLoginModal();
+            updateConnectionStatus(false);
+            showNotification('Logged out successfully', 'info');
+        }
+
+        // Dashboard Functions
+        function initializeDashboard() {
+            connectWebSocket();
+            loadDashboardData();
+            loadDashboardStats();
+            startPeriodicUpdates();
+        }
+
+        // WebSocket Connection
+        function connectWebSocket() {
+            if (websocket) {
+                websocket.close();
+            }
+            
+            try {
+                websocket = new WebSocket(WS_URL);
+                
+                websocket.onopen = function() {
+                    console.log('WebSocket connected');
+                    updateConnectionStatus(true);
+                };
+                
+                websocket.onmessage = function(event) {
+                    const data = JSON.parse(event.data);
+                    updateRealTimeMetrics(data);
+                };
+                
+                websocket.onclose = function() {
+                    console.log('WebSocket disconnected');
+                    updateConnectionStatus(false);
+                    // Attempt to reconnect after 5 seconds
+                    setTimeout(connectWebSocket, 5000);
+                };
+                
+                websocket.onerror = function(error) {
+                    console.error('WebSocket error:', error);
+                    updateConnectionStatus(false);
+                };
+            } catch (error) {
+                console.error('WebSocket connection error:', error);
+                updateConnectionStatus(false);
+            }
+        }
+
+        function updateConnectionStatus(connected) {
+            const dot = document.getElementById('connectionDot');
+            const text = document.getElementById('connectionText');
+            
+            if (connected) {
+                dot.classList.add('connected');
+                text.textContent = 'Connected';
+            } else {
+                dot.classList.remove('connected');
+                text.textContent = 'Disconnected';
+            }
+        }
+
+        // API Functions
+        async function apiRequest(endpoint, options = {}) {
+            const url = `${API_BASE_URL}${endpoint}`;
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`,
+                ...options.headers
+            };
+            
+            try {
+                const response = await fetch(url, {
+                    ...options,
+                    headers
+                });
+                
+                if (response.status === 401) {
+                    // Token expired, redirect to login
+                    logout();
+                    return null;
+                }
+                
+                if (response.ok) {
+                    return await response.json();
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('API request error:', error);
+                showNotification('API connection error', 'error');
+                return null;
+            }
+        }
+
+        async function loadDashboardData() {
+            const data = await apiRequest('/api/dashboard/realtime');
+            if (data) {
+                updateDashboardMetrics(data);
+            }
+        }
+
+        async function loadDashboardStats() {
+            const stats = await apiRequest('/api/dashboard/stats');
+            if (stats) {
+                document.getElementById('totalUsers').textContent = stats.total_users;
+                document.getElementById('systemHealth').textContent = stats.system_health.toFixed(1) + '%';
+                document.getElementById('avgResponseTime').textContent = stats.avg_response_time.toFixed(1) + 'ms';
+                document.getElementById('uptimePercentage').textContent = stats.uptime_percentage.toFixed(2) + '%';
+            }
+        }
+
+        function updateDashboardMetrics(data) {
+            if (document.getElementById('activeUsers')) {
+                document.getElementById('activeUsers').textContent = data.active_users || '--';
+            }
+            if (document.getElementById('requestsPerMin')) {
+                document.getElementById('requestsPerMin').textContent = (data.requests_per_min || '--') + 'K';
+            }
+            if (document.getElementById('errorRate')) {
+                document.getElementById('errorRate').textContent = (data.error_rate || '--') + '%';
+            }
+            if (document.getElementById('responseTime')) {
+                document.getElementById('responseTime').textContent = (data.response_time || '--') + 'ms';
+            }
+        }
+
+        function updateRealTimeMetrics(data) {
+            // Update header stats
+            document.getElementById('cpu').textContent = data.cpu + '%';
+            document.getElementById('memory').textContent = data.memory + '%';
+            document.getElementById('network').textContent = data.network + 'GB';
+            document.getElementById('uptime').textContent = '99.8%';
+            
+            // Update performance tab if visible
+            if (document.getElementById('perfCpu')) {
+                document.getElementById('perfCpu').textContent = data.cpu + '%';
+                document.getElementById('perfMemory').textContent = data.memory + '%';
+                document.getElementById('perfNetwork').textContent = data.network + 'GB';
+                document.getElementById('perfUsers').textContent = data.active_users;
+            }
+            
+            // Update activity feed
+            updateActivityFeed(data);
+        }
+
+        function updateActivityFeed(data) {
+            const feed = document.getElementById('activityFeed');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            // Create new activity item
+            const activityItem = document.createElement('div');
+            activityItem.className = 'activity-item';
+            activityItem.innerHTML = `
+                <div class="activity-icon">📊</div>
+                <div class="activity-content">
+                    <div class="activity-text">Metrics updated - CPU: ${data.cpu}%, Users: ${data.active_users}</div>
+                    <div class="activity-time">${timestamp}</div>
+                </div>
+            `;
+            
+            // Add to top of feed
+            const firstChild = feed.firstChild;
+            if (firstChild && firstChild.className === 'loading-spinner') {
+                feed.removeChild(firstChild);
+            }
+            
+            feed.insertBefore(activityItem, feed.firstChild);
+            
+            // Keep only last 10 items
+            while (feed.children.length > 10) {
+                feed.removeChild(feed.lastChild);
+            }
+        }
+
+        // Periodic Updates
+        function startPeriodicUpdates() {
+            // Refresh dashboard data every 30 seconds
+            setInterval(loadDashboardData, 30000);
+            setInterval(loadDashboardStats, 60000);
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Utility Functions
+        function refreshDashboard() {
+            showNotification('Refreshing dashboard...', 'info');
+            loadDashboardData();
+            loadDashboardStats();
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: var(--primary);
+                color: var(--dark);
+                padding: 15px 25px;
+                border-radius: 10px;
+                font-weight: 600;
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                max-width: 300px;
+            `;
+            
+            if (type === 'error') notification.style.background = 'var(--danger)';
+            if (type === 'success') notification.style.background = 'var(--success)';
+            if (type === 'info') notification.style.background = 'var(--accent)';
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
