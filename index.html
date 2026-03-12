@@ -3,180 +3,629 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShaneBrain Ecosystem</title>
+    <title>ShaneBrain - Personal AI Legacy System</title>
+    <meta name="description" content="Local-first AI ecosystem running on a Raspberry Pi 5. Discord bots, RAG, vector search, social automation, and more.">
+    <meta property="og:title" content="ShaneBrain Ecosystem">
+    <meta property="og:description" content="Personal AI legacy system by Shane Brazelton. Local-first. Family-first. Running on a Raspberry Pi 5.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#00ff88">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green: #00ff88;
+            --green-dim: rgba(0, 255, 136, 0.15);
+            --cyan: #00d4ff;
+            --cyan-dim: rgba(0, 212, 255, 0.12);
+            --pink: #ff3366;
+            --amber: #ffaa00;
+            --bg: #06080c;
+            --surface: #0d1117;
+            --surface-2: #161b22;
+            --border: #1e2a3a;
+            --text: #e6edf3;
+            --text-muted: #7d8590;
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Courier New', monospace;
-            background: #0a0a0f;
-            color: #e0e0e0;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
-            padding: 2rem;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
-        .header {
+
+        /* ---- Animated grid background ---- */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ---- Glow orbs ---- */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .orb-1 { width: 500px; height: 500px; background: rgba(0,255,136,0.08); top: -100px; left: -100px; }
+        .orb-2 { width: 400px; height: 400px; background: rgba(0,212,255,0.06); bottom: 10%; right: -80px; }
+        .orb-3 { width: 300px; height: 300px; background: rgba(255,51,102,0.05); top: 50%; left: 40%; }
+
+        /* ---- Layout ---- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+
+        /* ---- Hero ---- */
+        .hero {
+            padding: 6rem 0 4rem;
             text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid #1a3a4a;
-            padding-bottom: 2rem;
         }
-        .header h1 {
-            font-size: 2.5rem;
-            color: #00ff88;
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-            margin-bottom: 0.5rem;
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--green-dim);
+            border: 1px solid rgba(0,255,136,0.25);
+            border-radius: 100px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.8rem;
+            color: var(--green);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
         }
-        .header p {
-            color: #888;
-            font-size: 1rem;
+
+        .hero-badge .pulse {
+            width: 8px; height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
         }
-        .header .tagline {
-            color: #00aaff;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,136,0.4); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,136,0); }
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
+
+        .hero h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--green), var(--cyan));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.1;
         }
-        .card {
-            background: #111118;
-            border: 1px solid #1a2a3a;
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-sub strong { color: var(--text); }
+
+        /* ---- Stats bar ---- */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1rem 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            min-width: 120px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .stat:hover { border-color: var(--green); transform: translateY(-2px); }
+
+        .stat-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.25rem;
+        }
+
+        /* ---- CTA button ---- */
+        .cta-row { text-align: center; margin: 2rem 0; }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2.2rem;
+            background: transparent;
+            border: 2px solid var(--cyan);
+            color: var(--cyan);
             border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+        .cta-btn:hover {
+            background: var(--cyan);
+            color: var(--bg);
+            box-shadow: 0 0 30px rgba(0,212,255,0.25);
+        }
+
+        /* ---- Section headers ---- */
+        .section { padding: 3rem 0; }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ---- Project cards ---- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--green), var(--cyan));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--green);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        .card:hover::before { opacity: 1; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3 a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--green);
+            text-decoration: none;
+        }
+        .card h3 a:hover { text-decoration: underline; }
+
+        .badges { display: flex; gap: 0.4rem; }
+
+        .badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .badge-active  { background: rgba(0,255,136,0.12); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
+        .badge-build   { background: rgba(255,170,0,0.12); color: var(--amber); border: 1px solid rgba(255,170,0,0.3); }
+        .badge-core    { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); }
+        .badge-live    { background: rgba(255,51,102,0.12); color: var(--pink); border: 1px solid rgba(255,51,102,0.3); }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-tech {
+            font-size: 0.75rem;
+            color: #444d56;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ---- Infrastructure section ---- */
+        .infra-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .infra-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             padding: 1.5rem;
             transition: border-color 0.3s;
         }
-        .card:hover { border-color: #00ff88; }
-        .card h2 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+        .infra-card:hover { border-color: var(--cyan); }
+
+        .infra-card h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--cyan);
+            margin-bottom: 0.75rem;
         }
-        .card h2 a {
-            color: #00ff88;
-            text-decoration: none;
+
+        .infra-card ul {
+            list-style: none;
         }
-        .card h2 a:hover { text-decoration: underline; }
-        .card .desc { color: #aaa; font-size: 0.85rem; line-height: 1.5; margin-bottom: 0.75rem; }
-        .card .tech { color: #555; font-size: 0.75rem; }
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 0.7rem;
-            margin-right: 4px;
+
+        .infra-card li {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(30,42,58,0.5);
         }
-        .badge-active { background: #0a2a1a; color: #00ff88; border: 1px solid #00ff8844; }
-        .badge-building { background: #2a2a0a; color: #ffaa00; border: 1px solid #ffaa0044; }
-        .badge-core { background: #0a1a2a; color: #00aaff; border: 1px solid #00aaff44; }
+        .infra-card li:last-child { border-bottom: none; }
+
+        .infra-card li strong { color: var(--text); }
+
+        /* ---- Footer ---- */
         .footer {
             text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #1a3a4a;
-            color: #555;
-            font-size: 0.8rem;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
         }
-        .footer .quote {
-            color: #00ff88;
+
+        .footer-quote {
+            font-family: 'JetBrains Mono', monospace;
             font-style: italic;
-            margin-bottom: 0.5rem;
+            color: var(--green);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
         }
-        .stats {
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .footer-links {
             display: flex;
             justify-content: center;
-            gap: 3rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
-        .stat { text-align: center; }
-        .stat .num { font-size: 1.8rem; color: #00ff88; font-weight: bold; }
-        .stat .label { font-size: 0.75rem; color: #666; }
-        .cta-btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.85rem 2.5rem;
-            border: 2px solid #00d4ff;
-            color: #00d4ff;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
+
+        .footer-links a {
+            color: var(--text-muted);
             text-decoration: none;
-            transition: all 0.2s;
+            font-size: 0.8rem;
+            transition: color 0.2s;
         }
-        .cta-btn:hover {
-            background: #00d4ff;
-            color: #0a0a0f;
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.3);
+        .footer-links a:hover { color: var(--green); }
+
+        /* ---- Scroll reveal ---- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 640px) {
+            .hero { padding: 4rem 0 2.5rem; }
+            .stats-bar { gap: 0.75rem; }
+            .stat { min-width: 100px; padding: 0.75rem 1rem; }
+            .stat-num { font-size: 1.3rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .infra-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>SHANEBRAIN</h1>
-        <p>Personal AI Legacy System by Shane Brazelton</p>
-        <p class="tagline">Local-first. Family-first. Running on a Raspberry Pi 5.</p>
-        <div class="stats">
-            <div class="stat"><div class="num">8</div><div class="label">Active Projects</div></div>
-            <div class="stat"><div class="num">Pi 5</div><div class="label">16GB RAM</div></div>
-            <div class="stat"><div class="num">5</div><div class="label">Weaviate Collections</div></div>
-            <div class="stat"><div class="num">165</div><div class="label">Knowledge Objects</div></div>
-        </div>
-        <a href="http://100.67.120.6:4200" class="cta-btn">JOIN ANGEL CLOUD</a>
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-badge"><span class="pulse"></span> All systems online</div>
+            <h1>SHANEBRAIN</h1>
+            <p class="hero-sub">
+                Personal AI legacy system by <strong>Shane Brazelton</strong>.<br>
+                Local-first. Family-first. Running on a <strong>Raspberry Pi 5</strong>.
+            </p>
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-num">8</div>
+                    <div class="stat-label">Active Projects</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">Pi 5</div>
+                    <div class="stat-label">16 GB RAM</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">17</div>
+                    <div class="stat-label">Weaviate Collections</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">251+</div>
+                    <div class="stat-label">Knowledge Objects</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">27</div>
+                    <div class="stat-label">MCP Tools</div>
+                </div>
+            </div>
+            <div class="cta-row">
+                <a href="https://shanebrain-1.tail202c1a.ts.net" class="cta-btn" target="_blank" rel="noopener">
+                    JOIN ANGEL CLOUD &rarr;
+                </a>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section">
+            <div class="section-title reveal">// Active Projects</div>
+            <div class="projects-grid">
+
+                <div class="card reveal">
+                    <div class="card-header">
+                        <h3><a href="https://github.com/thebardchat/shanebrain-core" target="_blank" rel="noopener">shanebrain-core</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-core">Core</span>
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">The brain. Discord bot with RAG-powered personality, Weaviate vector DB, Facebook social automation, Angel Arcade revenue bot, cloud backup system. Everything runs from here.</p>
+                    <div class="card-tech">Python / Ollama / Weaviate / Discord.py / Docker</div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-header">
+                        <h3><a href="https://shanebrain-1.tail202c1a.ts.net" target="_blank" rel="noopener">angel-cloud</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-live">Live</span>
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Angel Cloud Gateway &mdash; front door to the ecosystem. User registration, angel progression (Newborn &rarr; Angel), streaming chat, community leaderboard, Discord + GitHub + Roblox integration with cross-platform point system.</p>
+                    <div class="card-tech">Python / FastAPI / SQLite / Weaviate / Ollama</div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-header">
+                        <h3><a href="https://github.com/thebardchat/shanebrain_mcp" target="_blank" rel="noopener">shanebrain-mcp</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-core">Core</span>
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Custom MCP server with 27 tools across 12 groups &mdash; knowledge, chat, RAG, social, vault, notes, drafts, security, admin, Ollama, planning, and system health. Streamable HTTP transport with Pydantic v2 validation.</p>
+                    <div class="card-tech">Python / MCP / Docker / Weaviate / Ollama</div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-header">
+                        <h3><a href="https://github.com/thebardchat/srm-dispatch" target="_blank" rel="noopener">srm-dispatch</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-live">Live</span>
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Static dispatch PWA for SRM Concrete. Daily assignment tool for 18 dump truck drivers with drag-and-drop scheduling, route optimization, and mobile-first design.</p>
+                    <div class="card-tech">React / Vite / PWA</div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-header">
+                        <h3><a href="https://github.com/thebardchat/pulsar_sentinel" target="_blank" rel="noopener">pulsar_sentinel</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Post-quantum cryptography security framework. ML-KEM lattice-based encryption, blockchain audit trails on Polygon, MetaMask wallet auth, cyberpunk dashboard.</p>
+                    <div class="card-tech">Python / FastAPI / liboqs / Web3 / Discord.py</div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-header">
+                        <h3><a href="https://github.com/thebardchat/BGKPJR-Core-Simulations" target="_blank" rel="noopener">BGKPJR-Core-Simulations</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Electromagnetic launch architecture. Control systems (LQR, MPC), aerodynamics simulations, maglev track specs, Gryphon spacecraft design. Patent filed.</p>
+                    <div class="card-tech">Python / NumPy / Control Systems / CAD</div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-header">
+                        <h3><a href="https://github.com/thebardchat/loudon-desarro" target="_blank" rel="noopener">loudon-desarro</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-build">Building</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">50,000 SF multi-sport athletic complex honoring wrestling coaches Loudon and DeSarro. Interactive 3D visualizations with two building options and PLEX FLEX seating.</p>
+                    <div class="card-tech">Three.js / HTML / CSS</div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-header">
+                        <h3><a href="https://github.com/thebardchat/SB-Management-OS" target="_blank" rel="noopener">SB-Management-OS</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">SRM Concrete operations hub. Standard operating procedures, GROW coaching model, Game Plan interview scripts, 14-day trial tracker, morning affirmations.</p>
+                    <div class="card-tech">HTML / CSS</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Infrastructure -->
+        <section class="section">
+            <div class="section-title reveal">// Infrastructure</div>
+            <div class="infra-grid">
+
+                <div class="infra-card reveal">
+                    <h4>Compute</h4>
+                    <ul>
+                        <li><strong>Raspberry Pi 5</strong> &mdash; 16 GB RAM</li>
+                        <li><strong>Pironman 5-MAX</strong> &mdash; NVMe RAID chassis</li>
+                        <li><strong>RAID 1</strong> &mdash; 2x 2TB NVMe</li>
+                        <li><strong>8TB External</strong> &mdash; Seagate USB backup</li>
+                    </ul>
+                </div>
+
+                <div class="infra-card reveal">
+                    <h4>AI Stack</h4>
+                    <ul>
+                        <li><strong>Ollama 0.17.7</strong> &mdash; local LLM inference</li>
+                        <li><strong>shanebrain-3b</strong> &mdash; custom fine-tuned model</li>
+                        <li><strong>nomic-embed-text</strong> &mdash; 768-dim embeddings</li>
+                        <li><strong>Weaviate 1.36</strong> &mdash; 17 collections, 251+ objects</li>
+                    </ul>
+                </div>
+
+                <div class="infra-card reveal">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><strong>MCP Server</strong> &mdash; 27 tools, streamable HTTP</li>
+                        <li><strong>Angel Cloud Gateway</strong> &mdash; FastAPI + auth</li>
+                        <li><strong>Discord Bot</strong> &mdash; RAG-powered AI</li>
+                        <li><strong>Social Bot</strong> &mdash; Facebook automation</li>
+                        <li><strong>SRM Dispatch</strong> &mdash; React PWA</li>
+                    </ul>
+                </div>
+
+                <div class="infra-card reveal">
+                    <h4>Network</h4>
+                    <ul>
+                        <li><strong>Tailscale VPN</strong> &mdash; mesh networking</li>
+                        <li><strong>Tailscale Funnel</strong> &mdash; public HTTPS</li>
+                        <li><strong>Caddy 2.11</strong> &mdash; reverse proxy (reserved)</li>
+                        <li><strong>Docker</strong> &mdash; containerized services</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-quote">"If you don't own your infrastructure, you don't own your future."</p>
+            <p>
+                Shane Brazelton &mdash; Hazel Green, Alabama<br>
+                Dispatcher by day. AI architect by night. Father of five. 2+ years sober.
+            </p>
+            <div class="footer-links">
+                <a href="https://github.com/thebardchat" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://shanebrain-1.tail202c1a.ts.net" target="_blank" rel="noopener">Angel Cloud</a>
+            </div>
+        </footer>
     </div>
 
-    <div class="grid">
-        <div class="card">
-            <h2><a href="https://github.com/thebardchat/shanebrain-core">shanebrain-core</a></h2>
-            <span class="badge badge-core">CORE</span>
-            <span class="badge badge-active">ACTIVE</span>
-            <div class="desc">The brain. Discord bot with RAG-powered personality, Weaviate vector DB, Facebook social automation, Angel Arcade revenue bot. Everything runs from here.</div>
-            <div class="tech">Python / Ollama / Weaviate / Discord.py / Docker</div>
-        </div>
+    <script>
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
 
-        <div class="card">
-            <h2><a href="http://100.67.120.6:4200">angel-cloud</a></h2>
-            <span class="badge badge-active">ACTIVE</span>
-            <div class="desc">Angel Cloud Gateway — the front door to the ShaneBrain ecosystem. User registration, angel progression (Newborn → Angel), streaming chat, community leaderboard, Discord + GitHub integration with cross-platform point system.</div>
-            <div class="tech">Python / FastAPI / SQLite / Weaviate / Ollama</div>
-        </div>
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        <div class="card">
-            <h2><a href="https://github.com/thebardchat/pulsar_sentinel">pulsar_sentinel</a></h2>
-            <span class="badge badge-active">ACTIVE</span>
-            <div class="desc">Post-quantum cryptography security framework. ML-KEM lattice-based encryption, blockchain audit trails on Polygon, MetaMask wallet auth, cyberpunk dashboard.</div>
-            <div class="tech">Python / FastAPI / liboqs / Web3 / Discord.py</div>
-        </div>
+        // Animate stat numbers
+        function animateValue(el, end, duration) {
+            const isNum = !isNaN(parseInt(end));
+            if (!isNum) return;
+            const target = parseInt(end);
+            const start = 0;
+            const startTime = performance.now();
+            function update(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(start + (target - start) * eased);
+                if (progress < 1) requestAnimationFrame(update);
+                else el.textContent = end;
+            }
+            requestAnimationFrame(update);
+        }
 
-        <div class="card">
-            <h2><a href="https://github.com/thebardchat/BGKPJR-Core-Simulations">BGKPJR-Core-Simulations</a></h2>
-            <span class="badge badge-active">ACTIVE</span>
-            <div class="desc">Electromagnetic launch architecture. Control systems (LQR, MPC), aerodynamics simulations, maglev track specs, Gryphon spacecraft design. Patent filed.</div>
-            <div class="tech">Python / NumPy / Control Systems / CAD</div>
-        </div>
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const val = el.textContent;
+                    animateValue(el, val, 1200);
+                    statObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
 
-        <div class="card">
-            <h2><a href="https://github.com/thebardchat/loudon-desarro">loudon-desarro</a></h2>
-            <span class="badge badge-building">BUILDING</span>
-            <div class="desc">50,000 SF multi-sport athletic complex honoring wrestling coaches Loudon and DeSarro. Interactive 3D visualizations with two building options and PLEX FLEX seating.</div>
-            <div class="tech">Three.js / HTML / CSS</div>
-        </div>
-
-        <div class="card">
-            <h2><a href="https://github.com/thebardchat/SB-Management-OS">SB-Management-OS</a></h2>
-            <span class="badge badge-active">ACTIVE</span>
-            <div class="desc">SRM Concrete operations hub. Standard operating procedures, GROW coaching model, Game Plan interview scripts, 14-day trial tracker, morning affirmations.</div>
-            <div class="tech">HTML / CSS</div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <div class="quote">"If you don't own your infrastructure, you don't own your future."</div>
-        <p>Shane Brazelton &mdash; Hazel Green, Alabama</p>
-        <p>Dispatcher by day. AI architect by night. Father of five. 2+ years sober.</p>
-    </div>
+        document.querySelectorAll('.stat-num').forEach(el => statObserver.observe(el));
+    </script>
 </body>
 </html>
