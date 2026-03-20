@@ -356,6 +356,60 @@
             </div>
         </section>
 
+        <section class="section">
+            <div class="section-title reveal">// Volume Two — Coming Soon</div>
+            <div class="about-content reveal">
+                <div class="about-text" style="text-align: center;">
+                    <strong style="font-size: 1.2rem; color: var(--gold);">You Probably Think This Song Is About You Too</strong>
+                </div>
+                <div class="about-text" style="text-align: center;">
+                    The detective solved the case. Walked through the door. Now what?<br>
+                    Now he lands inside other people's bodies. One second at a time.
+                </div>
+                <div class="about-text" style="text-align: center;">
+                    Volume One was a book. Volume Two is an album.<br>
+                    Tracks, not scenes. Sides, not acts.<br>
+                    <em>The needle drops before the music does.</em>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title reveal">// The Process</div>
+            <div class="about-content reveal">
+                <div class="about-text">
+                    <strong>Shane talks. Claude shapes.</strong> Every scene started as a raw voice dump &mdash; recorded while driving, walking, living. Messy fragments. Tangents. The AI found the story inside the noise. It never invented a single thing.
+                </div>
+                <div class="about-text">
+                    The entire pipeline runs on a <strong>Raspberry Pi 5</strong> in a closet in Hazel Green, Alabama. No cloud. No subscription. No writing retreat. Just a dump truck dispatcher who clocks in at 5am and writes noir fiction by night.
+                </div>
+                <div class="about-text" style="text-align: center;">
+                    <a href="https://github.com/thebardchat/noir-detective-writing-process" class="cta-btn" style="background: var(--surface-2); color: var(--green); border: 1px solid var(--border); font-size: 0.85rem; padding: 0.7rem 1.5rem;" target="_blank" rel="noopener">
+                        SEE HOW IT WAS MADE &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title reveal">// Stay in the Loop</div>
+            <div class="about-content reveal" style="text-align: center;">
+                <div class="about-text">
+                    Volume Two drops track by track. Get notified when the next one locks.
+                </div>
+                <div id="signup-form" style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                    <input type="email" id="email-input" placeholder="your@email.com"
+                        style="padding: 0.8rem 1.2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.9rem; min-width: 260px; outline: none; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                    <button onclick="subscribe()" id="subscribe-btn"
+                        style="padding: 0.8rem 1.5rem; background: var(--gold); border: none; color: var(--bg); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.25s; letter-spacing: 0.04em;">
+                        NOTIFY ME
+                    </button>
+                </div>
+                <div id="signup-msg" style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--gold); display: none;"></div>
+            </div>
+        </section>
+
         <footer class="footer">
             <p>
                 Shane Brazelton &mdash; Hazel Green, Alabama<br>
@@ -363,7 +417,8 @@
             </p>
             <div class="footer-links">
                 <a href="https://www.amazon.com/dp/B0GT25R5FD" target="_blank" rel="noopener">Amazon</a>
-                <a href="https://github.com/thebardchat/you-probably-think-this-book-is-about-you" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/thebardchat/noir-detective-writing-process" target="_blank" rel="noopener">Process</a>
+                <a href="https://github.com/thebardchat/book-launch-playbook" target="_blank" rel="noopener">Playbook</a>
                 <a href="https://thebardchat.github.io" target="_blank" rel="noopener">ShaneBrain</a>
             </div>
         </footer>
@@ -380,6 +435,35 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function subscribe() {
+            const email = document.getElementById('email-input').value.trim();
+            const msg = document.getElementById('signup-msg');
+            const btn = document.getElementById('subscribe-btn');
+
+            if (!email || !email.includes('@')) {
+                msg.textContent = 'Enter a valid email.';
+                msg.style.color = 'var(--pink)';
+                msg.style.display = 'block';
+                return;
+            }
+
+            btn.textContent = '...';
+            btn.disabled = true;
+
+            // Store locally as fallback; upgrade to Cloudflare Worker when deployed
+            try {
+                const subs = JSON.parse(localStorage.getItem('book-subs') || '[]');
+                if (!subs.includes(email)) subs.push(email);
+                localStorage.setItem('book-subs', JSON.stringify(subs));
+            } catch {}
+
+            msg.textContent = 'You\'re in. The detective will find you.';
+            msg.style.color = 'var(--gold)';
+            msg.style.display = 'block';
+            btn.textContent = 'SUBSCRIBED';
+            document.getElementById('email-input').value = '';
+        }
     </script>
 </body>
 </html>
