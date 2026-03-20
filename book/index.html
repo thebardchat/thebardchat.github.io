@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Probably Think This Book Is About You — Shane Brazelton</title>
+    <meta name="description" content="A collection of noir-style vignettes about ego, identity, and the universal human condition. By Shane Brazelton.">
+    <meta property="og:title" content="You Probably Think This Book Is About You">
+    <meta property="og:description" content="It was always about you. It was never only about you. Noir vignettes by Shane Brazelton.">
+    <meta property="og:image" content="https://thebardchat.github.io/book/social-launch.png">
+    <meta property="og:url" content="https://thebardchat.github.io/book">
+    <meta property="og:type" content="book">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="You Probably Think This Book Is About You">
+    <meta name="twitter:description" content="It was always about you. It was never only about you.">
+    <meta name="twitter:image" content="https://thebardchat.github.io/book/social-launch.png">
+    <meta name="theme-color" content="#00ff88">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green: #00ff88;
+            --green-dim: rgba(0, 255, 136, 0.15);
+            --cyan: #00d4ff;
+            --cyan-dim: rgba(0, 212, 255, 0.12);
+            --pink: #ff3366;
+            --amber: #ffaa00;
+            --gold: #c9a84c;
+            --bg: #06080c;
+            --surface: #0d1117;
+            --surface-2: #161b22;
+            --border: #1e2a3a;
+            --text: #e6edf3;
+            --text-muted: #7d8590;
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .orb-1 { width: 500px; height: 500px; background: rgba(201,168,76,0.08); top: -100px; left: -100px; }
+        .orb-2 { width: 400px; height: 400px; background: rgba(0,212,255,0.06); bottom: 10%; right: -80px; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+
+        /* Hero */
+        .hero {
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(201,168,76,0.12);
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 100px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.8rem;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .book-cover {
+            max-width: 280px;
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.1);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            font-style: italic;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .author {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* CTA */
+        .cta-row {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            border: none;
+            color: var(--bg);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+        .cta-btn:hover {
+            background: #dbb85c;
+            box-shadow: 0 0 30px rgba(201,168,76,0.35);
+            transform: translateY(-2px);
+        }
+
+        .formats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .format-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.4rem 0.8rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        /* Section */
+        .section {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 2rem;
+        }
+
+        /* Excerpts */
+        .excerpt {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--gold);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s;
+        }
+        .excerpt:hover { border-color: var(--gold); }
+
+        .excerpt blockquote {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .excerpt-source {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .about-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .about-text strong { color: var(--text); }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--green); }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 3rem 0 2rem; }
+            .book-cover { max-width: 220px; }
+            .formats { gap: 1rem; }
+            .excerpt { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-badge">Available Now</div>
+            <img src="cover-ebook.png" alt="You Probably Think This Book Is About You — Book Cover" class="book-cover">
+            <h1>You Probably Think This Book Is About You</h1>
+            <p class="tagline">It was always about you.<br>It was never only about you.</p>
+            <p class="author">Shane Brazelton</p>
+            <div class="cta-row">
+                <a href="https://www.amazon.com/dp/B0GT25R5FD" class="cta-btn" target="_blank" rel="noopener">
+                    BUY ON AMAZON &rarr;
+                </a>
+            </div>
+            <div class="formats">
+                <span class="format-tag">Ebook</span>
+                <span class="format-tag">Audiobook</span>
+                <span class="format-tag">Print</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title reveal">// From the Book</div>
+
+            <div class="excerpt reveal">
+                <blockquote>
+                    "It's your favorite movie, and you're the lead character. You always have been. The camera follows you &mdash; has always followed you &mdash; through every dimly lit hallway, every kitchen argument, every moment you sat alone in a car in a parking lot wondering how the plot got this complicated."
+                </blockquote>
+                <div class="excerpt-source">Scene 001 &mdash; The Lead Character</div>
+            </div>
+
+            <div class="excerpt reveal">
+                <blockquote>
+                    "A brain that runs at a frequency most equipment wasn't built to measure. Not broken &mdash; miscalibrated for a world that moves slower than it does."
+                </blockquote>
+                <div class="excerpt-source">Scene 018 &mdash; Dr. Seen</div>
+            </div>
+
+            <div class="excerpt reveal">
+                <blockquote>
+                    "The detective closes the file. Not because the case is solved. Because some cases aren't meant to be solved. Some cases are meant to be driven."
+                </blockquote>
+                <div class="excerpt-source">Scene 014 &mdash; You Finally Found</div>
+            </div>
+
+            <div class="excerpt reveal">
+                <blockquote>
+                    "The driveway. Engine off. The house glows from inside like something patient. He doesn't get out yet. Between the road and the door there is a version of him that belongs to neither &mdash; not the driver, not the father. Just the man."
+                </blockquote>
+                <div class="excerpt-source">Interlude</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title reveal">// About the Book</div>
+            <div class="about-content reveal">
+                <div class="about-text">
+                    <strong>22 noir-style vignettes.</strong> A detective who discovers he's the case. An old man who stands too close at the gas station. A garbage man who never looks up. A dream where a billion things almost make a shape. A doctor who doesn't diagnose. A missing scene that was never lost.
+                </div>
+                <div class="about-text">
+                    Dark but light. Cynical but comical. Written in third person by a dispatcher, father of five, and AI architect from <strong>Hazel Green, Alabama</strong>. The kind of book where you recognize everyone &mdash; especially yourself.
+                </div>
+                <div class="about-text">
+                    <em>"You probably think this book is about you. You're right. It always was. It was never only about you."</em>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>
+                Shane Brazelton &mdash; Hazel Green, Alabama<br>
+                Co-built with Claude (Anthropic) on a Raspberry Pi 5.
+            </p>
+            <div class="footer-links">
+                <a href="https://www.amazon.com/dp/B0GT25R5FD" target="_blank" rel="noopener">Amazon</a>
+                <a href="https://github.com/thebardchat/you-probably-think-this-book-is-about-you" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://thebardchat.github.io" target="_blank" rel="noopener">ShaneBrain</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
