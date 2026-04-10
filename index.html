@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShaneBrain - Personal AI Legacy System</title>
-    <meta name="description" content="Local-first AI ecosystem running on a Raspberry Pi 5. Discord bots, RAG, vector search, social automation, and more.">
-    <meta property="og:title" content="ShaneBrain Ecosystem">
-    <meta property="og:description" content="Personal AI legacy system by Shane Brazelton. Local-first. Family-first. Running on a Raspberry Pi 5.">
+    <title>ShaneBrain - Angel Cloud Ecosystem</title>
+    <meta name="description" content="AI for families. Built by a dump truck dispatcher in Alabama. Personal AI legacy system running on a Raspberry Pi 5.">
+    <meta property="og:title" content="ShaneBrain - Angel Cloud Ecosystem">
+    <meta property="og:description" content="AI for families. Built by a dump truck dispatcher in Alabama. Running on a Raspberry Pi 5.">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#00ff88">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,7 @@
             --cyan-dim: rgba(0, 212, 255, 0.12);
             --pink: #ff3366;
             --amber: #ffaa00;
+            --gold: #c9a84c;
             --bg: #06080c;
             --surface: #0d1117;
             --surface-2: #161b22;
@@ -61,17 +62,24 @@
             filter: blur(120px);
             pointer-events: none;
             z-index: 0;
+            animation: float 20s ease-in-out infinite;
         }
         .orb-1 { width: 500px; height: 500px; background: rgba(0,255,136,0.08); top: -100px; left: -100px; }
-        .orb-2 { width: 400px; height: 400px; background: rgba(0,212,255,0.06); bottom: 10%; right: -80px; }
-        .orb-3 { width: 300px; height: 300px; background: rgba(255,51,102,0.05); top: 50%; left: 40%; }
+        .orb-2 { width: 400px; height: 400px; background: rgba(0,212,255,0.06); bottom: 10%; right: -80px; animation-delay: -7s; }
+        .orb-3 { width: 300px; height: 300px; background: rgba(255,51,102,0.05); top: 50%; left: 40%; animation-delay: -14s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -20px); }
+            66% { transform: translate(-20px, 15px); }
+        }
 
         /* ---- Layout ---- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
 
         /* ---- Hero ---- */
         .hero {
-            padding: 6rem 0 4rem;
+            padding: 5rem 0 3rem;
             text-align: center;
         }
 
@@ -111,68 +119,116 @@
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             line-height: 1.1;
         }
 
+        .hero-tagline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--cyan);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            opacity: 0.8;
+        }
+
         .hero-sub {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
-            max-width: 560px;
-            margin: 0 auto 2rem;
+            max-width: 580px;
+            margin: 0 auto 1rem;
         }
 
         .hero-sub strong { color: var(--text); }
+
+        .hero-personal {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            opacity: 0.7;
+        }
+
+        /* ---- Sobriety counter ---- */
+        .sobriety {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(0, 255, 136, 0.06);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .sobriety-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+        .sobriety-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
 
         /* ---- Stats bar ---- */
         .stats-bar {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
-            margin: 2.5rem 0 1.5rem;
+            margin: 2rem 0 1.5rem;
         }
 
         .stat {
             text-align: center;
-            padding: 1rem 1.5rem;
+            padding: 0.8rem 1.2rem;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            min-width: 120px;
+            min-width: 110px;
             transition: border-color 0.3s, transform 0.3s;
         }
         .stat:hover { border-color: var(--green); transform: translateY(-2px); }
 
         .stat-num {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--green);
         }
 
         .stat-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            margin-top: 0.25rem;
+            margin-top: 0.2rem;
         }
 
-        /* ---- CTA button ---- */
-        .cta-row { text-align: center; margin: 2rem 0; }
+        /* ---- CTA buttons ---- */
+        .cta-row {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
 
         .cta-btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.9rem 2.2rem;
+            padding: 0.8rem 1.8rem;
             background: transparent;
             border: 2px solid var(--cyan);
             color: var(--cyan);
             border-radius: 8px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 0.04em;
             text-decoration: none;
@@ -182,6 +238,24 @@
             background: var(--cyan);
             color: var(--bg);
             box-shadow: 0 0 30px rgba(0,212,255,0.25);
+        }
+        .cta-btn.gold {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .cta-btn.gold:hover {
+            background: var(--gold);
+            color: var(--bg);
+            box-shadow: 0 0 30px rgba(201,168,76,0.3);
+        }
+        .cta-btn.green {
+            border-color: var(--green);
+            color: var(--green);
+        }
+        .cta-btn.green:hover {
+            background: var(--green);
+            color: var(--bg);
+            box-shadow: 0 0 30px rgba(0,255,136,0.25);
         }
 
         /* ---- Section headers ---- */
@@ -219,9 +293,7 @@
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(90deg, var(--green), var(--cyan));
             opacity: 0;
@@ -240,32 +312,35 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 0.75rem;
+            gap: 0.5rem;
         }
 
         .card h3 a {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--green);
             text-decoration: none;
         }
         .card h3 a:hover { text-decoration: underline; }
 
-        .badges { display: flex; gap: 0.4rem; }
+        .badges { display: flex; gap: 0.4rem; flex-shrink: 0; }
 
         .badge {
             display: inline-block;
             padding: 0.15rem 0.5rem;
             border-radius: 4px;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 600;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+            white-space: nowrap;
         }
         .badge-active  { background: rgba(0,255,136,0.12); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
         .badge-build   { background: rgba(255,170,0,0.12); color: var(--amber); border: 1px solid rgba(255,170,0,0.3); }
         .badge-core    { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); }
         .badge-live    { background: rgba(255,51,102,0.12); color: var(--pink); border: 1px solid rgba(255,51,102,0.3); }
+        .badge-pub     { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
 
         .card-desc {
             color: var(--text-muted);
@@ -275,7 +350,7 @@
         }
 
         .card-tech {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #444d56;
             font-family: 'JetBrains Mono', monospace;
         }
@@ -283,7 +358,7 @@
         /* ---- Infrastructure section ---- */
         .infra-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.25rem;
         }
 
@@ -298,24 +373,56 @@
 
         .infra-card h4 {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--cyan);
             margin-bottom: 0.75rem;
         }
 
-        .infra-card ul {
-            list-style: none;
-        }
+        .infra-card ul { list-style: none; }
 
         .infra-card li {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             padding: 0.3rem 0;
             border-bottom: 1px solid rgba(30,42,58,0.5);
         }
         .infra-card li:last-child { border-bottom: none; }
-
         .infra-card li strong { color: var(--text); }
+
+        /* ---- Social links ---- */
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.25s;
+        }
+        .social-link:hover {
+            border-color: var(--green);
+            color: var(--text);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .social-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
 
         /* ---- Footer ---- */
         .footer {
@@ -367,12 +474,15 @@
 
         /* ---- Responsive ---- */
         @media (max-width: 640px) {
-            .hero { padding: 4rem 0 2.5rem; }
-            .stats-bar { gap: 0.75rem; }
-            .stat { min-width: 100px; padding: 0.75rem 1rem; }
-            .stat-num { font-size: 1.3rem; }
+            .hero { padding: 3.5rem 0 2rem; }
+            .stats-bar { gap: 0.6rem; }
+            .stat { min-width: 90px; padding: 0.6rem 0.8rem; }
+            .stat-num { font-size: 1.2rem; }
             .projects-grid { grid-template-columns: 1fr; }
             .infra-grid { grid-template-columns: 1fr; }
+            .cta-row { flex-direction: column; align-items: center; }
+            .social-grid { gap: 0.6rem; }
+            .social-link { padding: 0.5rem 0.8rem; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -387,39 +497,45 @@
         <section class="hero">
             <div class="hero-badge"><span class="pulse"></span> All systems online</div>
             <h1>SHANEBRAIN</h1>
+            <div class="hero-tagline">Angel Cloud Ecosystem</div>
             <p class="hero-sub">
-                Personal AI legacy system by <strong>Shane Brazelton</strong>.<br>
+                AI for families. Built by a <strong>dump truck dispatcher</strong> in Alabama.<br>
                 Local-first. Family-first. Running on a <strong>Raspberry Pi 5</strong>.
             </p>
+            <p class="hero-personal">Father of 5 &bull; <span id="sober-days">800+</span> days sober &bull; Building the future on 16GB RAM</p>
+
+            <div class="sobriety">
+                <span class="sobriety-num" id="sober-count">---</span>
+                <span class="sobriety-label">Days<br>Sober</span>
+            </div>
+
             <div class="stats-bar">
-                <div class="stat">
-                    <div class="stat-num">8</div>
-                    <div class="stat-label">Active Projects</div>
+                <div class="stat reveal">
+                    <div class="stat-num">4</div>
+                    <div class="stat-label">Compute Nodes</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-num">Pi 5</div>
-                    <div class="stat-label">16 GB RAM</div>
+                <div class="stat reveal">
+                    <div class="stat-num">42</div>
+                    <div class="stat-label">MCP Tools</div>
                 </div>
-                <div class="stat">
+                <div class="stat reveal">
                     <div class="stat-num">17</div>
                     <div class="stat-label">Weaviate Collections</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-num">251+</div>
+                <div class="stat reveal">
+                    <div class="stat-num">210+</div>
                     <div class="stat-label">Knowledge Objects</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-num">27</div>
-                    <div class="stat-label">MCP Tools</div>
+                <div class="stat reveal">
+                    <div class="stat-num">10+</div>
+                    <div class="stat-label">Active Projects</div>
                 </div>
             </div>
+
             <div class="cta-row">
-                <a href="/book" class="cta-btn" style="border-color: #c9a84c; color: #c9a84c;">
-                    NEW BOOK OUT NOW &rarr;
-                </a>
-                <a href="https://shanebrain-1.tail202c1a.ts.net" class="cta-btn" target="_blank" rel="noopener">
-                    JOIN ANGEL CLOUD &rarr;
-                </a>
+                <a href="/book" class="cta-btn gold">NEW BOOK OUT NOW &rarr;</a>
+                <a href="https://github.com/thebardchat/pulsar_sentinel" class="cta-btn">PULSAR SENTINEL &rarr;</a>
+                <a href="https://ko-fi.com/shanebrain" class="cta-btn green" target="_blank" rel="noopener">SUPPORT ON KO-FI</a>
             </div>
         </section>
 
@@ -430,9 +546,9 @@
 
                 <div class="card reveal" style="border-color: rgba(201,168,76,0.3);">
                     <div class="card-header">
-                        <h3><a href="/book" style="color: #c9a84c;">you-probably-think-this-book-is-about-you</a></h3>
+                        <h3><a href="/book" style="color: var(--gold);">you-probably-think-this-book-is-about-you</a></h3>
                         <div class="badges">
-                            <span class="badge badge-live">Published</span>
+                            <span class="badge badge-pub">Published</span>
                         </div>
                     </div>
                     <p class="card-desc">Noir-style vignettes about ego, identity, and the universal human condition. 22 scenes. A detective who discovers he's the case. Available now on Amazon &mdash; ebook, audiobook, and print.</p>
@@ -447,20 +563,8 @@
                             <span class="badge badge-active">Active</span>
                         </div>
                     </div>
-                    <p class="card-desc">The brain. Discord bot with RAG-powered personality, Weaviate vector DB, Facebook social automation, Angel Arcade revenue bot, cloud backup system. Everything runs from here.</p>
+                    <p class="card-desc">The brain. Discord bots with RAG-powered personality, MEGA crew self-evolving bot architecture, Weaviate vector DB, Facebook social automation, cloud backup, email AI, and the mega dashboard. Everything runs from here.</p>
                     <div class="card-tech">Python / Ollama / Weaviate / Discord.py / Docker</div>
-                </div>
-
-                <div class="card reveal">
-                    <div class="card-header">
-                        <h3><a href="https://shanebrain-1.tail202c1a.ts.net" target="_blank" rel="noopener">angel-cloud</a></h3>
-                        <div class="badges">
-                            <span class="badge badge-live">Live</span>
-                            <span class="badge badge-active">Active</span>
-                        </div>
-                    </div>
-                    <p class="card-desc">Angel Cloud Gateway &mdash; front door to the ecosystem. User registration, angel progression (Newborn &rarr; Angel), streaming chat, community leaderboard, Discord + GitHub + Roblox integration with cross-platform point system.</p>
-                    <div class="card-tech">Python / FastAPI / SQLite / Weaviate / Ollama</div>
                 </div>
 
                 <div class="card reveal">
@@ -471,25 +575,13 @@
                             <span class="badge badge-active">Active</span>
                         </div>
                     </div>
-                    <p class="card-desc">Custom MCP server with 27 tools across 12 groups &mdash; knowledge, chat, RAG, social, vault, notes, drafts, security, admin, Ollama, planning, and system health. Streamable HTTP transport with Pydantic v2 validation.</p>
+                    <p class="card-desc">Custom MCP server with 42 tools across 26 groups &mdash; knowledge, chat, RAG, social, vault, notes, drafts, security, admin, Ollama, planning, and system health. Streamable HTTP transport, Pydantic v2.</p>
                     <div class="card-tech">Python / MCP / Docker / Weaviate / Ollama</div>
                 </div>
 
                 <div class="card reveal">
                     <div class="card-header">
-                        <h3><a href="https://github.com/thebardchat/srm-dispatch" target="_blank" rel="noopener">srm-dispatch</a></h3>
-                        <div class="badges">
-                            <span class="badge badge-live">Live</span>
-                            <span class="badge badge-active">Active</span>
-                        </div>
-                    </div>
-                    <p class="card-desc">Static dispatch PWA for SRM Concrete. Daily assignment tool for 18 dump truck drivers with drag-and-drop scheduling, route optimization, and mobile-first design.</p>
-                    <div class="card-tech">React / Vite / PWA</div>
-                </div>
-
-                <div class="card reveal">
-                    <div class="card-header">
-                        <h3><a href="https://github.com/thebardchat/pulsar_sentinel" target="_blank" rel="noopener">pulsar_sentinel</a></h3>
+                        <h3><a href="https://github.com/thebardchat/pulsar_sentinel" target="_blank" rel="noopener">pulsar-sentinel</a></h3>
                         <div class="badges">
                             <span class="badge badge-active">Active</span>
                         </div>
@@ -511,6 +603,28 @@
 
                 <div class="card reveal">
                     <div class="card-header">
+                        <h3><a href="https://github.com/thebardchat/SB-Management-OS" target="_blank" rel="noopener">SB-Management-OS</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">SRM Concrete operations hub. Standard operating procedures, GROW coaching model, Game Plan interview scripts, 14-day trial tracker, morning affirmations.</p>
+                    <div class="card-tech">HTML / CSS / Management SOPs</div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-header">
+                        <h3><a href="https://github.com/thebardchat/N8N" target="_blank" rel="noopener">N8N Automation</a></h3>
+                        <div class="badges">
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                    </div>
+                    <p class="card-desc">Automation workflows running on Pulsar. Connected to the ShaneBrain ecosystem for event-driven orchestration across services.</p>
+                    <div class="card-tech">N8N / Automation / Webhooks</div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-header">
                         <h3><a href="https://github.com/thebardchat/loudon-desarro" target="_blank" rel="noopener">loudon-desarro</a></h3>
                         <div class="badges">
                             <span class="badge badge-build">Building</span>
@@ -518,17 +632,6 @@
                     </div>
                     <p class="card-desc">50,000 SF multi-sport athletic complex honoring wrestling coaches Loudon and DeSarro. Interactive 3D visualizations with two building options and PLEX FLEX seating.</p>
                     <div class="card-tech">Three.js / HTML / CSS</div>
-                </div>
-
-                <div class="card reveal">
-                    <div class="card-header">
-                        <h3><a href="https://github.com/thebardchat/SB-Management-OS" target="_blank" rel="noopener">SB-Management-OS</a></h3>
-                        <div class="badges">
-                            <span class="badge badge-active">Active</span>
-                        </div>
-                    </div>
-                    <p class="card-desc">SRM Concrete operations hub. Standard operating procedures, GROW coaching model, Game Plan interview scripts, 14-day trial tracker, morning affirmations.</p>
-                    <div class="card-tech">HTML / CSS</div>
                 </div>
 
             </div>
@@ -542,31 +645,34 @@
                 <div class="infra-card reveal">
                     <h4>Compute</h4>
                     <ul>
-                        <li><strong>Raspberry Pi 5</strong> &mdash; 16 GB RAM</li>
+                        <li><strong>Raspberry Pi 5</strong> &mdash; 16 GB, controller</li>
                         <li><strong>Pironman 5-MAX</strong> &mdash; NVMe RAID chassis</li>
                         <li><strong>RAID 1</strong> &mdash; 2x 2TB NVMe</li>
-                        <li><strong>8TB External</strong> &mdash; Seagate USB backup</li>
+                        <li><strong>8TB External</strong> &mdash; Seagate backup</li>
+                        <li><strong>4-Node Cluster</strong> &mdash; Pi + 3 Windows nodes</li>
                     </ul>
                 </div>
 
                 <div class="infra-card reveal">
                     <h4>AI Stack</h4>
                     <ul>
-                        <li><strong>Ollama 0.17.7</strong> &mdash; local LLM inference</li>
-                        <li><strong>shanebrain-3b</strong> &mdash; custom fine-tuned model</li>
-                        <li><strong>nomic-embed-text</strong> &mdash; 768-dim embeddings</li>
-                        <li><strong>Weaviate 1.36</strong> &mdash; 17 collections, 251+ objects</li>
+                        <li><strong>Ollama 0.17</strong> &mdash; local LLM inference</li>
+                        <li><strong>shanebrain-3b</strong> &mdash; custom tuned model</li>
+                        <li><strong>nomic-embed-text</strong> &mdash; 768-dim vectors</li>
+                        <li><strong>Weaviate 1.36</strong> &mdash; 17 collections</li>
+                        <li><strong>Cluster Proxy</strong> &mdash; multi-node routing</li>
                     </ul>
                 </div>
 
                 <div class="infra-card reveal">
                     <h4>Services</h4>
                     <ul>
-                        <li><strong>MCP Server</strong> &mdash; 27 tools, streamable HTTP</li>
-                        <li><strong>Angel Cloud Gateway</strong> &mdash; FastAPI + auth</li>
-                        <li><strong>Discord Bot</strong> &mdash; RAG-powered AI</li>
+                        <li><strong>MCP Server v2.2</strong> &mdash; 42 tools, HTTP</li>
+                        <li><strong>Mega Dashboard</strong> &mdash; 20+ panels</li>
+                        <li><strong>Discord + Arcade Bots</strong> &mdash; AI-powered</li>
                         <li><strong>Social Bot</strong> &mdash; Facebook automation</li>
-                        <li><strong>SRM Dispatch</strong> &mdash; React PWA</li>
+                        <li><strong>Buddy Claude</strong> &mdash; AI dialogue engine</li>
+                        <li><strong>MEGA Crew</strong> &mdash; self-evolving bots</li>
                     </ul>
                 </div>
 
@@ -575,24 +681,61 @@
                     <ul>
                         <li><strong>Tailscale VPN</strong> &mdash; mesh networking</li>
                         <li><strong>Tailscale Funnel</strong> &mdash; public HTTPS</li>
-                        <li><strong>Caddy 2.11</strong> &mdash; reverse proxy (reserved)</li>
+                        <li><strong>Caddy 2.11</strong> &mdash; reverse proxy</li>
                         <li><strong>Docker</strong> &mdash; containerized services</li>
+                        <li><strong>theangel.com</strong> &mdash; custom domain</li>
                     </ul>
                 </div>
 
             </div>
         </section>
 
+        <!-- Social / Connect -->
+        <section class="section">
+            <div class="section-title reveal">// Connect</div>
+            <div class="social-grid reveal">
+                <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="https://instagram.com/shanebrain_theangel_cloud" target="_blank" rel="noopener" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    Instagram
+                </a>
+                <a href="https://tiktok.com/@thebardchat" target="_blank" rel="noopener" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13.2a8.16 8.16 0 005.58 2.2v-3.46a4.85 4.85 0 01-2-.75 4.86 4.86 0 01-1.78-2.13V6.69h3.78z"/></svg>
+                    TikTok
+                </a>
+                <a href="https://twitter.com/BGKPJRevolution" target="_blank" rel="noopener" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    X / Twitter
+                </a>
+                <a href="https://discord.gg/qST3UfFAr9" target="_blank" rel="noopener" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/></svg>
+                    Discord
+                </a>
+                <a href="mailto:brazeltonshane@gmail.com" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    Email
+                </a>
+                <a href="https://ko-fi.com/shanebrain" target="_blank" rel="noopener" class="social-link" style="border-color: rgba(255,51,102,0.3);">
+                    <svg viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311z"/></svg>
+                    Ko-fi
+                </a>
+            </div>
+        </section>
+
         <!-- Footer -->
-        <footer class="footer">
+        <footer class="footer reveal">
             <p class="footer-quote">"If you don't own your infrastructure, you don't own your future."</p>
             <p>
                 Shane Brazelton &mdash; Hazel Green, Alabama<br>
-                Dispatcher by day. AI architect by night. Father of five. 2+ years sober.
+                Dispatcher by day. AI architect by night. Father of five.
             </p>
             <div class="footer-links">
                 <a href="https://github.com/thebardchat" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://shanebrain-1.tail202c1a.ts.net" target="_blank" rel="noopener">Angel Cloud</a>
+                <a href="https://ko-fi.com/shanebrain" target="_blank" rel="noopener">Ko-fi</a>
+                <a href="https://discord.gg/qST3UfFAr9" target="_blank" rel="noopener">Discord</a>
             </div>
         </footer>
     </div>
@@ -607,7 +750,6 @@
                 }
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // Animate stat numbers
@@ -615,13 +757,12 @@
             const isNum = !isNaN(parseInt(end));
             if (!isNum) return;
             const target = parseInt(end);
-            const start = 0;
             const startTime = performance.now();
             function update(now) {
                 const elapsed = now - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const eased = 1 - Math.pow(1 - progress, 3);
-                el.textContent = Math.round(start + (target - start) * eased);
+                el.textContent = Math.round(target * eased);
                 if (progress < 1) requestAnimationFrame(update);
                 else el.textContent = end;
             }
@@ -632,14 +773,19 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const el = entry.target;
-                    const val = el.textContent;
-                    animateValue(el, val, 1200);
+                    animateValue(el, el.textContent, 1200);
                     statObserver.unobserve(el);
                 }
             });
         }, { threshold: 0.5 });
-
         document.querySelectorAll('.stat-num').forEach(el => statObserver.observe(el));
+
+        // Sobriety counter (sober since 2024-01-15)
+        const soberDate = new Date('2023-11-27');
+        const today = new Date();
+        const soberDays = Math.floor((today - soberDate) / 86400000);
+        document.getElementById('sober-count').textContent = soberDays;
+        document.getElementById('sober-days').textContent = soberDays;
     </script>
 </body>
 </html>
