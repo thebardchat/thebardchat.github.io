@@ -7,6 +7,12 @@
 
 # thebardchat.github.io
 
+> **Try Claude free for 2 weeks** — the AI behind this entire ecosystem. [Start your free trial →](https://claude.ai/referral/4fAMYN9Ing)
+
+---
+
+
+
 Public landing page and ecosystem hub for the **ShaneBrain** project — a personal AI legacy system by Shane Brazelton.
 
 > "If you don't own your infrastructure, you don't own your future."
