@@ -1,539 +1,934 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShaneBrain - Angel Cloud Ecosystem</title>
-    <meta name="description" content="AI for families. Built by a dump truck dispatcher in Alabama. Personal AI legacy system running on a Raspberry Pi 5.">
-    <meta property="og:title" content="ShaneBrain - Angel Cloud Ecosystem">
-    <meta property="og:description" content="AI for families. Built by a dump truck dispatcher in Alabama. Running on a Raspberry Pi 5.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://thebardchat.github.io/assets/social-card.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#00ff88">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShaneBrain — Angel Cloud Ecosystem</title>
+  <meta name="description" content="AI for families. Built by a dump truck dispatcher in Alabama. Local-first AI infrastructure on a Raspberry Pi 5 — 17 autonomous bots, 42 MCP tools, Weaviate RAG, 4-node Ollama cluster, patent-filed aerospace engineering, published noir fiction."/>
+  <meta property="og:title" content="ShaneBrain — Angel Cloud Ecosystem"/>
+  <meta property="og:description" content="AI for families. Built by a dump truck dispatcher in Alabama. Running on a Raspberry Pi 5."/>
+  <meta property="og:image" content="https://thebardchat.github.io/assets/social-card.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#00ff88"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
     :root {
-        --green: #00ff88;
-        --green-dim: rgba(0, 255, 136, 0.15);
-        --cyan: #00d4ff;
-        --cyan-dim: rgba(0, 212, 255, 0.12);
-        --pink: #ff3366;
-        --amber: #ffaa00;
-        --gold: #c9a84c;
-        --twitch: #9146ff;
-        --bg: #06080c;
-        --surface: #0d1117;
-        --surface-2: #161b22;
-        --border: #1e2a3a;
-        --text: #e6edf3;
-        --text-muted: #7d8590;
-        --radius: 12px;
+      --bg:        #04060a;
+      --bg-card:   rgba(8, 14, 24, 0.85);
+      --bg-card2:  rgba(4, 10, 20, 0.9);
+      --green:     #00ff88;
+      --green-dim: rgba(0, 255, 136, 0.08);
+      --cyan:      #00d4ff;
+      --cyan-dim:  rgba(0, 212, 255, 0.08);
+      --amber:     #ffaa00;
+      --amber-dim: rgba(255, 170, 0, 0.08);
+      --gold:      #c9a84c;
+      --pink:      #ff3366;
+      --purple:    #9146ff;
+      --text:      #ddeeff;
+      --text-2:    #7a9ab8;
+      --text-3:    #2a4060;
+      --border:    rgba(0, 255, 136, 0.1);
+      --border-2:  rgba(0, 212, 255, 0.12);
+      --border-3:  rgba(255, 170, 0, 0.15);
+      --font-mono: 'Share Tech Mono', 'JetBrains Mono', monospace;
+      --font-display: 'Bebas Neue', monospace;
+      --font-code: 'JetBrains Mono', monospace;
     }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
-        font-family: 'Inter', -apple-system, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        overflow-x: hidden;
-        line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding-bottom: 80px;
     }
 
-    .grid-bg {
-        position: fixed; inset: 0;
-        background-image:
-            linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
-        background-size: 48px 48px;
-        pointer-events: none; z-index: 0;
+    /* ── CANVAS ── */
+    #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    /* ── LAYOUT ── */
+    .page { position: relative; z-index: 1; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── REFERRAL TOP ── */
+    .ref-top {
+      background: linear-gradient(90deg, rgba(0,20,40,0.98), rgba(0,40,70,0.98));
+      border-bottom: 1px solid rgba(0,212,255,0.2);
+      padding: 0.6rem 1.5rem;
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-2);
+    }
+    .ref-top a { color: var(--cyan); text-decoration: none; font-weight: 700; }
+    .ref-top a:hover { text-decoration: underline; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
     }
 
-    .orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; animation: float 20s ease-in-out infinite; }
-    .orb-1 { width: 500px; height: 500px; background: rgba(0,255,136,0.08); top: -100px; left: -100px; }
-    .orb-2 { width: 400px; height: 400px; background: rgba(0,212,255,0.06); bottom: 10%; right: -80px; animation-delay: -7s; }
-    .orb-3 { width: 300px; height: 300px; background: rgba(255,51,102,0.05); top: 50%; left: 40%; animation-delay: -14s; }
-
-    @keyframes float {
-        0%, 100% { transform: translate(0, 0); }
-        33% { transform: translate(30px, -20px); }
-        66% { transform: translate(-20px, 15px); }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--green-dim);
+      border: 1px solid rgba(0,255,136,0.2);
+      border-radius: 100px;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.5s ease both;
     }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
-
-    .hero { padding: 5rem 0 3rem; text-align: center; }
-
-    .hero-badge {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        background: var(--green-dim); border: 1px solid rgba(0,255,136,0.25);
-        border-radius: 100px; padding: 0.4rem 1.2rem;
-        font-size: 0.8rem; color: var(--green); font-weight: 500;
-        margin-bottom: 1.5rem; letter-spacing: 0.05em;
-    }
-    .hero-badge .pulse {
-        width: 8px; height: 8px; background: var(--green); border-radius: 50%;
-        animation: pulse 2s ease-in-out infinite;
+    .pulse-dot {
+      width: 7px; height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 0 8px var(--green);
     }
     @keyframes pulse {
-        0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,136,0.4); }
-        50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,136,0); }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
     }
 
-    .hero h1 {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700;
-        letter-spacing: -0.02em;
-        background: linear-gradient(135deg, var(--green), var(--cyan));
-        background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        margin-bottom: 0.5rem; line-height: 1.1;
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 16vw, 12rem);
+      line-height: 0.9;
+      letter-spacing: 0.03em;
+      color: #fff;
+      text-shadow: 0 0 80px rgba(0,255,136,0.4), 0 0 160px rgba(0,255,136,0.15);
+      margin-bottom: 0.25rem;
+      animation: fadeUp 0.5s 0.1s ease both;
     }
-    .hero-tagline { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--cyan); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.2rem; opacity: 0.8; }
-    .hero-sub { font-size: 1.1rem; color: var(--text-muted); max-width: 580px; margin: 0 auto 1rem; }
-    .hero-sub strong { color: var(--text); }
-    .hero-personal { font-size: 0.9rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 2rem; opacity: 0.7; }
-
-    .sobriety {
-        display: inline-flex; align-items: center; gap: 0.6rem;
-        background: rgba(0,255,136,0.06); border: 1px solid rgba(0,255,136,0.15);
-        border-radius: 8px; padding: 0.5rem 1.2rem; margin-bottom: 2rem;
+    .hero-sub-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 5vw, 3.5rem);
+      letter-spacing: 0.15em;
+      color: var(--cyan);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.5s 0.2s ease both;
     }
-    .sobriety-num { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--green); }
-    .sobriety-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
 
-    .stats-bar { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 2rem 0 1.5rem; }
-    .stat { text-align: center; padding: 0.8rem 1.2rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); min-width: 110px; transition: border-color 0.3s, transform 0.3s; }
-    .stat:hover { border-color: var(--green); transform: translateY(-2px); }
-    .stat-num { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--green); }
-    .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2rem; }
-
-    .cta-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 2rem 0; }
-    .cta-btn {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        padding: 0.8rem 1.8rem; background: transparent;
-        border: 2px solid var(--cyan); color: var(--cyan);
-        border-radius: 8px; font-family: 'JetBrains Mono', monospace;
-        font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
-        text-decoration: none; transition: all 0.25s;
+    .hero-tagline {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: var(--text-2);
+      max-width: 600px;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.5s 0.3s ease both;
     }
-    .cta-btn:hover { background: var(--cyan); color: var(--bg); box-shadow: 0 0 30px rgba(0,212,255,0.25); }
-    .cta-btn.gold { border-color: var(--gold); color: var(--gold); }
-    .cta-btn.gold:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 30px rgba(201,168,76,0.3); }
-    .cta-btn.green { border-color: var(--green); color: var(--green); }
-    .cta-btn.green:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 30px rgba(0,255,136,0.25); }
-    .cta-btn.twitch { border-color: var(--twitch); color: var(--twitch); }
-    .cta-btn.twitch:hover { background: var(--twitch); color: #fff; box-shadow: 0 0 30px rgba(145,70,255,0.35); }
+    .hero-tagline strong { color: var(--text); }
 
-    .section { padding: 3rem 0; }
-    .section-title { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 500; color: var(--green); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 2rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+    /* sobriety */
+    .sober-block {
+      display: inline-flex; align-items: center; gap: 1rem;
+      background: var(--green-dim);
+      border: 1px solid rgba(0,255,136,0.15);
+      border-radius: 8px;
+      padding: 0.75rem 2rem;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.5s 0.35s ease both;
+    }
+    .sober-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      color: var(--green);
+      line-height: 1;
+    }
+    .sober-label { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-2); text-transform: uppercase; line-height: 1.5; text-align: left; }
 
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
+    /* stats */
+    .stats-row {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.5s 0.4s ease both;
+    }
+    .stat-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1.25rem;
+      text-align: center;
+      min-width: 100px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .stat-chip:hover { border-color: var(--green); transform: translateY(-2px); }
+    .stat-chip-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--green);
+      line-height: 1;
+    }
+    .stat-chip-label { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-3); text-transform: uppercase; margin-top: 0.3rem; }
 
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
-    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--green), var(--cyan)); opacity: 0; transition: opacity 0.3s; }
-    .card:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-    .card:hover::before { opacity: 1; }
+    .hero-cta {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      justify-content: center;
+      animation: fadeUp 0.5s 0.5s ease both;
+    }
 
-    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; gap: 0.5rem; }
-    .card h3 a { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 600; color: var(--green); text-decoration: none; }
-    .card h3 a:hover { text-decoration: underline; }
-    .badges { display: flex; gap: 0.4rem; flex-shrink: 0; }
-    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
-    .badge-active  { background: rgba(0,255,136,0.12); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
-    .badge-build   { background: rgba(255,170,0,0.12); color: var(--amber); border: 1px solid rgba(255,170,0,0.3); }
-    .badge-core    { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); }
-    .badge-live    { background: rgba(255,51,102,0.12); color: var(--pink); border: 1px solid rgba(255,51,102,0.3); }
-    .badge-pub     { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
-    .badge-twitch  { background: rgba(145,70,255,0.12); color: var(--twitch); border: 1px solid rgba(145,70,255,0.3); }
-    .card-desc { color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem; }
-    .card-tech { font-size: 0.72rem; color: #444d56; font-family: 'JetBrains Mono', monospace; }
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .btn-green { background: var(--green-dim); border: 1px solid rgba(0,255,136,0.4); color: var(--green); }
+    .btn-green:hover { background: rgba(0,255,136,0.18); box-shadow: 0 0 24px rgba(0,255,136,0.3); transform: translateY(-1px); }
+    .btn-cyan { background: var(--cyan-dim); border: 1px solid rgba(0,212,255,0.35); color: var(--cyan); }
+    .btn-cyan:hover { background: rgba(0,212,255,0.15); box-shadow: 0 0 24px rgba(0,212,255,0.3); transform: translateY(-1px); }
+    .btn-amber { background: var(--amber-dim); border: 1px solid rgba(255,170,0,0.35); color: var(--amber); }
+    .btn-amber:hover { background: rgba(255,170,0,0.15); box-shadow: 0 0 24px rgba(255,170,0,0.3); transform: translateY(-1px); }
+    .btn-purple { background: rgba(145,70,255,0.1); border: 1px solid rgba(145,70,255,0.35); color: var(--purple); }
+    .btn-purple:hover { background: rgba(145,70,255,0.2); box-shadow: 0 0 24px rgba(145,70,255,0.3); transform: translateY(-1px); }
+    .btn-muted { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: var(--text-2); }
+    .btn-muted:hover { border-color: var(--green); color: var(--text); transform: translateY(-1px); }
 
-    .infra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
-    .infra-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: border-color 0.3s; }
-    .infra-card:hover { border-color: var(--cyan); }
-    .infra-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--cyan); margin-bottom: 0.75rem; }
-    .infra-card ul { list-style: none; }
-    .infra-card li { font-size: 0.8rem; color: var(--text-muted); padding: 0.3rem 0; border-bottom: 1px solid rgba(30,42,58,0.5); }
-    .infra-card li:last-child { border-bottom: none; }
-    .infra-card li strong { color: var(--text); }
+    /* ── SCROLL HINT ── */
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.62rem; letter-spacing: 0.2em; color: var(--text-3);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      animation: bounce 2.5s ease-in-out infinite;
+    }
+    .scroll-hint::after { content: ''; width: 1px; height: 36px; background: linear-gradient(to bottom, var(--green), transparent); }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
 
-    .credits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
-    .credit-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.5rem; transition: border-color 0.3s, transform 0.2s; }
+    /* ── SECTION LABELS ── */
+    .section { padding: 5rem 0; }
+    .section + .section { padding-top: 0; }
+    .sec-label {
+      font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .sec-label::before { content: '//'; color: var(--text-3); }
+    .sec-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(0,255,136,0.2), transparent); max-width: 180px; }
+    .sec-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: 0.05em;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .sec-desc { font-size: 0.88rem; color: var(--text-2); line-height: 1.8; max-width: 680px; margin-bottom: 3rem; }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,255,136,0.15), transparent); margin: 0 1.5rem; }
+
+    /* ── FEATURED CARDS (book + BGKPJR) ── */
+    .featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem; }
+    @media (max-width: 900px) { .featured-grid { grid-template-columns: 1fr; } }
+
+    .feat-card {
+      background: var(--bg-card);
+      border-radius: 4px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .feat-card:hover { transform: translateY(-4px); }
+    .feat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .feat-book { border: 1px solid rgba(201,168,76,0.3); }
+    .feat-book::before { background: linear-gradient(90deg, var(--gold), var(--amber)); }
+    .feat-book:hover { box-shadow: 0 16px 60px rgba(201,168,76,0.15); }
+    .feat-bgkpjr { border: 1px solid rgba(0,212,255,0.25); }
+    .feat-bgkpjr::before { background: linear-gradient(90deg, var(--cyan), #0066ff); }
+    .feat-bgkpjr:hover { box-shadow: 0 16px 60px rgba(0,212,255,0.12); }
+
+    .feat-badge {
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.25rem 0.75rem; border-radius: 2px; margin-bottom: 1.25rem;
+      display: inline-block;
+    }
+    .badge-pub { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
+    .badge-patent { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.3); color: var(--cyan); }
+    .feat-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      letter-spacing: 0.05em;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      line-height: 1.1;
+    }
+    .feat-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.8; margin-bottom: 1.75rem; }
+    .feat-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
+    .feat-tag {
+      font-size: 0.68rem; letter-spacing: 0.08em;
+      padding: 0.2rem 0.65rem; border-radius: 2px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-2);
+    }
+    .feat-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    /* ── PROJECT GRID ── */
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+    .proj-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,255,136,0.08);
+      border-radius: 4px;
+      padding: 1.5rem;
+      position: relative; overflow: hidden;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+    }
+    .proj-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--green), var(--cyan)); opacity: 0; transition: opacity 0.25s; }
+    .proj-card:hover { border-color: rgba(0,255,136,0.25); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .proj-card:hover::before { opacity: 1; }
+    .proj-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.6rem; }
+    .proj-name { font-family: var(--font-code); font-size: 0.88rem; font-weight: 600; color: var(--green); }
+    .proj-name a { color: inherit; text-decoration: none; }
+    .proj-name a:hover { text-decoration: underline; }
+    .proj-badges { display: flex; gap: 0.3rem; flex-shrink: 0; flex-wrap: wrap; }
+    .pbadge {
+      font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.12rem 0.45rem; border-radius: 2px; white-space: nowrap; font-weight: 600;
+    }
+    .pb-active { background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3); color: var(--green); }
+    .pb-core   { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); color: var(--cyan); }
+    .pb-live   { background: rgba(255,51,102,0.1); border: 1px solid rgba(255,51,102,0.3); color: #ff3366; }
+    .pb-priv   { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); color: var(--text-2); }
+    .pb-build  { background: rgba(255,170,0,0.1); border: 1px solid rgba(255,170,0,0.3); color: var(--amber); }
+    .pb-patent { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
+    .proj-desc { font-size: 0.8rem; color: var(--text-2); line-height: 1.65; margin-bottom: 0.9rem; }
+    .proj-tech { font-family: var(--font-code); font-size: 0.68rem; color: var(--text-3); }
+
+    /* ── INFRA ── */
+    .infra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
+    .infra-card {
+      background: var(--bg-card2);
+      border: 1px solid var(--border-2);
+      border-radius: 4px;
+      padding: 1.5rem;
+      transition: border-color 0.25s;
+    }
+    .infra-card:hover { border-color: rgba(0,212,255,0.3); }
+    .infra-title { font-family: var(--font-code); font-size: 0.8rem; color: var(--cyan); margin-bottom: 1rem; letter-spacing: 0.08em; }
+    .infra-list { list-style: none; }
+    .infra-list li { font-size: 0.78rem; color: var(--text-2); padding: 0.35rem 0; border-bottom: 1px solid rgba(0,212,255,0.06); line-height: 1.5; }
+    .infra-list li:last-child { border-bottom: none; }
+    .infra-list li strong { color: var(--text); }
+
+    /* ── CONNECT ── */
+    .connect-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+    .soc-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.65rem 1.2rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .soc-link:hover { border-color: var(--green); color: var(--text); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    .soc-link svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+    .soc-link.twitch { border-color: rgba(145,70,255,0.25); color: var(--purple); }
+    .soc-link.twitch:hover { border-color: var(--purple); background: rgba(145,70,255,0.08); }
+    .soc-link.kofi { border-color: rgba(255,51,102,0.2); }
+
+    /* ── CREDITS ── */
+    .credits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1rem; }
+    .credit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.2rem 1.4rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
     .credit-card:hover { border-color: var(--cyan); transform: translateY(-2px); }
     .credit-card a { text-decoration: none; }
-    .credit-name { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; color: var(--cyan); margin-bottom: 0.3rem; }
-    .credit-role { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+    .credit-name { font-family: var(--font-code); font-size: 0.82rem; font-weight: 600; color: var(--cyan); margin-bottom: 0.4rem; }
+    .credit-role { font-size: 0.74rem; color: var(--text-2); line-height: 1.55; }
 
-    .social-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-    .social-link { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.82rem; font-family: 'JetBrains Mono', monospace; transition: all 0.25s; }
-    .social-link:hover { border-color: var(--green); color: var(--text); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-    .social-link svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
-    .social-link.twitch-link { border-color: rgba(145,70,255,0.3); color: var(--twitch); }
-    .social-link.twitch-link:hover { border-color: var(--twitch); background: rgba(145,70,255,0.1); }
-
-    .footer { text-align: center; padding: 3rem 0 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
-    .footer-quote { font-family: 'JetBrains Mono', monospace; font-style: italic; color: var(--green); font-size: 0.9rem; margin-bottom: 0.75rem; }
-    .footer p { color: var(--text-muted); font-size: 0.8rem; line-height: 1.8; }
-    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
-    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+    /* ── FOOTER ── */
+    .footer { border-top: 1px solid rgba(0,255,136,0.08); padding: 3rem 1.5rem 2rem; text-align: center; }
+    .footer-quote { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: 0.05em; color: var(--green); margin-bottom: 1rem; }
+    .footer-bio { font-size: 0.82rem; color: var(--text-2); line-height: 1.8; margin-bottom: 1.25rem; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .footer-links a { color: var(--text-3); font-size: 0.78rem; text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--green); }
+    .footer-ref { font-size: 0.72rem; color: var(--amber); }
+    .footer-ref a { color: var(--cyan); text-decoration: none; }
+    .footer-ref a:hover { text-decoration: underline; }
 
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    /* ── FIXED BOTTOM BAR ── */
+    .ref-bottom {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+      background: linear-gradient(90deg, #03080f, #050e1a, #03080f);
+      border-top: 1px solid rgba(0,212,255,0.2);
+      padding: 0.65rem 1.5rem;
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+      font-size: 0.68rem; letter-spacing: 0.1em;
+    }
+    .ref-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+    .ref-bottom span { color: var(--text-2); }
+    .ref-bottom a { color: var(--cyan); text-decoration: none; font-weight: 700; }
+    .ref-bottom a:hover { text-decoration: underline; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-        .hero { padding: 3.5rem 0 2rem; }
-        .stats-bar { gap: 0.6rem; }
-        .stat { min-width: 90px; padding: 0.6rem 0.8rem; }
-        .stat-num { font-size: 1.2rem; }
-        .projects-grid, .infra-grid { grid-template-columns: 1fr; }
-        .credits-grid { grid-template-columns: 1fr 1fr; }
-        .cta-row { flex-direction: column; align-items: center; }
-        .social-grid { gap: 0.6rem; }
-        .social-link { padding: 0.5rem 0.8rem; font-size: 0.75rem; }
+      .hero { padding: 5rem 1rem 3rem; }
+      .hero-title { font-size: clamp(4rem, 22vw, 8rem); }
+      .stats-row { gap: 0.6rem; }
+      .stat-chip { min-width: 80px; padding: 0.6rem 0.8rem; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .ref-bottom { flex-wrap: wrap; font-size: 0.62rem; }
+      .feat-card { padding: 1.75rem 1.25rem; }
     }
-</style>
-```
-
+  </style>
 </head>
 <body>
-    <div class="grid-bg"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
 
-```
-<div class="container">
+<canvas id="bg-canvas"></canvas>
 
-    <section class="hero">
-        <div class="hero-badge"><span class="pulse"></span> All systems online</div>
-        <h1>SHANEBRAIN</h1>
-        <div class="hero-tagline">Angel Cloud Ecosystem</div>
-        <p class="hero-sub">AI for families. Built by a <strong>dump truck dispatcher</strong> in Alabama.<br>Local-first. Family-first. Running on a <strong>Raspberry Pi 5</strong>.</p>
-        <p class="hero-personal">Father of 5 &bull; <span id="sober-days">800+</span> days sober &bull; Building the future on 16GB RAM</p>
-        <div class="sobriety">
-            <span class="sobriety-num" id="sober-count">---</span>
-            <span class="sobriety-label">Days<br>Sober</span>
+<div class="page">
+
+<!-- ── TOP REFERRAL ── -->
+<div class="ref-top">
+  <strong style="color:var(--text)">Try Claude free for 2 weeks</strong> — the AI behind every line of this ecosystem.
+  &nbsp;<a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">Start your free trial →</a>
+</div>
+
+<!-- ══════════════════════════════════════════ HERO -->
+<section class="hero" style="position:relative">
+  <div class="status-pill"><span class="pulse-dot"></span> All systems online · Pi 5 · Hazel Green AL</div>
+  <h1 class="hero-title">SHANEBRAIN</h1>
+  <div class="hero-sub-title">Angel Cloud Ecosystem</div>
+  <p class="hero-tagline">
+    AI for families. Built by a <strong>dump truck dispatcher</strong> in Alabama.<br/>
+    Local-first. Family-first. Running on a <strong>Raspberry Pi 5</strong> in the living room.
+  </p>
+
+  <div class="sober-block">
+    <div class="sober-num" id="sober-count">---</div>
+    <div class="sober-label">Days<br/>Sober</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-chip"><div class="stat-chip-num">4</div><div class="stat-chip-label">Compute Nodes</div></div>
+    <div class="stat-chip"><div class="stat-chip-num">42</div><div class="stat-chip-label">MCP Tools</div></div>
+    <div class="stat-chip"><div class="stat-chip-num">17</div><div class="stat-chip-label">Weaviate Collections</div></div>
+    <div class="stat-chip"><div class="stat-chip-num">210+</div><div class="stat-chip-label">Knowledge Objects</div></div>
+    <div class="stat-chip"><div class="stat-chip-num">17</div><div class="stat-chip-label">Autonomous Bots</div></div>
+    <div class="stat-chip"><div class="stat-chip-num">5</div><div class="stat-chip-label">Sons</div></div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="/book" class="btn btn-amber">New Book Out Now →</a>
+    <a href="https://twitch.tv/thebardchat" class="btn btn-purple" target="_blank" rel="noopener">▶ Watch Live</a>
+    <a href="https://thebardchat.github.io/BGKPJR-Core-Simulations/" class="btn btn-cyan" target="_blank">BGKPJR Project →</a>
+    <a href="https://ko-fi.com/shanebrain" class="btn btn-green" target="_blank" rel="noopener">Support on Ko-fi</a>
+  </div>
+
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════ FEATURED -->
+<section class="section">
+  <div class="container">
+    <div class="sec-label reveal">01 · Featured</div>
+    <h2 class="sec-title reveal">The Big Two</h2>
+    <p class="sec-desc reveal">A published noir fiction book and a patent-filed electromagnetic launch architecture. Built by the same guy, on the same Pi 5, at the same desk.</p>
+
+    <div class="featured-grid">
+      <!-- BOOK -->
+      <div class="feat-card feat-book reveal">
+        <span class="feat-badge badge-pub">★ Published</span>
+        <div class="feat-title">You Probably Think<br/>This Book Is About You</div>
+        <p class="feat-desc">
+          22 noir vignettes about ego, identity, and the universal human condition.
+          A detective who discovers he is the case. Available on Amazon — ebook, audiobook (ElevenLabs),
+          and print. First draft written in public, chapter by chapter.
+        </p>
+        <div class="feat-tags">
+          <span class="feat-tag">Noir Fiction</span>
+          <span class="feat-tag">22 Vignettes</span>
+          <span class="feat-tag">KDP</span>
+          <span class="feat-tag">ElevenLabs Audiobook</span>
+          <span class="feat-tag">Amazon</span>
         </div>
-        <div class="stats-bar">
-            <div class="stat reveal"><div class="stat-num">4</div><div class="stat-label">Compute Nodes</div></div>
-            <div class="stat reveal"><div class="stat-num">42</div><div class="stat-label">MCP Tools</div></div>
-            <div class="stat reveal"><div class="stat-num">17</div><div class="stat-label">Weaviate Collections</div></div>
-            <div class="stat reveal"><div class="stat-num">210+</div><div class="stat-label">Knowledge Objects</div></div>
-            <div class="stat reveal"><div class="stat-num">17</div><div class="stat-label">MEGA Crew Bots</div></div>
-            <div class="stat reveal"><div class="stat-num">10+</div><div class="stat-label">Active Projects</div></div>
+        <div class="feat-links">
+          <a href="/book" class="btn btn-amber">Read More →</a>
+          <a href="https://github.com/thebardchat/you-probably-think-this-book-is-about-you" class="btn btn-muted" target="_blank">GitHub →</a>
         </div>
-        <div class="cta-row">
-            <a href="/book" class="cta-btn gold">NEW BOOK OUT NOW &rarr;</a>
-            <a href="https://twitch.tv/thebardchat" class="cta-btn twitch" target="_blank" rel="noopener">&#9654; WATCH LIVE</a>
-            <a href="https://thebardchat.github.io/pulsar_sentinel/" class="cta-btn">PULSAR SENTINEL &rarr;</a>
-            <a href="https://ko-fi.com/shanebrain" class="cta-btn green" target="_blank" rel="noopener">SUPPORT ON KO-FI</a>
+      </div>
+
+      <!-- BGKPJR -->
+      <div class="feat-card feat-bgkpjr reveal">
+        <span class="feat-badge badge-patent">Patent Filed</span>
+        <div class="feat-title">BGKPJR Launch<br/>Architecture</div>
+        <p class="feat-desc">
+          Brazelton Gryphon Kepler Propulsion Jump Revolution. A three-stage electromagnetic
+          launch system: 28.7 km superconducting maglev tube, Gryphon hypersonic spacecraft,
+          Kepler solar sail. VacuumGate LH₂ cryogenic membrane is the novel IP.
+          AI expert peer review chain (McNab, Boyd, Shotwell simulations) documents every
+          hard barrier and correction.
+        </p>
+        <div class="feat-tags">
+          <span class="feat-tag">Maglev · 28.7 km</span>
+          <span class="feat-tag">Mach 3.5–5.0</span>
+          <span class="feat-tag">LH₂ VacuumGate</span>
+          <span class="feat-tag">LQR + MPC</span>
+          <span class="feat-tag">Python Physics Engine</span>
         </div>
-    </section>
-
-    <section class="section">
-        <div class="section-title reveal">// Active Projects</div>
-        <div class="projects-grid">
-
-            <div class="card reveal" style="border-color: rgba(201,168,76,0.3);">
-                <div class="card-header">
-                    <h3><a href="/book" style="color: var(--gold);">you-probably-think-this-book-is-about-you</a></h3>
-                    <div class="badges"><span class="badge badge-pub">Published</span></div>
-                </div>
-                <p class="card-desc">Noir-style vignettes about ego, identity, and the universal human condition. 22 scenes. A detective who discovers he's the case. Available now on Amazon &mdash; ebook, audiobook, and print.</p>
-                <div class="card-tech">Writing / KDP / ElevenLabs / Noir Fiction</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://github.com/thebardchat/shanebrain-core" target="_blank" rel="noopener">shanebrain-core</a></h3>
-                    <div class="badges"><span class="badge badge-core">Core</span><span class="badge badge-active">Private</span></div>
-                </div>
-                <p class="card-desc">Pi 5 operational layer — private. Discord bots, MEGA crew engine, Weaviate RAG, social automation, cloud backup, email AI, and the mega dashboard. The machine room behind everything.</p>
-                <div class="card-tech">Python / Ollama / Weaviate / Discord.py / Docker / systemd</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://thebardchat.github.io/angel-cloud/" target="_blank" rel="noopener">angel-cloud</a></h3>
-                    <div class="badges"><span class="badge badge-core">Core</span><span class="badge badge-active">Active</span></div>
-                </div>
-                <p class="card-desc">Mental wellness platform with auth bridge, 3D welcome center, and AI sentiment analysis. LogiBot handles automation, continuous sync, and local AI via Ollama. The public face of ShaneBrain.</p>
-                <div class="card-tech">Python / Node.js / Ollama / Firestore / Docker</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://thebardchat.github.io/shanebrain_mcp/" target="_blank" rel="noopener">shanebrain-mcp</a></h3>
-                    <div class="badges"><span class="badge badge-core">Core</span><span class="badge badge-active">Active</span></div>
-                </div>
-                <p class="card-desc">Custom MCP server with 42 tools across 26 groups &mdash; knowledge, chat, RAG, social, vault, notes, drafts, security, admin, Ollama, planning, and system health. Streamable HTTP transport, Pydantic v2.</p>
-                <div class="card-tech">Python / MCP / Docker / Weaviate / Ollama</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://thebardchat.github.io/pulsar_sentinel/" target="_blank" rel="noopener">pulsar-sentinel</a></h3>
-                    <div class="badges"><span class="badge badge-active">Active</span></div>
-                </div>
-                <p class="card-desc">Post-quantum cryptography security framework. ML-KEM lattice-based encryption, blockchain audit trails on Polygon, MetaMask wallet auth, cyberpunk dashboard.</p>
-                <div class="card-tech">Python / FastAPI / liboqs / Web3 / Discord.py</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://thebardchat.github.io/mega-crew-stories/" target="_blank" rel="noopener">mega-crew-stories</a></h3>
-                    <div class="badges"><span class="badge badge-active">Active</span><span class="badge badge-live">Live</span></div>
-                </div>
-                <p class="card-desc">Live story universe for the MEGA Crew &mdash; self-evolving characters, AI-generated narratives, and a world built in public. Hosted on GitHub Pages.</p>
-                <div class="card-tech">HTML / CSS / JavaScript / AI Narrative</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://thebardchat.github.io/mega-crew/" target="_blank" rel="noopener">mega-crew</a></h3>
-                    <div class="badges"><span class="badge badge-active">Active</span><span class="badge badge-live">Live</span></div>
-                </div>
-                <p class="card-desc">14 named AI bots running 24/7 on a Raspberry Pi 5. Each crew member — Arc, Blaze, Bolt, Flux, Glitch, Neon and more — has a distinct personality, domain, and persistent Weaviate memory. All local Ollama.</p>
-                <div class="card-tech">Python / Ollama / Weaviate / Docker / llama3.2:1b</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://thebardchat.github.io/shanebrain-agents/" target="_blank" rel="noopener">shanebrain-agents</a></h3>
-                    <div class="badges"><span class="badge badge-active">Active</span><span class="badge badge-live">Live</span></div>
-                </div>
-                <p class="card-desc">7-agent AI orchestration system on a Raspberry Pi 5. Guardian, Librarian, Dispatcher, Builder, Storyteller, Ops, and Social &mdash; coordinated by a central orchestrator. Local Ollama + Claude API.</p>
-                <div class="card-tech">Python / FastAPI / Claude API / Ollama / Weaviate</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://thebardchat.github.io/twitch/" target="_blank" rel="noopener">thebardchat &mdash; Twitch</a></h3>
-                    <div class="badges"><span class="badge badge-twitch">Live</span></div>
-                </div>
-                <p class="card-desc">Building in public. Live AI demos, automation builds, and real tech &mdash; streamed from the lab. Come watch the machine learn. <a href="https://twitch.tv/thebardchat" target="_blank" rel="noopener" style="color:var(--twitch)">Watch live →</a></p>
-                <div class="card-tech">Twitch / OBS / Ollama / N8N / Stream Bots</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://github.com/thebardchat/BGKPJR-Core-Simulations" target="_blank" rel="noopener">BGKPJR-Core-Simulations</a></h3>
-                    <div class="badges"><span class="badge badge-active">Active</span></div>
-                </div>
-                <p class="card-desc">Electromagnetic launch architecture. Control systems (LQR, MPC), aerodynamics simulations, maglev track specs, Gryphon spacecraft design. Patent filed.</p>
-                <div class="card-tech">Python / NumPy / Control Systems / CAD</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://github.com/thebardchat/N8N" target="_blank" rel="noopener">N8N Automation</a></h3>
-                    <div class="badges"><span class="badge badge-active">Active</span></div>
-                </div>
-                <p class="card-desc">Automation workflows running on Pulsar. Connected to the ShaneBrain ecosystem for event-driven orchestration across services.</p>
-                <div class="card-tech">N8N / Automation / Webhooks</div>
-            </div>
-
-            <div class="card reveal">
-                <div class="card-header">
-                    <h3><a href="https://github.com/thebardchat/loudon-desarro" target="_blank" rel="noopener">loudon-desarro</a></h3>
-                    <div class="badges"><span class="badge badge-build">Building</span></div>
-                </div>
-                <p class="card-desc">50,000 SF multi-sport athletic complex honoring wrestling coaches Loudon and DeSarro. Interactive 3D visualizations with two building options and PLEX FLEX seating.</p>
-                <div class="card-tech">Three.js / HTML / CSS</div>
-            </div>
-
+        <div class="feat-links">
+          <a href="https://thebardchat.github.io/BGKPJR-Core-Simulations/" class="btn btn-cyan" target="_blank">Full Project →</a>
+          <a href="https://github.com/thebardchat/BGKPJR-Core-Simulations" class="btn btn-muted" target="_blank">GitHub →</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="section">
-        <div class="section-title reveal">// Infrastructure</div>
-        <div class="infra-grid">
-            <div class="infra-card reveal">
-                <h4>Compute</h4>
-                <ul>
-                    <li><strong>Raspberry Pi 5</strong> &mdash; 16 GB, controller</li>
-                    <li><strong>Pironman 5-MAX</strong> &mdash; NVMe RAID chassis</li>
-                    <li><strong>RAID 1</strong> &mdash; 2x 2TB NVMe</li>
-                    <li><strong>8TB External</strong> &mdash; Seagate backup</li>
-                    <li><strong>4-Node Cluster</strong> &mdash; Pi + 3 Windows nodes</li>
-                </ul>
-            </div>
-            <div class="infra-card reveal">
-                <h4>AI Stack</h4>
-                <ul>
-                    <li><strong>Ollama 0.17</strong> &mdash; local LLM inference</li>
-                    <li><strong>shanebrain-3b</strong> &mdash; custom tuned model</li>
-                    <li><strong>nomic-embed-text</strong> &mdash; 768-dim vectors</li>
-                    <li><strong>Weaviate 1.36</strong> &mdash; 17 collections</li>
-                    <li><strong>Cluster Proxy</strong> &mdash; multi-node routing</li>
-                </ul>
-            </div>
-            <div class="infra-card reveal">
-                <h4>Services</h4>
-                <ul>
-                    <li><strong>MCP Server v2.2</strong> &mdash; 42 tools, HTTP</li>
-                    <li><strong>Mega Dashboard</strong> &mdash; 20+ panels</li>
-                    <li><strong>Discord + Arcade Bots</strong> &mdash; AI-powered</li>
-                    <li><strong>Social Bot</strong> &mdash; Facebook automation</li>
-                    <li><strong>Buddy Claude</strong> &mdash; AI dialogue engine</li>
-                    <li><strong>MEGA Crew</strong> &mdash; self-evolving bots</li>
-                </ul>
-            </div>
-            <div class="infra-card reveal">
-                <h4>Network</h4>
-                <ul>
-                    <li><strong>Tailscale VPN</strong> &mdash; mesh networking</li>
-                    <li><strong>Tailscale Funnel</strong> &mdash; public HTTPS</li>
-                    <li><strong>Caddy 2.11</strong> &mdash; reverse proxy</li>
-                    <li><strong>Docker</strong> &mdash; containerized services</li>
-                    <li><strong>theangel.com</strong> &mdash; custom domain</li>
-                </ul>
-            </div>
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════ PROJECTS -->
+<section class="section">
+  <div class="container">
+    <div class="sec-label reveal">02 · Active Projects</div>
+    <h2 class="sec-title reveal">The Ecosystem</h2>
+    <p class="sec-desc reveal">Everything running, building, or live as of April 2026. All of it on a Pi 5 in Alabama.</p>
+
+    <div class="proj-grid">
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://github.com/thebardchat/shanebrain-core" target="_blank">shanebrain-core</a></div>
+          <div class="proj-badges"><span class="pbadge pb-core">Core</span><span class="pbadge pb-priv">Private</span></div>
         </div>
-    </section>
+        <p class="proj-desc">The machine room behind everything. Discord bots, MEGA Crew engine, Weaviate RAG, social automation, cloud backup, email AI, mega dashboard, morning briefings, SMS alerting, and the preflight system. 24/7 on Pi 5.</p>
+        <div class="proj-tech">Python · Ollama · Weaviate · Discord.py · Docker · systemd · FastAPI</div>
+      </div>
 
-    <!-- CREDITS — new section -->
-    <section class="section">
-        <div class="section-title reveal">// Built With</div>
-        <div class="credits-grid">
-            <div class="credit-card reveal">
-                <a href="https://claude.ai" target="_blank" rel="noopener">
-                    <div class="credit-name">Claude by Anthropic</div>
-                    <div class="credit-role">AI partner &amp; co-builder. Every line of this ecosystem.</div>
-                </a>
-            </div>
-            <div class="credit-card reveal">
-                <a href="https://www.raspberrypi.com" target="_blank" rel="noopener">
-                    <div class="credit-name">Raspberry Pi 5</div>
-                    <div class="credit-role">Local AI compute backbone. 16GB RAM, running it all.</div>
-                </a>
-            </div>
-            <div class="credit-card reveal">
-                <a href="https://www.sunfounder.com/products/pironman-5" target="_blank" rel="noopener">
-                    <div class="credit-name">Pironman 5-MAX</div>
-                    <div class="credit-role">NVMe RAID 1 chassis by Sunfounder. Made it real.</div>
-                </a>
-            </div>
-            <div class="credit-card reveal">
-                <a href="https://github.com/thebardchat" target="_blank" rel="noopener">
-                    <div class="credit-name">GitHub</div>
-                    <div class="credit-role">Version control, Pages hosting, and open builds.</div>
-                </a>
-            </div>
-            <div class="credit-card reveal">
-                <a href="https://twitch.tv/thebardchat" target="_blank" rel="noopener">
-                    <div class="credit-name">Twitch</div>
-                    <div class="credit-role">Building in public. Live AI demos &amp; the stream lab.</div>
-                </a>
-            </div>
-            <div class="credit-card reveal">
-                <a href="https://discord.gg/qST3UfFAr9" target="_blank" rel="noopener">
-                    <div class="credit-name">Discord</div>
-                    <div class="credit-role">Community hub. AI bots, MEGA Crew, and the squad.</div>
-                </a>
-            </div>
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://thebardchat.github.io/angel-cloud/" target="_blank">angel-cloud</a></div>
+          <div class="proj-badges"><span class="pbadge pb-core">Core</span><span class="pbadge pb-active">Active</span></div>
         </div>
-    </section>
+        <p class="proj-desc">Mental wellness platform with auth bridge, Angel Cloud Gateway (port 4200), Messenger Storyteller module, and AI sentiment analysis. Public face of ShaneBrain. theangel.com · Tailscale Funnel HTTPS.</p>
+        <div class="proj-tech">Python · FastAPI · Node.js · Ollama · SQLite · Tailscale</div>
+      </div>
 
-    <section class="section">
-        <div class="section-title reveal">// Connect</div>
-        <div class="social-grid reveal">
-            <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="social-link">
-                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                GitHub
-            </a>
-            <a href="https://twitch.tv/thebardchat" target="_blank" rel="noopener" class="social-link twitch-link">
-                <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
-                Twitch
-            </a>
-            <a href="https://discord.gg/qST3UfFAr9" target="_blank" rel="noopener" class="social-link">
-                <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/></svg>
-                Discord
-            </a>
-            <a href="https://instagram.com/shanebrain_theangel_cloud" target="_blank" rel="noopener" class="social-link">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                Instagram
-            </a>
-            <a href="https://tiktok.com/@thebardchat" target="_blank" rel="noopener" class="social-link">
-                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13.2a8.16 8.16 0 005.58 2.2v-3.46a4.85 4.85 0 01-2-.75 4.86 4.86 0 01-1.78-2.13V6.69h3.78z"/></svg>
-                TikTok
-            </a>
-            <a href="https://twitter.com/BGKPJRevolution" target="_blank" rel="noopener" class="social-link">
-                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                X / Twitter
-            </a>
-            <a href="mailto:brazeltonshane@gmail.com" class="social-link">
-                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                Email
-            </a>
-            <a href="https://ko-fi.com/shanebrain" target="_blank" rel="noopener" class="social-link" style="border-color: rgba(255,51,102,0.3);">
-                <svg viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311z"/></svg>
-                Ko-fi
-            </a>
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://thebardchat.github.io/shanebrain_mcp/" target="_blank">shanebrain-mcp</a></div>
+          <div class="proj-badges"><span class="pbadge pb-core">Core</span><span class="pbadge pb-active">Active</span></div>
         </div>
-    </section>
+        <p class="proj-desc">Custom MCP server v2.2 — 42 tools across 26 groups. Knowledge, chat, RAG, social, vault, notes, drafts, security, admin, Ollama, planning, and system health. Streamable HTTP · Pydantic v2 · Docker.</p>
+        <div class="proj-tech">Python · MCP Protocol · Docker · Weaviate · FastAPI</div>
+      </div>
 
-    <footer class="footer reveal">
-        <p class="footer-quote">"If you don't own your infrastructure, you don't own your future."</p>
-        <p>Shane Brazelton &mdash; Hazel Green, Alabama<br>Dispatcher by day. AI architect by night. Father of five.</p>
-        <div class="footer-links">
-            <a href="https://github.com/thebardchat" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://twitch.tv/thebardchat" target="_blank" rel="noopener">Twitch</a>
-            <a href="https://discord.gg/qST3UfFAr9" target="_blank" rel="noopener">Discord</a>
-            <a href="https://ko-fi.com/shanebrain" target="_blank" rel="noopener">Ko-fi</a>
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://thebardchat.github.io/pulsar_sentinel/" target="_blank">pulsar-sentinel</a></div>
+          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
         </div>
-    </footer>
+        <p class="proj-desc">Post-quantum cryptography security framework. ML-KEM lattice-based encryption, blockchain audit trails on Polygon, MetaMask wallet auth, cyberpunk dashboard. Planned for all 4 cluster nodes.</p>
+        <div class="proj-tech">Python · FastAPI · liboqs · Web3 · Discord.py · Polygon</div>
+      </div>
 
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://thebardchat.github.io/mega-crew/" target="_blank">MEGA Crew</a></div>
+          <div class="proj-badges"><span class="pbadge pb-active">Active</span><span class="pbadge pb-live">Live</span></div>
+        </div>
+        <p class="proj-desc">17 named AI bots running 24/7 on Pi 5. Arc, Blaze, Bolt, Flux, Glitch, Neon and more — each with a distinct personality, domain, and persistent Weaviate memory. All local Ollama. Self-modifying 4-phase evolution complete.</p>
+        <div class="proj-tech">Python · Ollama · Weaviate · Docker · llama3.2:1b</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://github.com/thebardchat/Greenfield" target="_blank">Claim Cruncher</a></div>
+          <div class="proj-badges"><span class="pbadge pb-build">Building</span></div>
+        </div>
+        <p class="proj-desc">Medical billing intake platform built for Gavin. Digitizes and structures insurance claims, denial tracking, and reimbursement workflows. Python/FastAPI backend, Greenfield repo.</p>
+        <div class="proj-tech">Python · FastAPI · SQLite · PDF parsing · React</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name">Buddy Claude</div>
+          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
+        </div>
+        <p class="proj-desc">Port 8008 FastAPI service — 12-hour Claude↔Gemini AI dialogue engine. Two AI systems in conversation, stored to Weaviate ExternalPerspectives collection. llama3.2:1b via local Ollama for lightweight tasks.</p>
+        <div class="proj-tech">Python · FastAPI · Claude API · Gemini API · Weaviate · Ollama</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://github.com/thebardchat/N8N" target="_blank">N8N Automation</a></div>
+          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
+        </div>
+        <p class="proj-desc">Automation workflows running on Pulsar node. Event-driven orchestration across ShaneBrain services. Connected to the full ecosystem for triggers, webhooks, and cross-service automation.</p>
+        <div class="proj-tech">N8N · Webhooks · REST · Tailscale</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://twitch.tv/thebardchat" target="_blank">thebardchat · Twitch</a></div>
+          <div class="proj-badges"><span class="pbadge pb-live">Live</span></div>
+        </div>
+        <p class="proj-desc">Building in public. Live AI demos, automation builds, real infrastructure — streamed from the lab. Bot council, mega dashboard, and the full ShaneBrain stack running live on stream.</p>
+        <div class="proj-tech">Twitch · OBS · Ollama · N8N · Stream Bots</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://github.com/thebardchat/SB-Management-OS" target="_blank">SB Management OS</a></div>
+          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
+        </div>
+        <p class="proj-desc">SRM Concrete SOPs and dispatch management system. MASTER-Scheduler integration for job tracking, crew management, and operational workflows. Built for real daily use at work.</p>
+        <div class="proj-tech">Python · Google Sheets · Dispatch Logic · SOPs</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://github.com/thebardchat/shanebrain-agents" target="_blank">shanebrain-agents</a></div>
+          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
+        </div>
+        <p class="proj-desc">7-agent AI orchestration — Guardian, Librarian, Dispatcher, Builder, Storyteller, Ops, and Social — coordinated by a central orchestrator. Local Ollama + Claude API. Full Weaviate memory.</p>
+        <div class="proj-tech">Python · FastAPI · Claude API · Ollama · Weaviate</div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://github.com/thebardchat/BGKPJR-Core-Simulations" target="_blank">BGKPJR Simulations</a></div>
+          <div class="proj-badges"><span class="pbadge pb-active">Active</span><span class="pbadge pb-patent">Patent</span></div>
+        </div>
+        <p class="proj-desc">Full physics engine, LQR/MPC control systems, aerodynamics sims, VacuumGate feasibility report, and AI expert peer review chain. Real expert outreach underway. Has its own GitHub Pages.</p>
+        <div class="proj-tech">Python · NumPy · SciPy · Control Theory · MATLAB</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════ INFRASTRUCTURE -->
+<section class="section">
+  <div class="container">
+    <div class="sec-label reveal">03 · Infrastructure</div>
+    <h2 class="sec-title reveal">The Hardware Stack</h2>
+    <p class="sec-desc reveal">Everything runs local. No cloud subscriptions. No vendor lock-in. A Pi 5 with a RAID array, four Ollama nodes, and Tailscale mesh tying it together.</p>
+
+    <div class="infra-grid">
+      <div class="infra-card reveal">
+        <div class="infra-title">// Compute</div>
+        <ul class="infra-list">
+          <li><strong>Raspberry Pi 5</strong> — 16 GB RAM, controller node</li>
+          <li><strong>Pironman 5-MAX</strong> — NVMe RAID chassis by Sunfounder</li>
+          <li><strong>RAID 1</strong> — 2× WD Blue SN5000 2TB NVMe via mdadm</li>
+          <li><strong>8TB External</strong> — Seagate ANGEL_CLOUD (NTFS)</li>
+          <li><strong>4-Node Cluster</strong> — Pi 5 + Pulsar00100 + Bullfrog + Jaxton</li>
+        </ul>
+      </div>
+      <div class="infra-card reveal">
+        <div class="infra-title">// AI Stack</div>
+        <ul class="infra-list">
+          <li><strong>Ollama 0.17.7</strong> — local LLM inference, port 11434</li>
+          <li><strong>Cluster Proxy</strong> — 4-node routing, port 11435</li>
+          <li><strong>shanebrain-3b</strong> — custom model (llama3.2:3b base)</li>
+          <li><strong>nomic-embed-text</strong> — 768-dim vector embeddings</li>
+          <li><strong>Weaviate 1.36.2</strong> — 17 collections, text2vec-ollama</li>
+        </ul>
+      </div>
+      <div class="infra-card reveal">
+        <div class="infra-title">// Services</div>
+        <ul class="infra-list">
+          <li><strong>MCP Server v2.2</strong> — 42 tools, port 8100, Docker</li>
+          <li><strong>Mega Dashboard</strong> — port 8300, 20+ live panels</li>
+          <li><strong>Buddy Claude</strong> — port 8008, Claude↔Gemini engine</li>
+          <li><strong>Open WebUI</strong> — port 3000, Portainer port 9000</li>
+          <li><strong>Angel Cloud Gateway</strong> — port 4200, FastAPI</li>
+          <li><strong>ShaneBrain Alerter</strong> — 5 AM briefing, weekly report</li>
+        </ul>
+      </div>
+      <div class="infra-card reveal">
+        <div class="infra-title">// Network</div>
+        <ul class="infra-list">
+          <li><strong>Tailscale VPN</strong> — mesh across all 4 nodes</li>
+          <li><strong>Tailscale Funnel</strong> — public HTTPS at ts.net URL</li>
+          <li><strong>Caddy 2.11.2</strong> — reverse proxy, ready for custom domain</li>
+          <li><strong>theangel.com</strong> — IONOS, expires 2027</li>
+          <li><strong>Pi LAN</strong> — 10.0.0.42 · Tailscale 100.67.120.6</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════ CREDITS -->
+<section class="section">
+  <div class="container">
+    <div class="sec-label reveal">04 · Built With</div>
+    <h2 class="sec-title reveal">Partners & Tools</h2>
+    <div class="credits-grid">
+      <div class="credit-card reveal">
+        <a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">
+          <div class="credit-name">Claude by Anthropic</div>
+          <div class="credit-role">AI co-builder on every project in this ecosystem. Shane + Claude Anthropic — always together.</div>
+        </a>
+      </div>
+      <div class="credit-card reveal">
+        <a href="https://www.raspberrypi.com" target="_blank" rel="noopener">
+          <div class="credit-name">Raspberry Pi 5</div>
+          <div class="credit-role">16GB. Runs it all. Pi before cloud, every time.</div>
+        </a>
+      </div>
+      <div class="credit-card reveal">
+        <a href="https://www.sunfounder.com/products/pironman-5" target="_blank" rel="noopener">
+          <div class="credit-name">Pironman 5-MAX</div>
+          <div class="credit-role">NVMe RAID 1 chassis by Sunfounder. Made it real hardware.</div>
+        </a>
+      </div>
+      <div class="credit-card reveal">
+        <a href="https://ollama.com" target="_blank" rel="noopener">
+          <div class="credit-name">Ollama</div>
+          <div class="credit-role">Local LLM inference across 4 nodes. No cloud billing.</div>
+        </a>
+      </div>
+      <div class="credit-card reveal">
+        <a href="https://weaviate.io" target="_blank" rel="noopener">
+          <div class="credit-name">Weaviate</div>
+          <div class="credit-role">17 collections, 210+ knowledge objects. The long-term memory.</div>
+        </a>
+      </div>
+      <div class="credit-card reveal">
+        <a href="https://github.com/thebardchat" target="_blank" rel="noopener">
+          <div class="credit-name">GitHub</div>
+          <div class="credit-role">Version control, Pages hosting, open builds in public.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════ CONNECT -->
+<section class="section">
+  <div class="container" style="text-align:center">
+    <div class="sec-label reveal" style="justify-content:center">05 · Connect</div>
+    <h2 class="sec-title reveal">Find Me</h2>
+    <div class="connect-grid reveal">
+      <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="soc-link">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://twitch.tv/thebardchat" target="_blank" rel="noopener" class="soc-link twitch">
+        <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+        Twitch
+      </a>
+      <a href="https://discord.gg/qST3UfFAr9" target="_blank" rel="noopener" class="soc-link">
+        <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/></svg>
+        Discord
+      </a>
+      <a href="https://instagram.com/shanebrain_theangel_cloud" target="_blank" rel="noopener" class="soc-link">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Instagram
+      </a>
+      <a href="https://tiktok.com/@thebardchat" target="_blank" rel="noopener" class="soc-link">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13.2a8.16 8.16 0 005.58 2.2v-3.46a4.85 4.85 0 01-2-.75 4.86 4.86 0 01-1.78-2.13V6.69h3.78z"/></svg>
+        TikTok
+      </a>
+      <a href="https://twitter.com/BGKPJRevolution" target="_blank" rel="noopener" class="soc-link">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X / Twitter
+      </a>
+      <a href="mailto:brazeltonshane@gmail.com" class="soc-link">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Email
+      </a>
+      <a href="https://ko-fi.com/shanebrain" target="_blank" rel="noopener" class="soc-link kofi">
+        <svg viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311z"/></svg>
+        Ko-fi
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-quote">"If you don't own your infrastructure, you don't own your future."</div>
+    <p class="footer-bio">
+      Shane Brazelton — Hazel Green, Alabama<br/>
+      Dispatcher by day. AI architect by night. Father of five.<br/>
+      Built with Claude Anthropic. Every project. Every line.
+    </p>
+    <div class="footer-links">
+      <a href="https://github.com/thebardchat" target="_blank">GitHub</a>
+      <a href="https://twitch.tv/thebardchat" target="_blank">Twitch</a>
+      <a href="https://discord.gg/qST3UfFAr9" target="_blank">Discord</a>
+      <a href="https://ko-fi.com/shanebrain" target="_blank">Ko-fi</a>
+      <a href="https://thebardchat.github.io/BGKPJR-Core-Simulations/">BGKPJR</a>
+      <a href="https://github.com/thebardchat/constitution">Constitution</a>
+    </div>
+    <div class="footer-ref">
+      ★ Try Claude free for 2 weeks —
+      <a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">claude.ai/referral/4fAMYN9Ing</a>
+      · the AI behind this entire ecosystem ★
+    </div>
+  </div>
+</footer>
+
+</div><!-- end .page -->
+
+<!-- ── FIXED BOTTOM BAR ── -->
+<div class="ref-bottom">
+  <div class="ref-dot"></div>
+  <span>Try Claude free for 2 weeks —</span>
+  <a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">Start your free trial →</a>
+  <span>· AI behind this ecosystem</span>
 </div>
 
 <script>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => entry.target.classList.add('visible'), i * 80);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// ── CANVAS BACKGROUND ──
+(function(){
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
 
-    function animateValue(el, end, duration) {
-        if (isNaN(parseInt(end))) return;
-        const target = parseInt(end);
-        const startTime = performance.now();
-        function update(now) {
-            const elapsed = now - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(target * eased);
-            if (progress < 1) requestAnimationFrame(update);
-            else el.textContent = end;
-        }
-        requestAnimationFrame(update);
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Grid
+  const GRID = 52;
+  // Particles
+  const particles = [];
+  const PCOUNT = 70;
+
+  class Particle {
+    constructor(init){ this.reset(init); }
+    reset(init){
+      this.x = Math.random() * (W || window.innerWidth);
+      this.y = init ? Math.random() * (H || window.innerHeight) : (H || window.innerHeight) + 10;
+      this.vy = -(Math.random() * 1.5 + 0.4);
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.life = init ? Math.random() : 1;
+      this.decay = Math.random() * 0.004 + 0.002;
+      this.r = Math.random() * 1.8 + 0.4;
+      this.hue = 120 + Math.random() * 60; // green range
     }
+    update(){ this.x += this.vx; this.y += this.vy; this.life -= this.decay; if(this.life <= 0) this.reset(false); }
+    draw(){
+      ctx.globalAlpha = this.life * 0.7;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsl(${this.hue},100%,65%)`;
+      ctx.fill();
+      // trail
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(this.x - this.vx*10, this.y - this.vy*10);
+      ctx.strokeStyle = `hsla(${this.hue},100%,55%,0.3)`;
+      ctx.lineWidth = this.r * 0.5;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+  }
+  for(let i=0;i<PCOUNT;i++) particles.push(new Particle(true));
 
-    const statObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateValue(entry.target, entry.target.textContent, 1200);
-                statObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.stat-num').forEach(el => statObserver.observe(el));
+  // Stars
+  const stars = Array.from({length:180}, ()=>({
+    x: Math.random(), y: Math.random(),
+    r: Math.random()*1.2+0.2,
+    a: Math.random()*0.5+0.1,
+    phase: Math.random()*Math.PI*2,
+    speed: Math.random()*0.01+0.003,
+  }));
 
-    const soberDate = new Date('2023-11-27');
-    const soberDays = Math.floor((new Date() - soberDate) / 86400000);
-    document.getElementById('sober-count').textContent = soberDays;
-    document.getElementById('sober-days').textContent = soberDays;
+  function draw(ts){
+    const t = ts * 0.001;
+    ctx.fillStyle = 'rgba(4,6,10,0.2)';
+    ctx.fillRect(0,0,W,H);
+
+    // faint grid
+    ctx.strokeStyle = 'rgba(0,255,136,0.025)';
+    ctx.lineWidth = 1;
+    for(let x=0;x<W;x+=GRID){ ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke(); }
+    for(let y=0;y<H;y+=GRID){ ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke(); }
+
+    // stars
+    stars.forEach(s=>{
+      const a = s.a * (0.5 + 0.5*Math.sin(t*s.speed*100 + s.phase));
+      ctx.globalAlpha = a;
+      ctx.beginPath();
+      ctx.arc(s.x*W, s.y*H, s.r, 0, Math.PI*2);
+      ctx.fillStyle = '#c8e8ff';
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+
+    // particles
+    particles.forEach(p=>{ p.update(); p.draw(); });
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// ── SOBRIETY COUNTER ──
+(function(){
+  const soberDate = new Date('2023-11-27');
+  const days = Math.floor((new Date() - soberDate) / 86400000);
+  document.getElementById('sober-count').textContent = days;
+})();
+
+// ── SCROLL REVEAL ──
+(function(){
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('visible'), i*70);
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+})();
 </script>
 </body>
 </html>
