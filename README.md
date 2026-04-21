@@ -1,5 +1,9 @@
 <div align="center"><img src=".github/assets/banner.png" alt="thebardchat.github.io" width="100%"></div>
 
+> **Try Claude free for 2 weeks** — the AI powering this ecosystem. [Start your free trial →](https://claude.ai/referral/4fAMYN9Ing)
+
+![social card](assets/social-card.jpg)
+
 [![Constitution](https://img.shields.io/badge/Constitution-ShaneTheBrain-blue)](https://github.com/thebardchat/constitution)
 [![Twitch](https://img.shields.io/badge/Twitch-thebardchat-9146ff)](https://twitch.tv/thebardchat)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865f2)](https://discord.gg/qST3UfFAr9)
