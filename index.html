@@ -3,515 +3,516 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ShaneBrain — Angel Cloud Ecosystem</title>
-  <meta name="description" content="AI for families. Built by a dump truck dispatcher in Alabama. Local-first AI infrastructure on a Raspberry Pi 5 — 17 autonomous bots, 42 MCP tools, Weaviate RAG, 4-node Ollama cluster, patent-filed aerospace engineering, published noir fiction."/>
-  <meta property="og:title" content="ShaneBrain — Angel Cloud Ecosystem"/>
-  <meta property="og:description" content="AI for families. Built by a dump truck dispatcher in Alabama. Running on a Raspberry Pi 5."/>
+  <title>ShaneBrain — AI Infrastructure · Aerospace Engineering · Built in Alabama</title>
+  <meta name="description" content="Shane Brazelton — dispatch operator, AI architect, aerospace engineer. 17 autonomous bots, 42 MCP tools, patent-filed EM launch system, published noir fiction. All running on a Pi 5 in Hazel Green, Alabama."/>
+  <meta property="og:title" content="ShaneBrain — AI Infrastructure · Aerospace Engineering"/>
+  <meta property="og:description" content="Built by a dump truck dispatcher in Alabama. Pi 5 RAID, 4-node AI cluster, 17 bots, BGKPJR electromagnetic launch architecture, published noir fiction."/>
   <meta property="og:image" content="https://thebardchat.github.io/assets/social-card.jpg"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="theme-color" content="#00ff88"/>
+  <meta name="theme-color" content="#00e5ff"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --bg:        #04060a;
-      --bg-card:   rgba(8, 14, 24, 0.85);
-      --bg-card2:  rgba(4, 10, 20, 0.9);
-      --green:     #00ff88;
-      --green-dim: rgba(0, 255, 136, 0.08);
-      --cyan:      #00d4ff;
-      --cyan-dim:  rgba(0, 212, 255, 0.08);
-      --amber:     #ffaa00;
-      --amber-dim: rgba(255, 170, 0, 0.08);
-      --gold:      #c9a84c;
-      --pink:      #ff3366;
-      --purple:    #9146ff;
-      --text:      #ddeeff;
-      --text-2:    #7a9ab8;
-      --text-3:    #2a4060;
-      --border:    rgba(0, 255, 136, 0.1);
-      --border-2:  rgba(0, 212, 255, 0.12);
-      --border-3:  rgba(255, 170, 0, 0.15);
-      --font-mono: 'Share Tech Mono', 'JetBrains Mono', monospace;
-      --font-display: 'Bebas Neue', monospace;
-      --font-code: 'JetBrains Mono', monospace;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-mono);
-      overflow-x: hidden;
-      min-height: 100vh;
-      padding-bottom: 80px;
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════════════════ TOKENS */
+:root {
+  --bg:       #030810;
+  --bg-1:     #060e1c;
+  --bg-2:     #091524;
+  --card:     #07101e;
+  --line:     #0f2040;
+  --line-hi:  #1a3560;
+  --fg:       #ddeeff;
+  --fg-2:     #7a9ab8;
+  --fg-dim:   #344d66;
+  --cyan:     #00e5ff;
+  --cyan-d:   rgba(0,229,255,.08);
+  --amber:    #ffaa00;
+  --amber-d:  rgba(255,170,0,.08);
+  --lime:     #b4ff6e;
+  --lime-d:   rgba(180,255,110,.08);
+  --red:      #ff5555;
+  --green:    #00ff88;
+  --purple:   #9966ff;
+  --f-display:'Space Grotesk', system-ui, sans-serif;
+  --f-mono:   'JetBrains Mono', monospace;
+  --f-orb:    'Orbitron', monospace;
+  --ease:     cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{background:var(--bg);color:var(--fg);font-family:var(--f-display);font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{min-height:100vh;overflow-x:hidden;}
+a{color:var(--cyan);text-decoration:none;}
+a:hover{text-decoration:underline;}
 
-    /* ── CANVAS ── */
-    #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+/* ══════════════════════════════════════════════════ CANVAS */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.page{position:relative;z-index:1;}
 
-    /* ── LAYOUT ── */
-    .page { position: relative; z-index: 1; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+/* ══════════════════════════════════════════════════ REF BAR */
+.ref-bar{
+  background:linear-gradient(90deg,#020810,#041428,#020810);
+  border-bottom:1px solid rgba(0,229,255,.15);
+  padding:.55rem 1.5rem;
+  text-align:center;
+  font-family:var(--f-mono);
+  font-size:.7rem;
+  letter-spacing:.09em;
+  color:var(--fg-dim);
+}
+.ref-bar a{color:var(--cyan);font-weight:600;}
 
-    /* ── REFERRAL TOP ── */
-    .ref-top {
-      background: linear-gradient(90deg, rgba(0,20,40,0.98), rgba(0,40,70,0.98));
-      border-bottom: 1px solid rgba(0,212,255,0.2);
-      padding: 0.6rem 1.5rem;
-      text-align: center;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      color: var(--text-2);
-    }
-    .ref-top a { color: var(--cyan); text-decoration: none; font-weight: 700; }
-    .ref-top a:hover { text-decoration: underline; }
+/* ══════════════════════════════════════════════════ HEADER */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(3,8,16,.92);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+}
+.header-inner{
+  max-width:1240px;margin-inline:auto;padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;gap:16px;
+}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{font-family:var(--f-orb);font-size:16px;font-weight:900;color:var(--cyan);letter-spacing:.04em;}
+.logo-sub{font-family:var(--f-mono);font-size:.65rem;color:var(--fg-dim);letter-spacing:.08em;}
+.nav{display:flex;gap:20px;align-items:center;}
+.nav a{font-size:.8rem;color:var(--fg-2);font-weight:500;letter-spacing:.02em;transition:color .15s;}
+.nav a:hover{color:var(--cyan);text-decoration:none;}
+.nav-cta{
+  background:var(--cyan-d);border:1px solid rgba(0,229,255,.3);
+  border-radius:6px;padding:.35rem .9rem;color:var(--cyan)!important;
+}
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      text-align: center;
-      padding: 6rem 1.5rem 4rem;
-    }
+/* ══════════════════════════════════════════════════ HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:6rem 1.5rem 5rem;
+  background:radial-gradient(ellipse at 50% 60%, rgba(0,40,80,.35), transparent 70%);
+}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2);
+  border-radius:100px;padding:.4rem 1.1rem;
+  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:2rem;
+}
+.pulse{width:7px;height:7px;background:var(--cyan);border-radius:50%;
+  animation:pulse 2s ease-in-out infinite;box-shadow:0 0 8px var(--cyan);}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
 
-    .status-pill {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      background: var(--green-dim);
-      border: 1px solid rgba(0,255,136,0.2);
-      border-radius: 100px;
-      padding: 0.45rem 1.2rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 2rem;
-      animation: fadeUp 0.5s ease both;
-    }
-    .pulse-dot {
-      width: 7px; height: 7px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-      box-shadow: 0 0 8px var(--green);
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.7); }
-    }
+.hero-name{
+  font-family:var(--f-orb);font-size:clamp(3.5rem,14vw,11rem);
+  font-weight:900;line-height:.95;letter-spacing:.04em;color:#fff;
+  text-shadow:0 0 80px rgba(0,229,255,.5),0 0 200px rgba(0,229,255,.2);
+  margin-bottom:.4rem;
+}
+.hero-tagline{
+  font-family:var(--f-mono);font-size:clamp(.75rem,2vw,1rem);
+  letter-spacing:.14em;color:var(--cyan);margin-bottom:2rem;
+  text-transform:uppercase;
+}
+.hero-bio{
+  max-width:640px;font-size:clamp(.95rem,1.5vw,1.15rem);
+  color:var(--fg-2);line-height:1.75;margin-bottom:3rem;
+}
+.hero-bio strong{color:var(--fg);}
 
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(5rem, 16vw, 12rem);
-      line-height: 0.9;
-      letter-spacing: 0.03em;
-      color: #fff;
-      text-shadow: 0 0 80px rgba(0,255,136,0.4), 0 0 160px rgba(0,255,136,0.15);
-      margin-bottom: 0.25rem;
-      animation: fadeUp 0.5s 0.1s ease both;
-    }
-    .hero-sub-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 5vw, 3.5rem);
-      letter-spacing: 0.15em;
-      color: var(--cyan);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.5s 0.2s ease both;
-    }
+.hero-stats{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;}
+.stat{padding:0 28px;text-align:center;}
+.stat:first-child{padding-left:0;}
+.stat-n{font-family:var(--f-orb);font-size:clamp(1.6rem,4vw,2.8rem);font-weight:700;color:var(--cyan);}
+.stat-l{font-family:var(--f-mono);font-size:.62rem;color:var(--fg-dim);letter-spacing:.12em;text-transform:uppercase;margin-top:2px;}
+.stat-div{width:1px;height:44px;background:var(--line-hi);}
 
-    .hero-tagline {
-      font-size: clamp(0.85rem, 2vw, 1rem);
-      color: var(--text-2);
-      max-width: 600px;
-      line-height: 1.8;
-      margin-bottom: 2rem;
-      animation: fadeUp 0.5s 0.3s ease both;
-    }
-    .hero-tagline strong { color: var(--text); }
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  border-radius:8px;padding:.65rem 1.4rem;
+  font-family:var(--f-mono);font-size:.78rem;font-weight:600;letter-spacing:.06em;
+  transition:all .2s var(--ease);cursor:pointer;border:none;
+}
+.btn-primary{background:var(--cyan);color:#020810;}
+.btn-primary:hover{background:#33ecff;transform:translateY(-1px);text-decoration:none;}
+.btn-outline{background:transparent;border:1px solid var(--line-hi);color:var(--fg-2);}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);text-decoration:none;}
 
-    /* sobriety */
-    .sober-block {
-      display: inline-flex; align-items: center; gap: 1rem;
-      background: var(--green-dim);
-      border: 1px solid rgba(0,255,136,0.15);
-      border-radius: 8px;
-      padding: 0.75rem 2rem;
-      margin-bottom: 2.5rem;
-      animation: fadeUp 0.5s 0.35s ease both;
-    }
-    .sober-num {
-      font-family: var(--font-display);
-      font-size: 2.8rem;
-      color: var(--green);
-      line-height: 1;
-    }
-    .sober-label { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-2); text-transform: uppercase; line-height: 1.5; text-align: left; }
+/* ══════════════════════════════════════════════════ SECTIONS */
+.container{max-width:1240px;margin-inline:auto;padding-inline:2rem;}
+.section{padding-block:80px;}
+.divider{height:1px;background:var(--line);max-width:1240px;margin:0 auto;}
 
-    /* stats */
-    .stats-row {
-      display: flex; flex-wrap: wrap; gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2.5rem;
-      animation: fadeUp 0.5s 0.4s ease both;
-    }
-    .stat-chip {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.75rem 1.25rem;
-      text-align: center;
-      min-width: 100px;
-      transition: border-color 0.25s, transform 0.2s;
-    }
-    .stat-chip:hover { border-color: var(--green); transform: translateY(-2px); }
-    .stat-chip-num {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      color: var(--green);
-      line-height: 1;
-    }
-    .stat-chip-label { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-3); text-transform: uppercase; margin-top: 0.3rem; }
+.sec-label{
+  font-family:var(--f-mono);font-size:.65rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--fg-dim);margin-bottom:10px;
+}
+.sec-title{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:700;letter-spacing:-.02em;margin-bottom:14px;}
+.sec-desc{font-size:.95rem;color:var(--fg-2);max-width:640px;line-height:1.75;margin-bottom:44px;}
 
-    .hero-cta {
-      display: flex; flex-wrap: wrap; gap: 0.75rem;
-      justify-content: center;
-      animation: fadeUp 0.5s 0.5s ease both;
-    }
+/* ══════════════════════════════════════════════════ BGKPJR SECTION */
+.bgkpjr-section{
+  background:linear-gradient(180deg,var(--bg) 0%,rgba(0,20,60,.25) 50%,var(--bg) 100%);
+  padding-block:100px;
+}
+.bgkpjr-header{margin-bottom:48px;}
+.bgkpjr-title{
+  font-family:var(--f-orb);font-size:clamp(2rem,6vw,5rem);
+  font-weight:900;letter-spacing:.04em;
+  background:linear-gradient(135deg,var(--cyan),var(--amber),var(--lime));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
+}
+.bgkpjr-sub{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.14em;color:var(--fg-dim);text-transform:uppercase;margin-bottom:20px;}
+.bgkpjr-desc{font-size:1rem;color:var(--fg-2);max-width:680px;line-height:1.8;}
 
-    /* ── BUTTONS ── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.8rem 1.8rem;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: all 0.2s;
-    }
-    .btn-green { background: var(--green-dim); border: 1px solid rgba(0,255,136,0.4); color: var(--green); }
-    .btn-green:hover { background: rgba(0,255,136,0.18); box-shadow: 0 0 24px rgba(0,255,136,0.3); transform: translateY(-1px); }
-    .btn-cyan { background: var(--cyan-dim); border: 1px solid rgba(0,212,255,0.35); color: var(--cyan); }
-    .btn-cyan:hover { background: rgba(0,212,255,0.15); box-shadow: 0 0 24px rgba(0,212,255,0.3); transform: translateY(-1px); }
-    .btn-amber { background: var(--amber-dim); border: 1px solid rgba(255,170,0,0.35); color: var(--amber); }
-    .btn-amber:hover { background: rgba(255,170,0,0.15); box-shadow: 0 0 24px rgba(255,170,0,0.3); transform: translateY(-1px); }
-    .btn-purple { background: rgba(145,70,255,0.1); border: 1px solid rgba(145,70,255,0.35); color: var(--purple); }
-    .btn-purple:hover { background: rgba(145,70,255,0.2); box-shadow: 0 0 24px rgba(145,70,255,0.3); transform: translateY(-1px); }
-    .btn-muted { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: var(--text-2); }
-    .btn-muted:hover { border-color: var(--green); color: var(--text); transform: translateY(-1px); }
+.bgkpjr-stages{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:40px;}
+.stage-block{background:var(--card);padding:28px 24px;}
+.stage-n{font-family:var(--f-orb);font-size:10px;letter-spacing:.14em;margin-bottom:12px;}
+.stage-n.cyan{color:var(--cyan);}
+.stage-n.amber{color:var(--amber);}
+.stage-n.lime{color:var(--lime);}
+.stage-block h3{font-size:1rem;font-weight:700;margin-bottom:8px;}
+.stage-block p{font-size:.82rem;color:var(--fg-2);line-height:1.7;}
+.stage-specs{margin-top:14px;display:flex;flex-direction:column;gap:5px;}
+.stage-spec{font-family:var(--f-mono);font-size:.7rem;display:flex;justify-content:space-between;padding-bottom:5px;border-bottom:1px solid var(--line);}
+.stage-spec:last-child{border-bottom:none;}
+.stage-spec-k{color:var(--fg-dim);}
+.stage-spec-v{font-weight:600;}
+.stage-spec-v.cyan{color:var(--cyan);}
+.stage-spec-v.amber{color:var(--amber);}
+.stage-spec-v.lime{color:var(--lime);}
 
-    /* ── SCROLL HINT ── */
-    .scroll-hint {
-      position: absolute; bottom: 2rem; left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.62rem; letter-spacing: 0.2em; color: var(--text-3);
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      animation: bounce 2.5s ease-in-out infinite;
-    }
-    .scroll-hint::after { content: ''; width: 1px; height: 36px; background: linear-gradient(to bottom, var(--green), transparent); }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
-    }
+.bgkpjr-repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+.repo-card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;
+  display:flex;flex-direction:column;gap:10px;
+  transition:border-color .2s,transform .15s;
+}
+.repo-card:hover{border-color:var(--line-hi);transform:translateY(-2px);}
+.repo-card.featured{border-color:rgba(0,229,255,.3);box-shadow:0 0 30px rgba(0,229,255,.06);}
+.repo-top{display:flex;align-items:center;justify-content:space-between;}
+.repo-name{font-family:var(--f-mono);font-size:.8rem;font-weight:600;color:var(--fg);}
+.repo-badge{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.08em;border-radius:99px;padding:2px 8px;border:1px solid;}
+.rb-live{color:var(--green);border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.06);}
+.rb-new{color:var(--cyan);border-color:rgba(0,229,255,.3);background:var(--cyan-d);}
+.rb-wip{color:var(--amber);border-color:rgba(255,170,0,.3);background:var(--amber-d);}
+.repo-desc{font-size:.78rem;color:var(--fg-2);line-height:1.6;}
+.repo-links{display:flex;gap:12px;font-family:var(--f-mono);font-size:.7rem;margin-top:auto;}
+.repo-links a{color:var(--fg-dim);transition:color .15s;}
+.repo-links a:hover{color:var(--cyan);text-decoration:none;}
+.repo-links a.hl{color:var(--cyan);}
 
-    /* ── SECTION LABELS ── */
-    .section { padding: 5rem 0; }
-    .section + .section { padding-top: 0; }
-    .sec-label {
-      font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--green); margin-bottom: 0.6rem;
-      display: flex; align-items: center; gap: 0.75rem;
-    }
-    .sec-label::before { content: '//'; color: var(--text-3); }
-    .sec-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(0,255,136,0.2), transparent); max-width: 180px; }
-    .sec-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      letter-spacing: 0.05em;
-      color: #fff;
-      margin-bottom: 0.75rem;
-    }
-    .sec-desc { font-size: 0.88rem; color: var(--text-2); line-height: 1.8; max-width: 680px; margin-bottom: 3rem; }
+/* ══════════════════════════════════════════════════ MEGA CREW */
+.crew-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
+.crew-bot{
+  background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:12px;font-family:var(--f-mono);font-size:.68rem;
+  display:flex;flex-direction:column;gap:4px;
+  transition:border-color .15s;
+}
+.crew-bot:hover{border-color:var(--line-hi);}
+.crew-bot-name{font-weight:600;color:var(--fg);}
+.crew-bot-zone{color:var(--fg-dim);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;}
+.crew-bot-status{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);}
 
-    /* ── DIVIDER ── */
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,255,136,0.15), transparent); margin: 0 1.5rem; }
+.mcp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+.mcp-card{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;
+}
+.mcp-num{font-family:var(--f-orb);font-size:1.6rem;font-weight:700;color:var(--cyan);margin-bottom:4px;}
+.mcp-label{font-family:var(--f-mono);font-size:.68rem;color:var(--fg-dim);letter-spacing:.1em;text-transform:uppercase;}
+.mcp-desc{font-size:.75rem;color:var(--fg-2);margin-top:6px;line-height:1.5;}
 
-    /* ── FEATURED CARDS (book + BGKPJR) ── */
-    .featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem; }
-    @media (max-width: 900px) { .featured-grid { grid-template-columns: 1fr; } }
+/* ══════════════════════════════════════════════════ PROJECTS */
+.proj-filters{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+.pf-btn{
+  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;
+  background:var(--card);border:1px solid var(--line);border-radius:99px;
+  padding:5px 14px;cursor:pointer;color:var(--fg-dim);
+  transition:all .15s;
+}
+.pf-btn.active,.pf-btn:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-d);}
 
-    .feat-card {
-      background: var(--bg-card);
-      border-radius: 4px;
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .feat-card:hover { transform: translateY(-4px); }
-    .feat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-    .feat-book { border: 1px solid rgba(201,168,76,0.3); }
-    .feat-book::before { background: linear-gradient(90deg, var(--gold), var(--amber)); }
-    .feat-book:hover { box-shadow: 0 16px 60px rgba(201,168,76,0.15); }
-    .feat-bgkpjr { border: 1px solid rgba(0,212,255,0.25); }
-    .feat-bgkpjr::before { background: linear-gradient(90deg, var(--cyan), #0066ff); }
-    .feat-bgkpjr:hover { box-shadow: 0 16px 60px rgba(0,212,255,0.12); }
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+.proj-card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;
+  display:flex;flex-direction:column;gap:10px;
+  transition:border-color .2s var(--ease),transform .15s;
+}
+.proj-card:hover{border-color:var(--line-hi);transform:translateY(-2px);}
+.proj-card.daily{border-left:3px solid var(--green);}
+.proj-card.aerospace{border-left:3px solid var(--cyan);}
+.proj-card.creative{border-left:3px solid var(--amber);}
+.proj-header{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.proj-name{font-weight:700;font-size:.95rem;}
+.proj-name a{color:var(--fg);}
+.proj-name a:hover{color:var(--cyan);text-decoration:none;}
+.pbadge{
+  font-family:var(--f-mono);font-size:.58rem;letter-spacing:.08em;
+  border-radius:99px;padding:2px 8px;border:1px solid;white-space:nowrap;
+}
+.pb-live{color:var(--green);border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.06);}
+.pb-daily{color:var(--cyan);border-color:rgba(0,229,255,.3);background:var(--cyan-d);}
+.pb-new{color:var(--amber);border-color:rgba(255,170,0,.3);background:var(--amber-d);}
+.pb-core{color:var(--purple);border-color:rgba(153,102,255,.3);background:rgba(153,102,255,.06);}
+.proj-desc{font-size:.82rem;color:var(--fg-2);line-height:1.65;}
+.proj-tech{font-family:var(--f-mono);font-size:.68rem;color:var(--fg-dim);}
+.proj-footer{display:flex;gap:14px;font-family:var(--f-mono);font-size:.7rem;margin-top:auto;}
+.proj-footer a{color:var(--fg-dim);transition:color .15s;}
+.proj-footer a:hover{color:var(--cyan);text-decoration:none;}
+.proj-footer a.hl{color:var(--cyan);}
 
-    .feat-badge {
-      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-      padding: 0.25rem 0.75rem; border-radius: 2px; margin-bottom: 1.25rem;
-      display: inline-block;
-    }
-    .badge-pub { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
-    .badge-patent { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.3); color: var(--cyan); }
-    .feat-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      letter-spacing: 0.05em;
-      color: #fff;
-      margin-bottom: 0.75rem;
-      line-height: 1.1;
-    }
-    .feat-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.8; margin-bottom: 1.75rem; }
-    .feat-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
-    .feat-tag {
-      font-size: 0.68rem; letter-spacing: 0.08em;
-      padding: 0.2rem 0.65rem; border-radius: 2px;
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      color: var(--text-2);
-    }
-    .feat-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+/* ══════════════════════════════════════════════════ BOOK */
+.book-card{
+  display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:40px;
+}
+.book-cover{
+  width:130px;flex-shrink:0;
+  background:linear-gradient(135deg,#1a0a20,#2d1040);
+  border:1px solid rgba(180,100,255,.3);border-radius:8px;
+  aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-orb);font-size:.6rem;color:rgba(180,100,255,.7);
+  letter-spacing:.08em;text-align:center;padding:12px;box-shadow:0 8px 40px rgba(0,0,0,.6);
+}
+.book-title{font-size:1.4rem;font-weight:700;margin-bottom:8px;}
+.book-sub{font-family:var(--f-mono);font-size:.72rem;color:var(--amber);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;}
+.book-desc{font-size:.88rem;color:var(--fg-2);line-height:1.75;margin-bottom:20px;}
+.book-links{display:flex;gap:14px;flex-wrap:wrap;}
+.book-links .btn{font-size:.75rem;padding:.5rem 1rem;}
+.btn-amber{background:var(--amber-d);border:1px solid rgba(255,170,0,.3);color:var(--amber);}
+.btn-amber:hover{background:rgba(255,170,0,.15);text-decoration:none;}
 
-    /* ── PROJECT GRID ── */
-    .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
-    .proj-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(0,255,136,0.08);
-      border-radius: 4px;
-      padding: 1.5rem;
-      position: relative; overflow: hidden;
-      backdrop-filter: blur(8px);
-      transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
-    }
-    .proj-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--green), var(--cyan)); opacity: 0; transition: opacity 0.25s; }
-    .proj-card:hover { border-color: rgba(0,255,136,0.25); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
-    .proj-card:hover::before { opacity: 1; }
-    .proj-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.6rem; }
-    .proj-name { font-family: var(--font-code); font-size: 0.88rem; font-weight: 600; color: var(--green); }
-    .proj-name a { color: inherit; text-decoration: none; }
-    .proj-name a:hover { text-decoration: underline; }
-    .proj-badges { display: flex; gap: 0.3rem; flex-shrink: 0; flex-wrap: wrap; }
-    .pbadge {
-      font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase;
-      padding: 0.12rem 0.45rem; border-radius: 2px; white-space: nowrap; font-weight: 600;
-    }
-    .pb-active { background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3); color: var(--green); }
-    .pb-core   { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); color: var(--cyan); }
-    .pb-live   { background: rgba(255,51,102,0.1); border: 1px solid rgba(255,51,102,0.3); color: #ff3366; }
-    .pb-priv   { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); color: var(--text-2); }
-    .pb-build  { background: rgba(255,170,0,0.1); border: 1px solid rgba(255,170,0,0.3); color: var(--amber); }
-    .pb-patent { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
-    .proj-desc { font-size: 0.8rem; color: var(--text-2); line-height: 1.65; margin-bottom: 0.9rem; }
-    .proj-tech { font-family: var(--font-code); font-size: 0.68rem; color: var(--text-3); }
+/* ══════════════════════════════════════════════════ INFRA */
+.infra-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.infra-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;}
+.infra-title{font-family:var(--f-mono);font-size:.72rem;color:var(--cyan);letter-spacing:.08em;margin-bottom:14px;}
+.infra-list{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.infra-list li{font-size:.8rem;color:var(--fg-2);padding-left:14px;position:relative;line-height:1.4;}
+.infra-list li::before{content:'›';position:absolute;left:0;color:var(--fg-dim);}
+.infra-list strong{color:var(--fg);}
+.infra-note{
+  margin-top:20px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.1);
+  border-radius:8px;padding:14px;font-family:var(--f-mono);font-size:.7rem;color:var(--fg-dim);
+  line-height:1.6;
+}
 
-    /* ── INFRA ── */
-    .infra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
-    .infra-card {
-      background: var(--bg-card2);
-      border: 1px solid var(--border-2);
-      border-radius: 4px;
-      padding: 1.5rem;
-      transition: border-color 0.25s;
-    }
-    .infra-card:hover { border-color: rgba(0,212,255,0.3); }
-    .infra-title { font-family: var(--font-code); font-size: 0.8rem; color: var(--cyan); margin-bottom: 1rem; letter-spacing: 0.08em; }
-    .infra-list { list-style: none; }
-    .infra-list li { font-size: 0.78rem; color: var(--text-2); padding: 0.35rem 0; border-bottom: 1px solid rgba(0,212,255,0.06); line-height: 1.5; }
-    .infra-list li:last-child { border-bottom: none; }
-    .infra-list li strong { color: var(--text); }
+/* ══════════════════════════════════════════════════ SOBRIETY */
+.sober-card{
+  background:linear-gradient(135deg,rgba(0,255,136,.05),rgba(0,229,255,.03));
+  border:1px solid rgba(0,255,136,.15);border-radius:16px;padding:32px 40px;
+  display:flex;align-items:center;gap:40px;flex-wrap:wrap;
+}
+.sober-count{font-family:var(--f-orb);font-size:clamp(3rem,8vw,6rem);font-weight:900;color:var(--green);line-height:1;}
+.sober-label{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;color:var(--fg-dim);text-transform:uppercase;margin-top:4px;}
+.sober-text{flex:1;font-size:.9rem;color:var(--fg-2);line-height:1.75;}
+.sober-text strong{color:var(--fg);}
 
-    /* ── CONNECT ── */
-    .connect-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
-    .soc-link {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.65rem 1.2rem;
-      background: var(--bg-card);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 4px;
-      font-size: 0.78rem;
-      color: var(--text-2);
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .soc-link:hover { border-color: var(--green); color: var(--text); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    .soc-link svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
-    .soc-link.twitch { border-color: rgba(145,70,255,0.25); color: var(--purple); }
-    .soc-link.twitch:hover { border-color: var(--purple); background: rgba(145,70,255,0.08); }
-    .soc-link.kofi { border-color: rgba(255,51,102,0.2); }
+/* ══════════════════════════════════════════════════ CONNECT */
+.connect-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;}
+.soc-link{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:14px;font-family:var(--f-mono);font-size:.72rem;font-weight:600;
+  color:var(--fg-2);transition:all .2s;
+}
+.soc-link:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-d);text-decoration:none;}
+.soc-link svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;}
 
-    /* ── CREDITS ── */
-    .credits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1rem; }
-    .credit-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.2rem 1.4rem;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .credit-card:hover { border-color: var(--cyan); transform: translateY(-2px); }
-    .credit-card a { text-decoration: none; }
-    .credit-name { font-family: var(--font-code); font-size: 0.82rem; font-weight: 600; color: var(--cyan); margin-bottom: 0.4rem; }
-    .credit-role { font-size: 0.74rem; color: var(--text-2); line-height: 1.55; }
+/* ══════════════════════════════════════════════════ FOOTER */
+.site-footer{background:var(--bg-1);border-top:1px solid var(--line);padding-block:48px;}
+.footer-inner{display:flex;flex-direction:column;gap:20px;}
+.footer-quote{font-family:var(--f-orb);font-size:.85rem;color:var(--cyan);letter-spacing:.04em;}
+.footer-bio{font-size:.82rem;color:var(--fg-dim);line-height:1.7;}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{font-family:var(--f-mono);font-size:.72rem;color:var(--fg-dim);}
+.footer-links a:hover{color:var(--cyan);}
+.footer-ref{font-family:var(--f-mono);font-size:.68rem;color:var(--line-hi);}
+.footer-ref a{color:var(--cyan);}
 
-    /* ── FOOTER ── */
-    .footer { border-top: 1px solid rgba(0,255,136,0.08); padding: 3rem 1.5rem 2rem; text-align: center; }
-    .footer-quote { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: 0.05em; color: var(--green); margin-bottom: 1rem; }
-    .footer-bio { font-size: 0.82rem; color: var(--text-2); line-height: 1.8; margin-bottom: 1.25rem; }
-    .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .footer-links a { color: var(--text-3); font-size: 0.78rem; text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--green); }
-    .footer-ref { font-size: 0.72rem; color: var(--amber); }
-    .footer-ref a { color: var(--cyan); text-decoration: none; }
-    .footer-ref a:hover { text-decoration: underline; }
+.ref-bottom{
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:rgba(3,8,16,.96);border-top:1px solid rgba(0,229,255,.12);
+  backdrop-filter:blur(10px);padding:.55rem 1.5rem;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--f-mono);font-size:.68rem;color:var(--fg-dim);
+}
+.ref-bottom a{color:var(--cyan);font-weight:600;}
 
-    /* ── FIXED BOTTOM BAR ── */
-    .ref-bottom {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-      background: linear-gradient(90deg, #03080f, #050e1a, #03080f);
-      border-top: 1px solid rgba(0,212,255,0.2);
-      padding: 0.65rem 1.5rem;
-      display: flex; align-items: center; justify-content: center; gap: 1rem;
-      font-size: 0.68rem; letter-spacing: 0.1em;
-    }
-    .ref-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
-    .ref-bottom span { color: var(--text-2); }
-    .ref-bottom a { color: var(--cyan); text-decoration: none; font-weight: 700; }
-    .ref-bottom a:hover { text-decoration: underline; }
+/* ══════════════════════════════════════════════════ REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
+.reveal.visible{opacity:1;transform:none;}
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .hero { padding: 5rem 1rem 3rem; }
-      .hero-title { font-size: clamp(4rem, 22vw, 8rem); }
-      .stats-row { gap: 0.6rem; }
-      .stat-chip { min-width: 80px; padding: 0.6rem 0.8rem; }
-      .featured-grid { grid-template-columns: 1fr; }
-      .proj-grid { grid-template-columns: 1fr; }
-      .ref-bottom { flex-wrap: wrap; font-size: 0.62rem; }
-      .feat-card { padding: 1.75rem 1.25rem; }
-    }
-  </style>
+/* ══════════════════════════════════════════════════ RESPONSIVE */
+@media(max-width:860px){
+  .bgkpjr-stages{grid-template-columns:1fr;}
+  .book-card{grid-template-columns:1fr;}
+  .book-cover{width:90px;}
+  .nav a:not(.nav-cta){display:none;}
+}
+@media(max-width:600px){
+  .hero-stats{gap:0;}
+  .stat{padding:0 16px;}
+  .stat:first-child{padding-left:0;}
+}
+</style>
 </head>
 <body>
-
-<canvas id="bg-canvas"></canvas>
+<canvas id="bg"></canvas>
 
 <div class="page">
 
-<!-- ── TOP REFERRAL ── -->
-<div class="ref-top">
-  <strong style="color:var(--text)">Try Claude free for 2 weeks</strong> — the AI behind every line of this ecosystem.
-  &nbsp;<a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">Start your free trial →</a>
+<!-- ── REF TOP ── -->
+<div class="ref-bar">
+  ★ Try Claude free for 2 weeks — the AI behind every line of this ecosystem →
+  <a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">claude.ai/referral/4fAMYN9Ing</a>
 </div>
 
-<!-- ══════════════════════════════════════════ HERO -->
-<section class="hero" style="position:relative">
-  <div class="status-pill"><span class="pulse-dot"></span> All systems online · Pi 5 · Hazel Green AL</div>
-  <h1 class="hero-title">SHANEBRAIN</h1>
-  <div class="hero-sub-title">Angel Cloud Ecosystem</div>
-  <p class="hero-tagline">
-    AI for families. Built by a <strong>dump truck dispatcher</strong> in Alabama.<br/>
-    Local-first. Family-first. Running on a <strong>Raspberry Pi 5</strong> in the living room.
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">SHANEBRAIN</span>
+      <span class="logo-sub">Hazel Green, AL</span>
+    </a>
+    <nav class="nav">
+      <a href="#aerospace">Aerospace</a>
+      <a href="#ai">AI Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#book">Book</a>
+      <a href="#connect">Connect</a>
+      <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════ HERO -->
+<section class="hero">
+  <div class="hero-pill"><div class="pulse"></div>All systems operational</div>
+  <div class="hero-name">SHANE<br/>BRAIN</div>
+  <div class="hero-tagline">AI Infrastructure · Aerospace Engineering · Built in Alabama</div>
+  <p class="hero-bio">
+    A dump truck dispatcher in Hazel Green, Alabama building things that aren't supposed to exist out here —
+    <strong>a 4-node AI cluster</strong>, <strong>17 autonomous bots</strong>,
+    <strong>patent-filed electromagnetic launch architecture</strong>, and a <strong>published noir book</strong>.
+    All on a Raspberry Pi 5. All local. All mine.
   </p>
-
-  <div class="sober-block">
-    <div class="sober-num" id="sober-count">---</div>
-    <div class="sober-label">Days<br/>Sober</div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">17</div><div class="stat-l">Autonomous Bots</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n">42</div><div class="stat-l">MCP Tools</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n" id="sober-count">888</div><div class="stat-l">Days Sober</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n">4</div><div class="stat-l">Node Cluster</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n">25</div><div class="stat-l">Weaviate Collections</div></div>
   </div>
-
-  <div class="stats-row">
-    <div class="stat-chip"><div class="stat-chip-num">4</div><div class="stat-chip-label">Compute Nodes</div></div>
-    <div class="stat-chip"><div class="stat-chip-num">42</div><div class="stat-chip-label">MCP Tools</div></div>
-    <div class="stat-chip"><div class="stat-chip-num">17</div><div class="stat-chip-label">Weaviate Collections</div></div>
-    <div class="stat-chip"><div class="stat-chip-num">210+</div><div class="stat-chip-label">Knowledge Objects</div></div>
-    <div class="stat-chip"><div class="stat-chip-num">17</div><div class="stat-chip-label">Autonomous Bots</div></div>
-    <div class="stat-chip"><div class="stat-chip-num">5</div><div class="stat-chip-label">Sons</div></div>
+  <div class="hero-btns">
+    <a href="#aerospace" class="btn btn-primary">View Launch Architecture</a>
+    <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="btn btn-outline">GitHub Profile →</a>
   </div>
-
-  <div class="hero-cta">
-    <a href="/book" class="btn btn-amber">New Book Out Now →</a>
-    <a href="https://twitch.tv/thebardchat" class="btn btn-purple" target="_blank" rel="noopener">▶ Watch Live</a>
-    <a href="https://thebardchat.github.io/BGKPJR-Core-Simulations/" class="btn btn-cyan" target="_blank">BGKPJR Project →</a>
-    <a href="https://ko-fi.com/shanebrain" class="btn btn-green" target="_blank" rel="noopener">Support on Ko-fi</a>
-  </div>
-
-  <div class="scroll-hint">scroll</div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ══════════════════════════════════════════ FEATURED -->
-<section class="section">
+<!-- ════════════════════════════════════════ BGKPJR AEROSPACE -->
+<section class="bgkpjr-section" id="aerospace">
   <div class="container">
-    <div class="sec-label reveal">01 · Featured</div>
-    <h2 class="sec-title reveal">The Big Two</h2>
-    <p class="sec-desc reveal">A published noir fiction book and a patent-filed electromagnetic launch architecture. Built by the same guy, on the same Pi 5, at the same desk.</p>
+    <div class="bgkpjr-header reveal">
+      <div class="sec-label">01 · Aerospace Engineering</div>
+      <div class="bgkpjr-title">BGKPJR</div>
+      <div class="bgkpjr-sub">Brazelton Gryphon Kepler Propulsion Jump Revolution</div>
+      <p class="bgkpjr-desc">
+        Ground-based superconducting electromagnets replace the first stage of every rocket ever built.
+        A 28.7 km evacuated maglev tube accelerates to Mach 3.5 in 23 seconds — no propellant consumed.
+        Gryphon wings carry it to orbit. Kepler's 1,200 m² solar sail takes it beyond.
+        Target cost: <strong style="color:var(--cyan)">$200/kg to lunar surface</strong>.
+        Current: $1,200,000/kg via CLPS.
+      </p>
+    </div>
 
-    <div class="featured-grid">
-      <!-- BOOK -->
-      <div class="feat-card feat-book reveal">
-        <span class="feat-badge badge-pub">★ Published</span>
-        <div class="feat-title">You Probably Think<br/>This Book Is About You</div>
-        <p class="feat-desc">
-          22 noir vignettes about ego, identity, and the universal human condition.
-          A detective who discovers he is the case. Available on Amazon — ebook, audiobook (ElevenLabs),
-          and print. First draft written in public, chapter by chapter.
-        </p>
-        <div class="feat-tags">
-          <span class="feat-tag">Noir Fiction</span>
-          <span class="feat-tag">22 Vignettes</span>
-          <span class="feat-tag">KDP</span>
-          <span class="feat-tag">ElevenLabs Audiobook</span>
-          <span class="feat-tag">Amazon</span>
-        </div>
-        <div class="feat-links">
-          <a href="/book" class="btn btn-amber">Read More →</a>
-          <a href="https://github.com/thebardchat/you-probably-think-this-book-is-about-you" class="btn btn-muted" target="_blank">GitHub →</a>
+    <!-- 3-stage breakdown -->
+    <div class="bgkpjr-stages reveal">
+      <div class="stage-block">
+        <div class="stage-n cyan">STAGE 01 — MAGLEV JUMP</div>
+        <h3>The Rail</h3>
+        <p>28.7 km evacuated superconducting tube. NbTi coils at 4.2K, 8T field strength. Partial vacuum at 0.1 atm eliminates aerodynamic drag. Human-rated at 3.9G sustained.</p>
+        <div class="stage-specs">
+          <div class="stage-spec"><span class="stage-spec-k">Length</span><span class="stage-spec-v cyan">28.7 km</span></div>
+          <div class="stage-spec"><span class="stage-spec-k">Exit velocity</span><span class="stage-spec-v cyan">Mach 3.5 — 1,190 m/s</span></div>
+          <div class="stage-spec"><span class="stage-spec-k">Rail run time</span><span class="stage-spec-v cyan">23 seconds</span></div>
+          <div class="stage-spec"><span class="stage-spec-k">G-load (crew)</span><span class="stage-spec-v cyan">3.9 G sustained</span></div>
         </div>
       </div>
-
-      <!-- BGKPJR -->
-      <div class="feat-card feat-bgkpjr reveal">
-        <span class="feat-badge badge-patent">Patent Filed</span>
-        <div class="feat-title">BGKPJR Launch<br/>Architecture</div>
-        <p class="feat-desc">
-          Brazelton Gryphon Kepler Propulsion Jump Revolution. A three-stage electromagnetic
-          launch system: 28.7 km superconducting maglev tube, Gryphon hypersonic spacecraft,
-          Kepler solar sail. VacuumGate LH₂ cryogenic membrane is the novel IP.
-          AI expert peer review chain (McNab, Boyd, Shotwell simulations) documents every
-          hard barrier and correction.
-        </p>
-        <div class="feat-tags">
-          <span class="feat-tag">Maglev · 28.7 km</span>
-          <span class="feat-tag">Mach 3.5–5.0</span>
-          <span class="feat-tag">LH₂ VacuumGate</span>
-          <span class="feat-tag">LQR + MPC</span>
-          <span class="feat-tag">Python Physics Engine</span>
+      <div class="stage-block">
+        <div class="stage-n amber">STAGE 02 — GRYPHON ASCENT</div>
+        <h3>The Wing</h3>
+        <p>At tube exit, variable-geometry wings deploy instantly. Aerodynamic lift extends the boost window from Mach 3.5 to Mach 8 — using the atmosphere as a free energy source. Glides back unpowered.</p>
+        <div class="stage-specs">
+          <div class="stage-spec"><span class="stage-spec-k">Wingspan</span><span class="stage-spec-v amber">18 m</span></div>
+          <div class="stage-spec"><span class="stage-spec-k">Peak Mach</span><span class="stage-spec-v amber">Mach 8</span></div>
+          <div class="stage-spec"><span class="stage-spec-k">Payload</span><span class="stage-spec-v amber">2,200 kg</span></div>
+          <div class="stage-spec"><span class="stage-spec-k">Crew</span><span class="stage-spec-v amber">4 passengers</span></div>
         </div>
-        <div class="feat-links">
-          <a href="https://thebardchat.github.io/BGKPJR-Core-Simulations/" class="btn btn-cyan" target="_blank">Full Project →</a>
-          <a href="https://github.com/thebardchat/BGKPJR-Core-Simulations" class="btn btn-muted" target="_blank">GitHub →</a>
+      </div>
+      <div class="stage-block">
+        <div class="stage-n lime">STAGE 03 — KEPLER SAIL</div>
+        <h3>The Sail</h3>
+        <p>Above 310 km, a 1,200 m² CP1 Polyimide solar sail deploys from a 3.2 kg boom. Zero propellant. Zero fuel mass fraction. Solar pressure at 1 AU: 1.8 mm/s² continuous thrust. Forever.</p>
+        <div class="stage-specs">
+          <div class="stage-spec"><span class="stage-spec-k">Sail area</span><span class="stage-spec-v lime">1,200 m²</span></div>
+          <div class="stage-spec"><span class="stage-spec-k">Sail mass</span><span class="stage-spec-v lime">3.2 kg</span></div>
+          <div class="stage-spec"><span class="stage-spec-k">Solar ΔV</span><span class="stage-spec-v lime">1.8 mm/s² @ 1 AU</span></div>
+          <div class="stage-spec"><span class="stage-spec-k">Deploy alt.</span><span class="stage-spec-v lime">310 km</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Repo cards -->
+    <div class="bgkpjr-repos reveal">
+      <div class="repo-card featured">
+        <div class="repo-top"><div class="repo-name">BGKPJR-Launch-Vis</div><span class="repo-badge rb-new">NEW</span></div>
+        <div class="repo-desc">NASA-ready 3D animated launch visualization — Three.js full mission sequence from rail acceleration through Kepler solar sail. Interactive scrub, live physics HUD, Manna pod comparison.</div>
+        <div class="repo-links">
+          <a href="https://thebardchat.github.io/BGKPJR-Launch-Vis" target="_blank" class="hl">Live Demo →</a>
+          <a href="https://github.com/thebardchat/BGKPJR-Launch-Vis" target="_blank">Repo</a>
+        </div>
+      </div>
+      <div class="repo-card featured">
+        <div class="repo-top"><div class="repo-name">manna-pods</div><span class="repo-badge rb-new">NEW</span></div>
+        <div class="repo-desc">All 7 Manna cargo pod concepts — 3D rotating cross-sections, H/I/B operational variants, plus Manna-F/M/X/T WIP designs with open engineering questions documented.</div>
+        <div class="repo-links">
+          <a href="https://thebardchat.github.io/manna-pods" target="_blank" class="hl">Live Demo →</a>
+          <a href="https://github.com/thebardchat/manna-pods" target="_blank">Repo</a>
+        </div>
+      </div>
+      <div class="repo-card">
+        <div class="repo-top"><div class="repo-name">manna</div><span class="repo-badge rb-live">Live</span></div>
+        <div class="repo-desc">Manna cargo pod design research — Manna-H (100G/$54/kg), Manna-I (5.5G/$467/kg), Manna-B (2.5G/$4,190/kg). Full physics trade studies. Blueprint aesthetic technical reference.</div>
+        <div class="repo-links">
+          <a href="https://github.com/thebardchat/manna" target="_blank" class="hl">Repo →</a>
+        </div>
+      </div>
+      <div class="repo-card">
+        <div class="repo-top"><div class="repo-name">tug-pro</div><span class="repo-badge rb-live">Live</span></div>
+        <div class="repo-desc">Pre-Phase A concept brief for the reusable cislunar tug — 3D orbit visualizer, live ΔV calculator, mass budget, risk matrix, field comparison vs. MEV-1 / Centaur V / Starship.</div>
+        <div class="repo-links">
+          <a href="https://github.com/thebardchat/tug-pro" target="_blank" class="hl">Repo →</a>
+        </div>
+      </div>
+      <div class="repo-card">
+        <div class="repo-top"><div class="repo-name">BGKPJR-Core-Simulations</div><span class="repo-badge rb-live">Live</span></div>
+        <div class="repo-desc">Physics engine — trajectory modeling, GNC, thermal analysis, Monte Carlo verification. The mathematical foundation the visualizers are built on.</div>
+        <div class="repo-links">
+          <a href="https://github.com/thebardchat/BGKPJR-Core-Simulations" target="_blank" class="hl">Repo →</a>
+        </div>
+      </div>
+      <div class="repo-card">
+        <div class="repo-top"><div class="repo-name">pulsar_sentinel</div><span class="repo-badge rb-live">Live</span></div>
+        <div class="repo-desc">Post-quantum cryptography security framework deployed across all cluster nodes. Kyber-1024 key exchange, Dilithium3 signatures, real-time threat scoring.</div>
+        <div class="repo-links">
+          <a href="https://github.com/thebardchat/pulsar_sentinel" target="_blank" class="hl">Repo →</a>
         </div>
       </div>
     </div>
@@ -520,239 +521,198 @@
 
 <div class="divider"></div>
 
-<!-- ══════════════════════════════════════════ PROJECTS -->
-<section class="section">
+<!-- ════════════════════════════════════════ AI STACK -->
+<section class="section" id="ai">
   <div class="container">
-    <div class="sec-label reveal">02 · Active Projects</div>
-    <h2 class="sec-title reveal">The Ecosystem</h2>
-    <p class="sec-desc reveal">Everything running, building, or live as of April 2026. All of it on a Pi 5 in Alabama.</p>
+    <div class="sec-label reveal">02 · AI Infrastructure</div>
+    <h2 class="sec-title reveal">ShaneBrain — The Living System</h2>
+    <p class="sec-desc reveal">
+      Claude (the intelligence) + Weaviate (Shane's growing memory) + MCP (the nervous system) = ShaneBrain.
+      Not a chatbot. A brain that grows with every session, every voice dump, every decision made.
+    </p>
 
-    <div class="proj-grid">
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/shanebrain-core" target="_blank">shanebrain-core</a></div>
-          <div class="proj-badges"><span class="pbadge pb-core">Core</span><span class="pbadge pb-priv">Private</span></div>
-        </div>
-        <p class="proj-desc">The machine room behind everything. Discord bots, MEGA Crew engine, Weaviate RAG, social automation, cloud backup, email AI, mega dashboard, morning briefings, SMS alerting, and the preflight system. 24/7 on Pi 5.</p>
-        <div class="proj-tech">Python · Ollama · Weaviate · Discord.py · Docker · systemd · FastAPI</div>
+    <!-- Key numbers -->
+    <div class="mcp-grid reveal" style="margin-bottom:44px;">
+      <div class="mcp-card">
+        <div class="mcp-num">42</div>
+        <div class="mcp-label">MCP Tools</div>
+        <div class="mcp-desc">29 in server.py + 13 via Claude.ai integrations (Gmail, Calendar, Drive, HuggingFace, Cloudflare, Stripe)</div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/angel-cloud/" target="_blank">angel-cloud</a></div>
-          <div class="proj-badges"><span class="pbadge pb-core">Core</span><span class="pbadge pb-active">Active</span></div>
-        </div>
-        <p class="proj-desc">Mental wellness platform with auth bridge, Angel Cloud Gateway (port 4200), Messenger Storyteller module, and AI sentiment analysis. Public face of ShaneBrain. theangel.com · Tailscale Funnel HTTPS.</p>
-        <div class="proj-tech">Python · FastAPI · Node.js · Ollama · SQLite · Tailscale</div>
+      <div class="mcp-card">
+        <div class="mcp-num">25</div>
+        <div class="mcp-label">Weaviate Collections</div>
+        <div class="mcp-desc">3,200+ objects. Voice dumps, book chapters, conversations, daily notes, bot memories — all vectorized and searchable</div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/shanebrain_mcp/" target="_blank">shanebrain-mcp</a></div>
-          <div class="proj-badges"><span class="pbadge pb-core">Core</span><span class="pbadge pb-active">Active</span></div>
-        </div>
-        <p class="proj-desc">Custom MCP server v2.2 — 42 tools across 26 groups. Knowledge, chat, RAG, social, vault, notes, drafts, security, admin, Ollama, planning, and system health. Streamable HTTP · Pydantic v2 · Docker.</p>
-        <div class="proj-tech">Python · MCP Protocol · Docker · Weaviate · FastAPI</div>
+      <div class="mcp-card">
+        <div class="mcp-num">17</div>
+        <div class="mcp-label">MEGA Crew Bots</div>
+        <div class="mcp-desc">17 Docker containers, 24/7. Self-modifying architecture — bots propose code changes, Arc reviews, Weld deploys</div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/pulsar_sentinel/" target="_blank">pulsar-sentinel</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
-        </div>
-        <p class="proj-desc">Post-quantum cryptography security framework. ML-KEM lattice-based encryption, blockchain audit trails on Polygon, MetaMask wallet auth, cyberpunk dashboard. Planned for all 4 cluster nodes.</p>
-        <div class="proj-tech">Python · FastAPI · liboqs · Web3 · Discord.py · Polygon</div>
+      <div class="mcp-card">
+        <div class="mcp-num">4</div>
+        <div class="mcp-label">Inference Nodes</div>
+        <div class="mcp-desc">Pi 5 + Pulsar00100 + Bullfrog-R2D2 + Jaxton, routed via Ollama Cluster Proxy on port 11435</div>
       </div>
+    </div>
 
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/mega-crew/" target="_blank">MEGA Crew</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Active</span><span class="pbadge pb-live">Live</span></div>
-        </div>
-        <p class="proj-desc">17 named AI bots running 24/7 on Pi 5. Arc, Blaze, Bolt, Flux, Glitch, Neon and more — each with a distinct personality, domain, and persistent Weaviate memory. All local Ollama. Self-modifying 4-phase evolution complete.</p>
-        <div class="proj-tech">Python · Ollama · Weaviate · Docker · llama3.2:1b</div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/Greenfield" target="_blank">Claim Cruncher</a></div>
-          <div class="proj-badges"><span class="pbadge pb-build">Building</span></div>
-        </div>
-        <p class="proj-desc">Medical billing intake platform built for Gavin. Digitizes and structures insurance claims, denial tracking, and reimbursement workflows. Python/FastAPI backend, Greenfield repo.</p>
-        <div class="proj-tech">Python · FastAPI · SQLite · PDF parsing · React</div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name">Buddy Claude</div>
-          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
-        </div>
-        <p class="proj-desc">Port 8008 FastAPI service — 12-hour Claude↔Gemini AI dialogue engine. Two AI systems in conversation, stored to Weaviate ExternalPerspectives collection. llama3.2:1b via local Ollama for lightweight tasks.</p>
-        <div class="proj-tech">Python · FastAPI · Claude API · Gemini API · Weaviate · Ollama</div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/N8N" target="_blank">N8N Automation</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
-        </div>
-        <p class="proj-desc">Automation workflows running on Pulsar node. Event-driven orchestration across ShaneBrain services. Connected to the full ecosystem for triggers, webhooks, and cross-service automation.</p>
-        <div class="proj-tech">N8N · Webhooks · REST · Tailscale</div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://twitch.tv/thebardchat" target="_blank">thebardchat · Twitch</a></div>
-          <div class="proj-badges"><span class="pbadge pb-live">Live</span></div>
-        </div>
-        <p class="proj-desc">Building in public. Live AI demos, automation builds, real infrastructure — streamed from the lab. Bot council, mega dashboard, and the full ShaneBrain stack running live on stream.</p>
-        <div class="proj-tech">Twitch · OBS · Ollama · N8N · Stream Bots</div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/SB-Management-OS" target="_blank">SB Management OS</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
-        </div>
-        <p class="proj-desc">SRM Concrete SOPs and dispatch management system. MASTER-Scheduler integration for job tracking, crew management, and operational workflows. Built for real daily use at work.</p>
-        <div class="proj-tech">Python · Google Sheets · Dispatch Logic · SOPs</div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/shanebrain-agents" target="_blank">shanebrain-agents</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Active</span></div>
-        </div>
-        <p class="proj-desc">7-agent AI orchestration — Guardian, Librarian, Dispatcher, Builder, Storyteller, Ops, and Social — coordinated by a central orchestrator. Local Ollama + Claude API. Full Weaviate memory.</p>
-        <div class="proj-tech">Python · FastAPI · Claude API · Ollama · Weaviate</div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/BGKPJR-Core-Simulations" target="_blank">BGKPJR Simulations</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Active</span><span class="pbadge pb-patent">Patent</span></div>
-        </div>
-        <p class="proj-desc">Full physics engine, LQR/MPC control systems, aerodynamics sims, VacuumGate feasibility report, and AI expert peer review chain. Real expert outreach underway. Has its own GitHub Pages.</p>
-        <div class="proj-tech">Python · NumPy · SciPy · Control Theory · MATLAB</div>
-      </div>
-
+    <!-- MEGA Crew bots -->
+    <div class="sec-label reveal" style="margin-bottom:14px;">MEGA Crew — 17 Autonomous Docker Containers</div>
+    <div class="crew-grid reveal">
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Sparky</div><div class="crew-bot-zone">Brain · Judge / reasoning core</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Volt</div><div class="crew-bot-zone">Brain · Persona drift detector</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Neon</div><div class="crew-bot-zone">Brain · Embedding specialist</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Glitch</div><div class="crew-bot-zone">Brain · Adversarial tester</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Rivet</div><div class="crew-bot-zone">Left Hand · Deduplication</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Torch</div><div class="crew-bot-zone">Left Hand · Persona editor</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Weld</div><div class="crew-bot-zone">Left Hand · Code applier + deployer</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Blaze</div><div class="crew-bot-zone">Right Hand · Context injector</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Arc</div><div class="crew-bot-zone">Right Hand · Gatekeeper — all writes</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Flux</div><div class="crew-bot-zone">Right Hand · Health monitor</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Gemini</div><div class="crew-bot-zone">Right Hand · Growth coach (4x/day)</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Bolt</div><div class="crew-bot-zone">Left Foot · Pattern miner</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Stomp</div><div class="crew-bot-zone">Left Foot · Conflict resolver</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Grind</div><div class="crew-bot-zone">Left Foot · Re-embedder</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Crank</div><div class="crew-bot-zone">Right Foot · Scheduler</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Spike</div><div class="crew-bot-zone">Right Foot · IQ benchmark</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Forge</div><div class="crew-bot-zone">Right Foot · Tool drafter</div></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ══════════════════════════════════════════ RELEASED REPOS -->
-<section class="section">
+<!-- ════════════════════════════════════════ PROJECTS -->
+<section class="section" id="projects">
   <div class="container">
-    <div class="sec-label reveal">03 · Released to GitHub</div>
-    <h2 class="sec-title reveal">The Treasures</h2>
-    <p class="sec-desc reveal">Eight projects recovered from the drives of Shane Brazelton and released April 2026. Each has a live GitHub Pages site. <a href="https://thebardchat.github.io/treasures/" style="color:var(--green)">View the full Treasures Hub →</a></p>
+    <div class="sec-label reveal">03 · Projects</div>
+    <h2 class="sec-title reveal">Built & Deployed</h2>
+    <p class="sec-desc reveal">Every project built in production. Most used daily. All open source.</p>
 
     <div class="proj-grid">
+
+      <div class="proj-card daily reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://thebardchat.github.io/srm-dispatch/" target="_blank">srm-dispatch</a></div>
+          <span class="pbadge pb-daily">Daily Use</span>
+        </div>
+        <p class="proj-desc">SRM Concrete PWA dispatch tool for 18 dump truck drivers. Real crew config, Bridgeport rotation, one-tap copy-to-text. No backend. No database. No login. Used every single morning.</p>
+        <div class="proj-tech">React 18 · Vite 5 · Static PWA · No Backend</div>
+        <div class="proj-footer">
+          <a href="https://thebardchat.github.io/srm-dispatch/" target="_blank" class="hl">Live App →</a>
+          <a href="https://github.com/thebardchat/srm-dispatch" target="_blank">Repo</a>
+        </div>
+      </div>
 
       <div class="proj-card reveal">
         <div class="proj-header">
           <div class="proj-name"><a href="https://thebardchat.github.io/AI-Trainer-MAX/" target="_blank">AI-Trainer-MAX</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Live</span></div>
+          <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">5-phase local AI training curriculum — 36 modules, zero cloud. From "first local LLM" to owning your own AI brain. Built for the 800M losing Windows 10 support.</p>
+        <p class="proj-desc">5-phase local AI training curriculum — 36 modules, zero cloud. From "first local LLM" to owning your own AI brain. Built for the 800M people losing Windows 10 support in 2025.</p>
         <div class="proj-tech">Windows .bat · Ollama · Weaviate · MCP · 36 modules</div>
-        <div style="margin-top:12px;display:flex;gap:12px;font-size:0.8rem;">
-          <a href="https://thebardchat.github.io/AI-Trainer-MAX/" target="_blank" style="color:var(--green);text-decoration:none;">Pages →</a>
-          <a href="https://github.com/thebardchat/AI-Trainer-MAX" target="_blank" style="color:var(--text-2);text-decoration:none;">Repo →</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/angelcloud-actual/" target="_blank">angelcloud-actual</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Live</span></div>
-        </div>
-        <p class="proj-desc">The actual Angel Cloud platform codebase — Firebase social wellness app, Pulsar blockchain security core, North Alabama logistics API, aggregate pricing engine, and AI agent blueprints.</p>
-        <div class="proj-tech">Firebase · Node.js · Python · FastAPI · Pulsar Blockchain</div>
-        <div style="margin-top:12px;display:flex;gap:12px;font-size:0.8rem;">
-          <a href="https://thebardchat.github.io/angelcloud-actual/" target="_blank" style="color:var(--green);text-decoration:none;">Pages →</a>
-          <a href="https://github.com/thebardchat/angelcloud-actual" target="_blank" style="color:var(--text-2);text-decoration:none;">Repo →</a>
+        <div class="proj-footer">
+          <a href="https://thebardchat.github.io/AI-Trainer-MAX/" target="_blank" class="hl">Live →</a>
+          <a href="https://github.com/thebardchat/AI-Trainer-MAX" target="_blank">Repo</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-header">
           <div class="proj-name"><a href="https://thebardchat.github.io/thought-tree/" target="_blank">thought-tree</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Live</span></div>
+          <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">React + Python visual thought browser. Node-based mind mapping on a dark full-screen canvas. Search and browse Weaviate knowledge collections with Ollama-powered semantic search.</p>
-        <div class="proj-tech">React · Canvas API · Weaviate · Ollama · Zero External Deps</div>
-        <div style="margin-top:12px;display:flex;gap:12px;font-size:0.8rem;">
-          <a href="https://thebardchat.github.io/thought-tree/" target="_blank" style="color:var(--green);text-decoration:none;">Pages →</a>
-          <a href="https://github.com/thebardchat/thought-tree" target="_blank" style="color:var(--text-2);text-decoration:none;">Repo →</a>
+        <p class="proj-desc">React + Python visual thought browser. Node-based mind mapping on a dark full-screen canvas. Semantic search through Weaviate knowledge collections with live Ollama inference.</p>
+        <div class="proj-tech">React · Canvas API · Weaviate · Ollama</div>
+        <div class="proj-footer">
+          <a href="https://thebardchat.github.io/thought-tree/" target="_blank" class="hl">Live →</a>
+          <a href="https://github.com/thebardchat/thought-tree" target="_blank">Repo</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/srm-dispatch/" target="_blank">srm-dispatch</a></div>
-          <div class="proj-badges"><span class="pbadge pb-live">Daily Use</span></div>
+          <div class="proj-name"><a href="https://github.com/thebardchat/shanebrain_mcp" target="_blank">ShaneBrain MCP</a></div>
+          <span class="pbadge pb-daily">42 Tools</span>
         </div>
-        <p class="proj-desc">SRM Concrete PWA dispatch tool for 18 dump truck drivers. Real crew config, Bridgeport rotation, plant substitution, one-tap copy-to-text. No backend. No database. No login.</p>
-        <div class="proj-tech">React 18 · Vite 5 · Static PWA · No Backend</div>
-        <div style="margin-top:12px;display:flex;gap:12px;font-size:0.8rem;">
-          <a href="https://thebardchat.github.io/srm-dispatch/" target="_blank" style="color:var(--green);text-decoration:none;">Pages →</a>
-          <a href="https://github.com/thebardchat/srm-dispatch" target="_blank" style="color:var(--text-2);text-decoration:none;">Repo →</a>
+        <p class="proj-desc">FastMCP server running 29 native tools — knowledge search, calendar, vault, drafts, social, security logs, system health, Weaviate RAG, email, reminders. The nervous system of ShaneBrain.</p>
+        <div class="proj-tech">Python · FastMCP · Weaviate · Docker · port 8100</div>
+        <div class="proj-footer">
+          <a href="https://github.com/thebardchat/shanebrain_mcp" target="_blank" class="hl">Repo →</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://github.com/thebardchat/angel-cloud" target="_blank">Angel Cloud</a></div>
+          <span class="pbadge pb-live">Live</span>
+        </div>
+        <p class="proj-desc">Wellness platform + Messenger storyteller. FastAPI gateway with Tailscale Funnel, SQLite sessions, Weaviate RAG, SecurityLog pipeline, Facebook Messenger bot with OPTOUT/ANON/FORGET commands.</p>
+        <div class="proj-tech">FastAPI · Tailscale · Weaviate · Messenger API</div>
+        <div class="proj-footer">
+          <a href="https://github.com/thebardchat/angel-cloud" target="_blank" class="hl">Repo →</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-header">
           <div class="proj-name"><a href="https://thebardchat.github.io/mini-shanebrain/" target="_blank">mini-shanebrain</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Live</span></div>
+          <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">Multi-platform social bot framework: posts to X, Facebook, LinkedIn, Instagram, Bluesky, and Threads from a unified Weaviate + Ollama backend on a cron schedule.</p>
+        <p class="proj-desc">Multi-platform social bot: posts to X, Facebook, LinkedIn, Instagram, Bluesky, and Threads from a unified Weaviate + Ollama backend on a cron schedule. AI-disclosure required.</p>
         <div class="proj-tech">Node.js · Ollama · Weaviate · 6 Platforms · Cron</div>
-        <div style="margin-top:12px;display:flex;gap:12px;font-size:0.8rem;">
-          <a href="https://thebardchat.github.io/mini-shanebrain/" target="_blank" style="color:var(--green);text-decoration:none;">Pages →</a>
-          <a href="https://github.com/thebardchat/mini-shanebrain" target="_blank" style="color:var(--text-2);text-decoration:none;">Repo →</a>
+        <div class="proj-footer">
+          <a href="https://thebardchat.github.io/mini-shanebrain/" target="_blank" class="hl">Live →</a>
+          <a href="https://github.com/thebardchat/mini-shanebrain" target="_blank">Repo</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/shanebrain-learning/" target="_blank">shanebrain-learning</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Live</span></div>
+          <div class="proj-name"><a href="https://github.com/thebardchat/SB-Management-OS" target="_blank">SB-Management-OS</a></div>
+          <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">Auto-learning inbox pipeline: drop a file in, it gets embedded with Ollama and ingested to Weaviate on cron. Zero-friction knowledge capture. inbox → embed → store → done.</p>
-        <div class="proj-tech">Python · Weaviate · Ollama · Cron · nomic-embed-text</div>
-        <div style="margin-top:12px;display:flex;gap:12px;font-size:0.8rem;">
-          <a href="https://thebardchat.github.io/shanebrain-learning/" target="_blank" style="color:var(--green);text-decoration:none;">Pages →</a>
-          <a href="https://github.com/thebardchat/shanebrain-learning" target="_blank" style="color:var(--text-2);text-decoration:none;">Repo →</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/multi-container-app/" target="_blank">multi-container-app</a></div>
-          <div class="proj-badges"><span class="pbadge pb-active">Live</span></div>
-        </div>
-        <p class="proj-desc">Clean multi-container Docker starter: Node.js + MongoDB, one compose up. Full CRUD todo app demonstrates the stack. Start building containerized services in under 30 seconds.</p>
-        <div class="proj-tech">Docker · docker-compose · Node.js · Express · MongoDB</div>
-        <div style="margin-top:12px;display:flex;gap:12px;font-size:0.8rem;">
-          <a href="https://thebardchat.github.io/multi-container-app/" target="_blank" style="color:var(--green);text-decoration:none;">Pages →</a>
-          <a href="https://github.com/thebardchat/multi-container-app" target="_blank" style="color:var(--text-2);text-decoration:none;">Repo →</a>
+        <p class="proj-desc">SRM Concrete Standard Operating Procedures — full dispatch, crew management, and safety protocol documentation. Built for real field conditions in North Alabama construction.</p>
+        <div class="proj-tech">Markdown · GitHub Pages · Field Operations</div>
+        <div class="proj-footer">
+          <a href="https://github.com/thebardchat/SB-Management-OS" target="_blank" class="hl">Repo →</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/treasures/" target="_blank">treasures (hub)</a></div>
-          <div class="proj-badges"><span class="pbadge pb-core">Hub</span></div>
+          <div class="proj-name"><a href="https://github.com/thebardchat/Greenfield" target="_blank">Claim Cruncher</a></div>
+          <span class="pbadge pb-new">In Dev</span>
         </div>
-        <p class="proj-desc">Master hub for all 8 recovered projects. The complete archive of artifacts scanned from Shane's external drives in April 2026. Scripts, projects, creative, data, and code.</p>
-        <div class="proj-tech">Archive · All 8 Repos · GitHub Pages Hub · Treasure Map</div>
-        <div style="margin-top:12px;display:flex;gap:12px;font-size:0.8rem;">
-          <a href="https://thebardchat.github.io/treasures/" target="_blank" style="color:var(--green);text-decoration:none;">Pages →</a>
-          <a href="https://github.com/thebardchat/treasures" target="_blank" style="color:var(--text-2);text-decoration:none;">Repo →</a>
+        <p class="proj-desc">Medical billing intake platform for Gavin. Python/FastAPI backend, structured claim ingestion, automated coding assistance. Replacing a manual process that costs thousands of hours.</p>
+        <div class="proj-tech">Python · FastAPI · SQLite · Medical Billing</div>
+        <div class="proj-footer">
+          <a href="https://github.com/thebardchat/Greenfield" target="_blank" class="hl">Repo →</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://thebardchat.github.io/angelcloud-actual/" target="_blank">angelcloud-actual</a></div>
+          <span class="pbadge pb-live">Live</span>
+        </div>
+        <p class="proj-desc">Angel Cloud platform codebase — Firebase social wellness app, Pulsar blockchain security core, North Alabama logistics API, aggregate pricing engine, and AI agent blueprints.</p>
+        <div class="proj-tech">Firebase · Node.js · Python · FastAPI · Pulsar Blockchain</div>
+        <div class="proj-footer">
+          <a href="https://thebardchat.github.io/angelcloud-actual/" target="_blank" class="hl">Live →</a>
+          <a href="https://github.com/thebardchat/angelcloud-actual" target="_blank">Repo</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://thebardchat.github.io/treasures/" target="_blank">Treasures Archive</a></div>
+          <span class="pbadge pb-core">Archive</span>
+        </div>
+        <p class="proj-desc">Master hub for all recovered projects — scripts, creative work, data, and code scanned from external drives in April 2026. Complete artifact archive with treasure map index.</p>
+        <div class="proj-tech">Archive · 8 Repos · GitHub Pages Hub</div>
+        <div class="proj-footer">
+          <a href="https://thebardchat.github.io/treasures/" target="_blank" class="hl">Live →</a>
+          <a href="https://github.com/thebardchat/treasures" target="_blank">Repo</a>
         </div>
       </div>
 
@@ -762,54 +722,104 @@
 
 <div class="divider"></div>
 
-<!-- ══════════════════════════════════════════ INFRASTRUCTURE -->
+<!-- ════════════════════════════════════════ BOOK -->
+<section class="section" id="book">
+  <div class="container">
+    <div class="sec-label reveal">04 · Published Work</div>
+    <h2 class="sec-title reveal">The Book</h2>
+    <div class="book-card reveal">
+      <div class="book-cover">YOU<br/>PROBABLY<br/>THINK<br/>THIS<br/>BOOK IS<br/>ABOUT<br/>YOU</div>
+      <div class="book-content">
+        <div class="book-sub">Noir Vignettes · Published 2025</div>
+        <div class="book-title">You Probably Think This Book Is About You</div>
+        <p class="book-desc">
+          Fifty-five noir vignettes set in the American South. Each one a portrait — a dispatcher at 4 AM,
+          a man who can't leave a town that never held him, a woman deciding what to do with what's left.
+          The kind of stories that feel like they happened to someone you know.
+          Written by a dump truck dispatcher in Alabama who built an AI ecosystem to help him write them.
+        </p>
+        <div class="book-links">
+          <a href="https://www.amazon.com/Probably-Think-This-Book-About/dp/B0GT25R5FD" target="_blank" rel="noopener" class="btn btn-amber">Buy on Amazon →</a>
+          <a href="https://github.com/thebardchat/you-probably-think-this-book-is-about-you" target="_blank" rel="noopener" class="btn btn-outline">Repo →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════ SOBRIETY -->
 <section class="section">
   <div class="container">
-    <div class="sec-label reveal">04 · Infrastructure</div>
-    <h2 class="sec-title reveal">The Hardware Stack</h2>
-    <p class="sec-desc reveal">Everything runs local. No cloud subscriptions. No vendor lock-in. A Pi 5 with a RAID array, four Ollama nodes, and Tailscale mesh tying it together.</p>
+    <div class="sober-card reveal">
+      <div>
+        <div class="sober-count" id="sober-count">888</div>
+        <div class="sober-label">Days Sober</div>
+      </div>
+      <div class="sober-text">
+        <strong>November 27, 2023.</strong> That's the day everything changed.
+        Sobriety is the bedrock under everything on this page — the infrastructure, the aerospace work,
+        the book, the 5 AM briefings. You can't build a brain farm on a shaky foundation.
+        Every project here was built sober. Every line of code. Every chapter.
+        <br/><br/>
+        Faith. Family. Sobriety. Local AI. The left-behind user.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════ INFRASTRUCTURE -->
+<section class="section" id="infra">
+  <div class="container">
+    <div class="sec-label reveal">05 · Hardware</div>
+    <h2 class="sec-title reveal">The Stack</h2>
+    <p class="sec-desc reveal">Everything runs local. No cloud subscriptions. No vendor lock-in. Pi before cloud, every time.</p>
 
     <div class="infra-grid">
       <div class="infra-card reveal">
-        <div class="infra-title">// Compute</div>
+        <div class="infra-title">// Controller Node — shanebrain</div>
         <ul class="infra-list">
-          <li><strong>Raspberry Pi 5</strong> — 16 GB RAM, controller node</li>
+          <li><strong>Raspberry Pi 5</strong> — 16 GB RAM, main orchestrator</li>
           <li><strong>Pironman 5-MAX</strong> — NVMe RAID chassis by Sunfounder</li>
           <li><strong>RAID 1</strong> — 2× WD Blue SN5000 2TB NVMe via mdadm</li>
-          <li><strong>8TB External</strong> — Seagate ANGEL_CLOUD (NTFS)</li>
-          <li><strong>4-Node Cluster</strong> — Pi 5 + Pulsar00100 + Bullfrog + Jaxton</li>
+          <li><strong>8TB External</strong> — Seagate ANGEL_CLOUD backup</li>
+          <li><strong>16 GB RAID swapfile</strong> — expanded April 2026</li>
         </ul>
       </div>
       <div class="infra-card reveal">
-        <div class="infra-title">// AI Stack</div>
+        <div class="infra-title">// Data Node — neworleans</div>
         <ul class="infra-list">
-          <li><strong>Ollama 0.17.7</strong> — local LLM inference, port 11434</li>
-          <li><strong>Cluster Proxy</strong> — 4-node routing, port 11435</li>
-          <li><strong>shanebrain-3b</strong> — custom model (llama3.2:3b base)</li>
-          <li><strong>nomic-embed-text</strong> — 768-dim vector embeddings</li>
-          <li><strong>Weaviate 1.36.2</strong> — 17 collections, text2vec-ollama</li>
+          <li><strong>Weaviate 1.36.2</strong> — 25 collections, port 8080</li>
+          <li><strong>text2vec-transformers</strong> — MiniLM-L6-v2, 384-dim</li>
+          <li><strong>N8N</strong> — automation workflows, port 5678</li>
+          <li><strong>Postgres + Redis</strong> — N8N backing store</li>
+          <li><strong>3,200+ knowledge objects</strong> — growing daily at 4 AM</li>
         </ul>
       </div>
       <div class="infra-card reveal">
-        <div class="infra-title">// Services</div>
+        <div class="infra-title">// Services on Pi</div>
         <ul class="infra-list">
-          <li><strong>MCP Server v2.2</strong> — 42 tools, port 8100, Docker</li>
-          <li><strong>Mega Dashboard</strong> — port 8300, 20+ live panels</li>
-          <li><strong>Buddy Claude</strong> — port 8008, Claude↔Gemini engine</li>
-          <li><strong>Open WebUI</strong> — port 3000, Portainer port 9000</li>
-          <li><strong>Angel Cloud Gateway</strong> — port 4200, FastAPI</li>
-          <li><strong>ShaneBrain Alerter</strong> — 5 AM briefing, weekly report</li>
+          <li><strong>MCP Server v2.3</strong> — 42 tools, port 8100, Docker</li>
+          <li><strong>Mega Dashboard</strong> — 24 panels, port 8300</li>
+          <li><strong>Angel Cloud Gateway</strong> — FastAPI, port 4200</li>
+          <li><strong>MEGA Crew</strong> — 17 bot containers, docker-compose</li>
+          <li><strong>ShaneBrain Alerter</strong> — 5 AM briefing, Discord DM</li>
+          <li><strong>Open WebUI</strong> — port 3000 · Portainer — port 9000</li>
         </ul>
       </div>
       <div class="infra-card reveal">
-        <div class="infra-title">// Network</div>
+        <div class="infra-title">// Cluster Nodes</div>
         <ul class="infra-list">
-          <li><strong>Tailscale VPN</strong> — mesh across all 4 nodes</li>
-          <li><strong>Tailscale Funnel</strong> — public HTTPS at ts.net URL</li>
-          <li><strong>Caddy 2.11.2</strong> — reverse proxy, ready for custom domain</li>
-          <li><strong>theangel.com</strong> — IONOS, expires 2027</li>
-          <li><strong>Pi LAN</strong> — 10.0.0.42 · Tailscale 100.67.120.6</li>
+          <li><strong>Pulsar00100</strong> — Priority 1, fastest inference</li>
+          <li><strong>Bullfrog-R2D2</strong> — Priority 2 overflow</li>
+          <li><strong>Jaxton Laptop</strong> — Priority 3, Ollama only</li>
+          <li><strong>gulfshores</strong> — Surface 1, dev/build node, Node.js v24</li>
+          <li><strong>Tailscale mesh</strong> — all nodes, no raw IPs anywhere</li>
         </ul>
+        <div class="infra-note">Pulsar Sentinel (PQC) runs on every node — Kyber-1024 + Dilithium3 binding security layer</div>
       </div>
     </div>
   </div>
@@ -817,65 +827,17 @@
 
 <div class="divider"></div>
 
-<!-- ══════════════════════════════════════════ CREDITS -->
-<section class="section">
+<!-- ════════════════════════════════════════ CONNECT -->
+<section class="section" id="connect">
   <div class="container">
-    <div class="sec-label reveal">05 · Built With</div>
-    <h2 class="sec-title reveal">Partners & Tools</h2>
-    <div class="credits-grid">
-      <div class="credit-card reveal">
-        <a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">
-          <div class="credit-name">Claude by Anthropic</div>
-          <div class="credit-role">AI co-builder on every project in this ecosystem. Shane + Claude Anthropic — always together.</div>
-        </a>
-      </div>
-      <div class="credit-card reveal">
-        <a href="https://www.raspberrypi.com" target="_blank" rel="noopener">
-          <div class="credit-name">Raspberry Pi 5</div>
-          <div class="credit-role">16GB. Runs it all. Pi before cloud, every time.</div>
-        </a>
-      </div>
-      <div class="credit-card reveal">
-        <a href="https://www.sunfounder.com/products/pironman-5" target="_blank" rel="noopener">
-          <div class="credit-name">Pironman 5-MAX</div>
-          <div class="credit-role">NVMe RAID 1 chassis by Sunfounder. Made it real hardware.</div>
-        </a>
-      </div>
-      <div class="credit-card reveal">
-        <a href="https://ollama.com" target="_blank" rel="noopener">
-          <div class="credit-name">Ollama</div>
-          <div class="credit-role">Local LLM inference across 4 nodes. No cloud billing.</div>
-        </a>
-      </div>
-      <div class="credit-card reveal">
-        <a href="https://weaviate.io" target="_blank" rel="noopener">
-          <div class="credit-name">Weaviate</div>
-          <div class="credit-role">17 collections, 210+ knowledge objects. The long-term memory.</div>
-        </a>
-      </div>
-      <div class="credit-card reveal">
-        <a href="https://github.com/thebardchat" target="_blank" rel="noopener">
-          <div class="credit-name">GitHub</div>
-          <div class="credit-role">Version control, Pages hosting, open builds in public.</div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ══════════════════════════════════════════ CONNECT -->
-<section class="section">
-  <div class="container" style="text-align:center">
-    <div class="sec-label reveal" style="justify-content:center">06 · Connect</div>
+    <div class="sec-label reveal">06 · Connect</div>
     <h2 class="sec-title reveal">Find Me</h2>
     <div class="connect-grid reveal">
       <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="soc-link">
         <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
-      <a href="https://twitch.tv/thebardchat" target="_blank" rel="noopener" class="soc-link twitch">
+      <a href="https://twitch.tv/thebardchat" target="_blank" rel="noopener" class="soc-link">
         <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
         Twitch
       </a>
@@ -887,19 +849,19 @@
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
         Instagram
       </a>
-      <a href="https://tiktok.com/@thebardchat" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13.2a8.16 8.16 0 005.58 2.2v-3.46a4.85 4.85 0 01-2-.75 4.86 4.86 0 01-1.78-2.13V6.69h3.78z"/></svg>
-        TikTok
-      </a>
       <a href="https://twitter.com/BGKPJRevolution" target="_blank" rel="noopener" class="soc-link">
         <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         X / Twitter
+      </a>
+      <a href="https://tiktok.com/@thebardchat" target="_blank" rel="noopener" class="soc-link">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13.2a8.16 8.16 0 005.58 2.2v-3.46a4.85 4.85 0 01-2-.75 4.86 4.86 0 01-1.78-2.13V6.69h3.78z"/></svg>
+        TikTok
       </a>
       <a href="mailto:brazeltonshane@gmail.com" class="soc-link">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         Email
       </a>
-      <a href="https://ko-fi.com/shanebrain" target="_blank" rel="noopener" class="soc-link kofi">
+      <a href="https://ko-fi.com/shanebrain" target="_blank" rel="noopener" class="soc-link">
         <svg viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311z"/></svg>
         Ko-fi
       </a>
@@ -907,21 +869,21 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════ FOOTER -->
-<footer class="footer">
-  <div class="container">
+<!-- ════════════════════════════════════════ FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-inner">
     <div class="footer-quote">"If you don't own your infrastructure, you don't own your future."</div>
     <p class="footer-bio">
-      Shane Brazelton — Hazel Green, Alabama<br/>
-      Dispatcher by day. AI architect by night. Father of five.<br/>
-      Built with Claude Anthropic. Every project. Every line.
+      Shane Brazelton — Hazel Green, Alabama · Dispatcher by day. AI architect by night. Father of five.<br/>
+      Every project built with Claude Anthropic. Every line. Every session. Partners in all of it.
     </p>
     <div class="footer-links">
-      <a href="https://github.com/thebardchat" target="_blank">GitHub</a>
-      <a href="https://twitch.tv/thebardchat" target="_blank">Twitch</a>
-      <a href="https://discord.gg/qST3UfFAr9" target="_blank">Discord</a>
-      <a href="https://ko-fi.com/shanebrain" target="_blank">Ko-fi</a>
-      <a href="https://thebardchat.github.io/BGKPJR-Core-Simulations/">BGKPJR</a>
+      <a href="https://github.com/thebardchat">GitHub</a>
+      <a href="https://twitch.tv/thebardchat">Twitch</a>
+      <a href="https://discord.gg/qST3UfFAr9">Discord</a>
+      <a href="https://ko-fi.com/shanebrain">Ko-fi</a>
+      <a href="https://thebardchat.github.io/BGKPJR-Launch-Vis">Launch Vis</a>
+      <a href="https://thebardchat.github.io/manna-pods">Manna Pods</a>
       <a href="https://github.com/thebardchat/constitution">Constitution</a>
     </div>
     <div class="footer-ref">
@@ -932,12 +894,12 @@
   </div>
 </footer>
 
-</div><!-- end .page -->
+</div><!-- .page -->
 
-<!-- ── FIXED BOTTOM BAR ── -->
+<!-- FIXED BOTTOM REF BAR -->
 <div class="ref-bottom">
-  <div class="ref-dot"></div>
-  <span>Try Claude free for 2 weeks —</span>
+  <div class="pulse" style="width:6px;height:6px;"></div>
+  <span>Try Claude free —</span>
   <a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">Start your free trial →</a>
   <span>· AI behind this ecosystem</span>
 </div>
@@ -945,95 +907,71 @@
 <script>
 // ── CANVAS BACKGROUND ──
 (function(){
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
+  const c = document.getElementById('bg');
+  const ctx = c.getContext('2d');
   let W, H;
-
-  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Grid
-  const GRID = 52;
-  // Particles
-  const particles = [];
-  const PCOUNT = 70;
-
-  class Particle {
-    constructor(init){ this.reset(init); }
-    reset(init){
-      this.x = Math.random() * (W || window.innerWidth);
-      this.y = init ? Math.random() * (H || window.innerHeight) : (H || window.innerHeight) + 10;
-      this.vy = -(Math.random() * 1.5 + 0.4);
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.life = init ? Math.random() : 1;
-      this.decay = Math.random() * 0.004 + 0.002;
-      this.r = Math.random() * 1.8 + 0.4;
-      this.hue = 120 + Math.random() * 60; // green range
-    }
-    update(){ this.x += this.vx; this.y += this.vy; this.life -= this.decay; if(this.life <= 0) this.reset(false); }
-    draw(){
-      ctx.globalAlpha = this.life * 0.7;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
-      ctx.fillStyle = `hsl(${this.hue},100%,65%)`;
-      ctx.fill();
-      // trail
-      ctx.beginPath();
-      ctx.moveTo(this.x, this.y);
-      ctx.lineTo(this.x - this.vx*10, this.y - this.vy*10);
-      ctx.strokeStyle = `hsla(${this.hue},100%,55%,0.3)`;
-      ctx.lineWidth = this.r * 0.5;
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-    }
-  }
-  for(let i=0;i<PCOUNT;i++) particles.push(new Particle(true));
+  function resize(){ W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
 
   // Stars
-  const stars = Array.from({length:180}, ()=>({
-    x: Math.random(), y: Math.random(),
-    r: Math.random()*1.2+0.2,
-    a: Math.random()*0.5+0.1,
-    phase: Math.random()*Math.PI*2,
-    speed: Math.random()*0.01+0.003,
+  const stars = Array.from({length:200}, ()=>({
+    x:Math.random(), y:Math.random(),
+    r:Math.random()*1.4+0.2,
+    a:Math.random()*0.5+0.1,
+    phase:Math.random()*Math.PI*2,
+    speed:Math.random()*0.008+0.002,
   }));
 
-  function draw(ts){
+  // Particles
+  const parts = Array.from({length:50}, ()=>({
+    x:Math.random(), y:Math.random(),
+    vx:(Math.random()-.5)*0.3,
+    vy:-(Math.random()*0.8+0.2),
+    life:Math.random(), decay:Math.random()*.003+.001,
+    r:Math.random()*1.5+.3,
+    hue: Math.random() > .5 ? 195 : 45,
+  }));
+
+  function drawFrame(ts){
     const t = ts * 0.001;
-    ctx.fillStyle = 'rgba(4,6,10,0.2)';
+    ctx.fillStyle='rgba(3,8,16,.18)';
     ctx.fillRect(0,0,W,H);
 
-    // faint grid
-    ctx.strokeStyle = 'rgba(0,255,136,0.025)';
-    ctx.lineWidth = 1;
-    for(let x=0;x<W;x+=GRID){ ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke(); }
-    for(let y=0;y<H;y+=GRID){ ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke(); }
+    // grid
+    ctx.strokeStyle='rgba(0,229,255,.018)';
+    ctx.lineWidth=1;
+    const G=60;
+    for(let x=0;x<W;x+=G){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(let y=0;y<H;y+=G){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
 
     // stars
     stars.forEach(s=>{
-      const a = s.a * (0.5 + 0.5*Math.sin(t*s.speed*100 + s.phase));
-      ctx.globalAlpha = a;
-      ctx.beginPath();
-      ctx.arc(s.x*W, s.y*H, s.r, 0, Math.PI*2);
-      ctx.fillStyle = '#c8e8ff';
-      ctx.fill();
-      ctx.globalAlpha = 1;
+      const a = s.a*(0.4+0.6*Math.sin(t*s.speed*80+s.phase));
+      ctx.globalAlpha=a;
+      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
+      ctx.fillStyle='#c8e8ff';ctx.fill();
+      ctx.globalAlpha=1;
     });
 
     // particles
-    particles.forEach(p=>{ p.update(); p.draw(); });
+    parts.forEach(p=>{
+      p.x+=p.vx/W; p.y+=p.vy/H; p.life-=p.decay;
+      if(p.life<=0||p.y<0){p.x=Math.random();p.y=1;p.life=1;}
+      ctx.globalAlpha=p.life*.5;
+      ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);
+      ctx.fillStyle=`hsl(${p.hue},100%,65%)`;ctx.fill();
+      ctx.globalAlpha=1;
+    });
 
-    requestAnimationFrame(draw);
+    requestAnimationFrame(drawFrame);
   }
-  requestAnimationFrame(draw);
+  requestAnimationFrame(drawFrame);
 })();
 
 // ── SOBRIETY COUNTER ──
 (function(){
-  const soberDate = new Date('2023-11-27');
-  const days = Math.floor((new Date() - soberDate) / 86400000);
-  document.getElementById('sober-count').textContent = days;
+  const days = Math.floor((Date.now() - new Date('2023-11-27').getTime()) / 86400000);
+  document.querySelectorAll('#sober-count').forEach(el => el.textContent = days);
 })();
 
 // ── SCROLL REVEAL ──
@@ -1041,11 +979,11 @@
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach((e,i)=>{
       if(e.isIntersecting){
-        setTimeout(()=>e.target.classList.add('visible'), i*70);
+        setTimeout(()=>e.target.classList.add('visible'), i*60);
         obs.unobserve(e.target);
       }
     });
-  }, {threshold:0.08});
+  },{threshold:.07});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 })();
 </script>
