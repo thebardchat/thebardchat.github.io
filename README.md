@@ -70,8 +70,8 @@ All `thebardchat` repositories run on local-first hardware:
 | **Chassis** | Pironman 5-MAX by Sunfounder (NVMe RAID) |
 | **Storage** | 2x WD Blue SN5000 2 TB NVMe — RAID 1 via mdadm |
 | **Core path** | `/mnt/shanebrain-raid/shanebrain-core/` |
-| **Local AI** | Ollama (llama3.2:1b default) |
-| **Vector memory** | Weaviate (Docker, 8080/50051) |
+| **Intelligence** | Claude (Anthropic) — every surface, every session |
+| **Vector memory** | Weaviate (Docker, 8080) — 28 collections, text2vec-transformers (MiniLM-L6-v2) |
 | **Networking** | Tailscale VPN across all nodes |
 
 > Pi before cloud. Privacy before convenience. — Pillar 4

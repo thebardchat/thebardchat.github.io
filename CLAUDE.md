@@ -16,9 +16,9 @@ All `thebardchat` repositories run on the following local-first infrastructure:
 | **Chassis** | Pironman 5-MAX by Sunfounder (NVMe RAID) |
 | **Storage** | 2x WD Blue SN5000 2 TB NVMe — RAID 1 via mdadm |
 | **Core path** | `/mnt/shanebrain-raid/shanebrain-core/` |
-| **Local AI** | Ollama (llama3.2:1b default) |
-| **Vector memory** | Weaviate (Docker, 8080/50051) |
-| **MCP server** | FastMCP (port 8008, Streamable HTTP) |
+| **Intelligence** | Claude (Anthropic) — every surface, every session |
+| **Vector memory** | Weaviate (Docker, 8080) — 28 collections, text2vec-transformers MiniLM-L6-v2 |
+| **MCP server** | FastMCP (port 8100, Docker, 44 tools) |
 | **Networking** | Tailscale VPN across all nodes |
 | **Dev environment** | Claude Code on Pi 5 |
 

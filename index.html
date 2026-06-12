@@ -4,9 +4,9 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ShaneBrain — AI Infrastructure · Aerospace Engineering · Built in Alabama</title>
-  <meta name="description" content="Shane Brazelton — dispatch operator, AI architect, aerospace engineer. 17 autonomous bots, 42 MCP tools, patent-filed EM launch system, published noir fiction. All running on a Pi 5 in Hazel Green, Alabama."/>
+  <meta name="description" content="Shane Brazelton — dispatch operator, AI architect, aerospace engineer. 18 autonomous bots, 44 MCP tools, patent-filed EM launch system, published noir fiction. All running on a Pi 5 in Hazel Green, Alabama."/>
   <meta property="og:title" content="ShaneBrain — AI Infrastructure · Aerospace Engineering"/>
-  <meta property="og:description" content="Built by a concrete dispatch operator in Alabama. Pi 5 RAID, 17 bots, BGKPJR electromagnetic launch architecture, patent-filed aerospace engineering, published noir fiction."/>
+  <meta property="og:description" content="Built by a concrete dispatch operator in Alabama. Pi 5 RAID, 18 bots, BGKPJR electromagnetic launch architecture, patent-filed aerospace engineering, published noir fiction."/>
   <meta property="og:image" content="https://thebardchat.github.io/assets/social-card.jpg"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="theme-color" content="#00e5ff"/>
@@ -431,6 +431,142 @@ a:hover{text-decoration:underline;}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
 .reveal.visible{opacity:1;transform:none;}
 
+/* ══════════════════════════════════════════════════ AURORA BLOBS */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.aurora i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.15;animation:drift 26s ease-in-out infinite alternate;}
+.aurora i:nth-child(1){width:48vw;height:48vw;background:#0050a0;top:-12vw;left:-10vw;}
+.aurora i:nth-child(2){width:40vw;height:40vw;background:#00e5ff;bottom:-14vw;right:-8vw;animation-duration:32s;animation-delay:-8s;opacity:.08;}
+.aurora i:nth-child(3){width:30vw;height:30vw;background:#9966ff;top:38%;left:55%;animation-duration:38s;animation-delay:-16s;opacity:.1;}
+@keyframes drift{from{transform:translate(0,0) scale(1);}to{transform:translate(6vw,-4vw) scale(1.18);}}
+
+/* ══════════════════════════════════════════════════ SCANLINES */
+body::after{
+  content:'';position:fixed;inset:0;z-index:300;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px);
+  mix-blend-mode:overlay;
+}
+
+/* ══════════════════════════════════════════════════ TICKER */
+.ticker-wrap{
+  overflow:hidden;position:relative;
+  background:rgba(3,8,16,.85);border-bottom:1px solid var(--line);
+  padding:.5rem 0;
+}
+.ticker-wrap::before,.ticker-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:70px;z-index:2;pointer-events:none;
+}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
+.ticker-wrap::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent);}
+.ticker{display:flex;width:max-content;animation:ticker 45s linear infinite;}
+.ticker-wrap:hover .ticker{animation-play-state:paused;}
+.ticker span{
+  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;
+  color:var(--fg-2);padding:0 1.8rem;white-space:nowrap;
+}
+.ticker b{color:var(--cyan);font-weight:600;}
+.ticker .tk-amber{color:var(--amber);}
+.ticker .tk-green{color:var(--green);}
+.ticker .tk-red{color:var(--red);}
+@keyframes ticker{to{transform:translateX(-50%);}}
+
+/* ══════════════════════════════════════════════════ HERO SHIMMER + GLITCH */
+.hero-name{
+  text-shadow:none;
+  background:linear-gradient(115deg,#fff 35%,var(--cyan) 47%,#bfe9ff 53%,#fff 65%);
+  background-size:230% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 35px rgba(0,229,255,.35));
+  animation:shimmer 5.5s linear infinite, glitch 7s steps(1) infinite;
+}
+@keyframes shimmer{to{background-position:-230% 0;}}
+@keyframes glitch{
+  0%,93.9%,98.1%,100%{transform:none;}
+  94%{transform:translate(-3px,1px) skewX(2deg);filter:drop-shadow(3px 0 0 rgba(255,85,85,.8)) drop-shadow(-3px 0 0 rgba(0,229,255,.8));}
+  95.2%{transform:translate(3px,-1px);}
+  96.4%{transform:translate(-1px,0) skewX(-1.5deg);filter:drop-shadow(-3px 0 0 rgba(255,85,85,.8)) drop-shadow(3px 0 0 rgba(0,229,255,.8));}
+  97%{transform:none;}
+}
+
+/* ══════════════════════════════════════════════════ BUTTON SHINE */
+.btn-primary{position:relative;overflow:hidden;}
+.btn-primary::after{
+  content:'';position:absolute;top:0;left:-130%;width:60%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.75),transparent);
+  animation:shine 3.4s ease-in-out infinite;
+}
+@keyframes shine{0%{left:-130%;}55%,100%{left:140%;}}
+
+/* ══════════════════════════════════════════════════ CONIC GLOW BORDER */
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false;}
+.glow-border{position:relative;}
+.glow-border::before{
+  content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;
+  background:conic-gradient(from var(--ang),transparent 0 68%,var(--cyan) 80%,var(--amber) 88%,transparent 96%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spin-border 4.5s linear infinite;pointer-events:none;
+}
+@keyframes spin-border{to{--ang:360deg;}}
+
+/* ══════════════════════════════════════════════════ NOW SECTION */
+.now-section{padding-block:70px;}
+.now-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;}
+.now-card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;
+  display:flex;flex-direction:column;gap:8px;transition:border-color .2s,transform .15s;
+}
+.now-card:hover{border-color:var(--line-hi);transform:translateY(-2px);}
+.now-tag{
+  font-family:var(--f-mono);font-size:.58rem;letter-spacing:.12em;align-self:flex-start;
+  border-radius:99px;padding:2px 9px;border:1px solid;text-transform:uppercase;
+}
+.nt-live{color:var(--green);border-color:rgba(0,255,136,.35);background:rgba(0,255,136,.07);animation:flash 1.8s steps(2) infinite;}
+.nt-next{color:var(--amber);border-color:rgba(255,170,0,.35);background:var(--amber-d);}
+.nt-prod{color:var(--purple);border-color:rgba(153,102,255,.35);background:rgba(153,102,255,.07);}
+@keyframes flash{50%{opacity:.35;}}
+.now-card h3{font-size:.95rem;font-weight:700;}
+.now-card p{font-size:.8rem;color:var(--fg-2);line-height:1.65;}
+
+/* ══════════════════════════════════════════════════ Q-DAY */
+.qday{
+  margin-top:16px;border-radius:14px;padding:28px 32px;
+  background:linear-gradient(135deg,rgba(255,85,85,.06),rgba(153,102,255,.05));
+  border:1px solid rgba(255,85,85,.2);
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.qday-left{display:flex;flex-direction:column;gap:6px;}
+.qday-label{
+  font-family:var(--f-mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--red);display:flex;align-items:center;gap:8px;
+}
+.qday-warn{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:flash 1s steps(2) infinite;}
+.qday-digits{
+  font-family:var(--f-orb);font-size:clamp(1.3rem,4.5vw,2.6rem);font-weight:700;
+  color:var(--red);text-shadow:0 0 35px rgba(255,85,85,.45);
+  font-variant-numeric:tabular-nums;letter-spacing:.04em;
+}
+.qday-planck{font-family:var(--f-mono);font-size:.7rem;color:var(--fg-dim);letter-spacing:.06em;}
+.qday-planck b{color:var(--purple);}
+.qday-right{font-size:.8rem;color:var(--fg-2);line-height:1.7;max-width:380px;}
+.qday-right strong{color:var(--fg);}
+
+/* ══════════════════════════════════════════════════ BOOK GRID + COVER IMG */
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.book-cover-img{width:130px;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.6);border:1px solid rgba(255,170,0,.25);}
+.book-cover.song{
+  background:linear-gradient(135deg,#200a0a,#401a10);
+  border-color:rgba(255,170,0,.3);color:rgba(255,180,80,.8);
+}
+@media(max-width:980px){.book-grid{grid-template-columns:1fr;}}
+
+/* ══════════════════════════════════════════════════ TILT */
+.tilt{transform-style:preserve-3d;will-change:transform;}
+
+/* ══════════════════════════════════════════════════ REDUCED MOTION */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+}
+
 /* ══════════════════════════════════════════════════ RESPONSIVE */
 @media(max-width:860px){
   .bgkpjr-stages{grid-template-columns:1fr;}
@@ -447,6 +583,7 @@ a:hover{text-decoration:underline;}
 </head>
 <body>
 <canvas id="bg"></canvas>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 
 <div class="page">
 
@@ -464,6 +601,7 @@ a:hover{text-decoration:underline;}
       <span class="logo-sub">Hazel Green, AL</span>
     </a>
     <nav class="nav">
+      <a href="#now">Now</a>
       <a href="#aerospace">Aerospace</a>
       <a href="#ai">AI Stack</a>
       <a href="#projects">Projects</a>
@@ -474,33 +612,107 @@ a:hover{text-decoration:underline;}
   </div>
 </header>
 
+<!-- ── LIVE TICKER ── -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker" id="ticker">
+    <span>⬢ <b>44</b> MCP TOOLS ONLINE</span>
+    <span>⬢ <b>18</b> MEGA CREW BOTS · 24/7</span>
+    <span>⬢ <b>28</b> WEAVIATE COLLECTIONS</span>
+    <span class="tk-green">⬢ <b id="tick-sober">—</b> DAYS SOBER</span>
+    <span>⬢ SESSION CONTINUITY <b class="tk-green">PHASE 1 SHIPPED</b></span>
+    <span class="tk-amber">⬢ BOOK II — 17 TRACKS IN PRODUCTION</span>
+    <span class="tk-red">⬢ Q-DAY COUNTDOWN ARMED</span>
+    <span>⬢ BGKPJR TARGET <b>$200/KG</b> TO LUNAR SURFACE</span>
+    <span>⬢ 4-NODE TAILSCALE MESH <b class="tk-green">NOMINAL</b></span>
+    <span>⬢ PI 5 ORCHESTRATOR <b class="tk-green">ONLINE</b></span>
+  </div>
+</div>
+
 <!-- ════════════════════════════════════════ HERO -->
 <section class="hero">
   <div class="hero-pill"><div class="pulse"></div>All systems operational</div>
   <div class="hero-name">SHANE<br/>BRAIN</div>
-  <div class="hero-tagline">AI Infrastructure · Aerospace Engineering · Built in Alabama</div>
+  <div class="hero-tagline" id="tagline">AI Infrastructure · Aerospace Engineering · Built in Alabama</div>
   <p class="hero-bio">
     A concrete dispatch operator in Hazel Green, Alabama building things that aren't supposed to exist out here —
-    <strong>a 4-node AI cluster</strong>, <strong>17 autonomous bots</strong>,
+    <strong>a 4-node AI cluster</strong>, <strong>18 autonomous bots</strong>,
     <strong>patent-filed electromagnetic launch architecture</strong>, and a <strong>published noir book</strong>.
     All on a Raspberry Pi 5. All local. All mine.
   </p>
   <div class="hero-stats">
-    <div class="stat"><div class="stat-n">17</div><div class="stat-l">Autonomous Bots</div></div>
+    <div class="stat"><div class="stat-n">18</div><div class="stat-l">Autonomous Bots</div></div>
     <div class="stat-div"></div>
-    <div class="stat"><div class="stat-n">42</div><div class="stat-l">MCP Tools</div></div>
+    <div class="stat"><div class="stat-n">44</div><div class="stat-l">MCP Tools</div></div>
     <div class="stat-div"></div>
     <div class="stat"><div class="stat-n" id="sober-count">888</div><div class="stat-l">Days Sober</div></div>
     <div class="stat-div"></div>
     <div class="stat"><div class="stat-n">28.7</div><div class="stat-l">km Maglev Rail</div></div>
     <div class="stat-div"></div>
-    <div class="stat"><div class="stat-n">25</div><div class="stat-l">Weaviate Collections</div></div>
+    <div class="stat"><div class="stat-n">28</div><div class="stat-l">Weaviate Collections</div></div>
   </div>
   <div class="hero-btns">
     <a href="#aerospace" class="btn btn-primary">View Launch Architecture</a>
     <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="btn btn-outline">GitHub Profile →</a>
   </div>
 </section>
+
+<!-- ════════════════════════════════════════ NOW — LIVE FEED -->
+<section class="now-section" id="now">
+  <div class="container">
+    <div class="sec-label reveal">00 · NOW — June 2026</div>
+    <h2 class="sec-title reveal">What's Moving Right Now</h2>
+    <p class="sec-desc reveal">Live status straight off the cluster. This isn't a portfolio of finished things — it's a machine that's running while you read this.</p>
+
+    <div class="now-grid">
+      <div class="now-card glow-border reveal">
+        <span class="now-tag nt-live">● Phase 1 Shipped</span>
+        <h3>Session Continuity</h3>
+        <p>Every Claude Code session now boots knowing prior context — sobriety, last 3 sessions, last mood — pulled straight from Weaviate at preflight. Zero cold starts. Phase 2 next: gateway routes so Claude web, desktop, and mobile read/write the same memory.</p>
+      </div>
+      <div class="now-card reveal">
+        <span class="now-tag nt-prod">In Production</span>
+        <h3>Book II — "…This Song Is About You Too"</h3>
+        <p>17 tracks. Locked architecture. The follow-up to the published noir collection — written the same way the first one was: sober, at 4 AM, with a brain farm humming in the next room.</p>
+      </div>
+      <div class="now-card reveal">
+        <span class="now-tag nt-live">● Auto-Publishing</span>
+        <h3>MEGA Crew Comic Pipeline</h3>
+        <p>The 18 bots got their own comic. Gemini writes episodes, Z-Image renders the panels, the pipeline pushes finished pages to GitHub Pages — no human in the loop.</p>
+      </div>
+      <div class="now-card reveal">
+        <span class="now-tag nt-next">Building</span>
+        <h3>HaloFinance</h3>
+        <p>Private family financial dashboard — 31-bill SMS reminder system, local-first, port 9998. The family's money never leaves the house.</p>
+      </div>
+      <div class="now-card reveal">
+        <span class="now-tag nt-next">Mid-Setup</span>
+        <h3>mcp.shanebrain.cloud</h3>
+        <p>Cloudflare tunnel pointing the new shanebrain.cloud domain at the Pi's MCP server. One brain, reachable from any Claude surface, keys stay home.</p>
+      </div>
+      <div class="now-card reveal">
+        <span class="now-tag nt-next">FreeCAD Done</span>
+        <h3>Wrestling Facility</h3>
+        <p>Build project for the Hazel Green youth wrestling program. CAD complete. Because the mission was never just software.</p>
+      </div>
+    </div>
+
+    <!-- Q-DAY COUNTDOWN -->
+    <div class="qday glow-border reveal">
+      <div class="qday-left">
+        <div class="qday-label"><span class="qday-warn"></span>Pulsar Sentinel · T-minus Q-Day (est. 2030)</div>
+        <div class="qday-digits" id="qday-digits">----d 00:00:00.000</div>
+        <div class="qday-planck" id="qday-planck">≈ <b>—</b> Planck times remaining</div>
+      </div>
+      <div class="qday-right">
+        <strong>Q-Day:</strong> the estimated moment a quantum computer breaks today's encryption.
+        Pulsar Sentinel already runs post-quantum crypto on every node in this house —
+        <strong>Kyber-1024 + Dilithium3</strong> — counting down so nobody here gets caught flat.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
 
 <!-- ════════════════════════════════════════ BGKPJR AEROSPACE -->
 <section class="bgkpjr-section" id="aerospace">
@@ -645,29 +857,29 @@ a:hover{text-decoration:underline;}
     <!-- Key numbers -->
     <div class="mcp-grid reveal" style="margin-bottom:44px;">
       <div class="mcp-card">
-        <div class="mcp-num">42</div>
+        <div class="mcp-num">44</div>
         <div class="mcp-label">MCP Tools</div>
-        <div class="mcp-desc">29 in server.py + 13 via Claude.ai integrations (Gmail, Calendar, Drive, HuggingFace, Cloudflare, Stripe)</div>
+        <div class="mcp-desc">29 native across 13 groups in server.py + 15 via Claude.ai connectors (Gmail, Calendar, Drive, HuggingFace, LunarCrush, Cloudflare, Stripe, Figma)</div>
       </div>
       <div class="mcp-card">
-        <div class="mcp-num">25</div>
+        <div class="mcp-num">28</div>
         <div class="mcp-label">Weaviate Collections</div>
-        <div class="mcp-desc">3,200+ objects. Voice dumps, book chapters, conversations, daily notes, bot memories — all vectorized and searchable</div>
+        <div class="mcp-desc">3,200+ objects. Voice dumps, book chapters, conversations, session context, daily notes, bot memories — all vectorized and searchable</div>
       </div>
       <div class="mcp-card">
-        <div class="mcp-num">17</div>
+        <div class="mcp-num">18</div>
         <div class="mcp-label">MEGA Crew Bots</div>
-        <div class="mcp-desc">17 Docker containers, 24/7. Self-modifying architecture — bots propose code changes, Arc reviews, Weld deploys</div>
+        <div class="mcp-desc">18 Docker containers, 24/7. Self-modifying architecture — bots propose code changes, Arc reviews, Weld deploys</div>
       </div>
       <div class="mcp-card">
         <div class="mcp-num">4</div>
-        <div class="mcp-label">Inference Nodes</div>
-        <div class="mcp-desc">Pi 5 + Pulsar00100 + Bullfrog-R2D2 + Jaxton, routed via Ollama Cluster Proxy on port 11435</div>
+        <div class="mcp-label">Mesh Nodes</div>
+        <div class="mcp-desc">shanebrain (Pi 5) · neworleans · gulfshores · bullfrog (TrueNAS) — Tailscale-bound, zero raw IPs exposed anywhere</div>
       </div>
     </div>
 
     <!-- MEGA Crew bots -->
-    <div class="sec-label reveal" style="margin-bottom:14px;">MEGA Crew — 17 Autonomous Docker Containers</div>
+    <div class="sec-label reveal" style="margin-bottom:14px;">MEGA Crew — 18 Autonomous Docker Containers</div>
     <div class="crew-grid reveal">
       <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Sparky</div><div class="crew-bot-zone">Brain · Judge / reasoning core</div></div>
       <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Volt</div><div class="crew-bot-zone">Brain · Persona drift detector</div></div>
@@ -680,6 +892,7 @@ a:hover{text-decoration:underline;}
       <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Arc</div><div class="crew-bot-zone">Right Hand · Gatekeeper — all writes</div></div>
       <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Flux</div><div class="crew-bot-zone">Right Hand · Health monitor</div></div>
       <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Gemini</div><div class="crew-bot-zone">Right Hand · Growth coach (4x/day)</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Nukkels</div><div class="crew-bot-zone">Chest · The power grid</div></div>
       <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Bolt</div><div class="crew-bot-zone">Left Foot · Pattern miner</div></div>
       <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Stomp</div><div class="crew-bot-zone">Left Foot · Conflict resolver</div></div>
       <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Grind</div><div class="crew-bot-zone">Left Foot · Re-embedder</div></div>
@@ -719,8 +932,8 @@ a:hover{text-decoration:underline;}
           <div class="proj-name"><a href="https://thebardchat.github.io/AI-Trainer-MAX/" target="_blank">AI-Trainer-MAX</a></div>
           <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">5-phase local AI training curriculum — 36 modules, zero cloud. From "first local LLM" to owning your own AI brain. Built for the 800M people losing Windows 10 support in 2025.</p>
-        <div class="proj-tech">Windows .bat · Ollama · Weaviate · MCP · 36 modules</div>
+        <p class="proj-desc">5-phase local AI training curriculum — 36 modules, zero cloud. From "first local LLM" to owning your own AI brain. Built for the 800M people left behind when Windows 10 support ended.</p>
+        <div class="proj-tech">Windows .bat · Local LLMs · Weaviate · MCP · 36 modules</div>
         <div class="proj-footer">
           <a href="https://thebardchat.github.io/AI-Trainer-MAX/" target="_blank" class="hl">Live →</a>
           <a href="https://github.com/thebardchat/AI-Trainer-MAX" target="_blank">Repo</a>
@@ -732,8 +945,8 @@ a:hover{text-decoration:underline;}
           <div class="proj-name"><a href="https://thebardchat.github.io/thought-tree/" target="_blank">thought-tree</a></div>
           <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">React + Python visual thought browser. Node-based mind mapping on a dark full-screen canvas. Semantic search through Weaviate knowledge collections with live Ollama inference.</p>
-        <div class="proj-tech">React · Canvas API · Weaviate · Ollama</div>
+        <p class="proj-desc">React + Python visual thought browser. Node-based mind mapping on a dark full-screen canvas. Live semantic search through Weaviate knowledge collections.</p>
+        <div class="proj-tech">React · Canvas API · Weaviate · Port 4500</div>
         <div class="proj-footer">
           <a href="https://thebardchat.github.io/thought-tree/" target="_blank" class="hl">Live →</a>
           <a href="https://github.com/thebardchat/thought-tree" target="_blank">Repo</a>
@@ -743,7 +956,7 @@ a:hover{text-decoration:underline;}
       <div class="proj-card reveal">
         <div class="proj-header">
           <div class="proj-name"><a href="https://github.com/thebardchat/shanebrain_mcp" target="_blank">ShaneBrain MCP</a></div>
-          <span class="pbadge pb-daily">42 Tools</span>
+          <span class="pbadge pb-daily">44 Tools</span>
         </div>
         <p class="proj-desc">FastMCP server running 29 native tools — knowledge search, calendar, vault, drafts, social, security logs, system health, Weaviate RAG, email, reminders. The nervous system of ShaneBrain.</p>
         <div class="proj-tech">Python · FastMCP · Weaviate · Docker · port 8100</div>
@@ -769,8 +982,8 @@ a:hover{text-decoration:underline;}
           <div class="proj-name"><a href="https://thebardchat.github.io/mini-shanebrain/" target="_blank">mini-shanebrain</a></div>
           <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">Multi-platform social bot: posts to X, Facebook, LinkedIn, Instagram, Bluesky, and Threads from a unified Weaviate + Ollama backend on a cron schedule. AI-disclosure required.</p>
-        <div class="proj-tech">Node.js · Ollama · Weaviate · 6 Platforms · Cron</div>
+        <p class="proj-desc">Multi-platform social bot: posts to X, Facebook, LinkedIn, Instagram, Bluesky, and Threads from a unified Weaviate backend on a cron schedule. AI-disclosure required.</p>
+        <div class="proj-tech">Node.js · Weaviate · 6 Platforms · Cron</div>
         <div class="proj-footer">
           <a href="https://thebardchat.github.io/mini-shanebrain/" target="_blank" class="hl">Live →</a>
           <a href="https://github.com/thebardchat/mini-shanebrain" target="_blank">Repo</a>
@@ -837,21 +1050,37 @@ a:hover{text-decoration:underline;}
 <section class="section" id="book">
   <div class="container">
     <div class="sec-label reveal">04 · Published Work</div>
-    <h2 class="sec-title reveal">The Book</h2>
-    <div class="book-card reveal">
-      <div class="book-cover">YOU<br/>PROBABLY<br/>THINK<br/>THIS<br/>BOOK IS<br/>ABOUT<br/>YOU</div>
-      <div class="book-content">
-        <div class="book-sub">Noir Vignettes · Published 2025</div>
-        <div class="book-title">You Probably Think This Book Is About You</div>
-        <p class="book-desc">
-          Fifty-five noir vignettes set in the American South. Each one a portrait — a dispatcher at 4 AM,
-          a man who can't leave a town that never held him, a woman deciding what to do with what's left.
-          The kind of stories that feel like they happened to someone you know.
-          Written by a concrete dispatch operator in Alabama who built an AI ecosystem to help him write them.
-        </p>
-        <div class="book-links">
-          <a href="https://www.amazon.com/Probably-Think-This-Book-About/dp/B0GT25R5FD" target="_blank" rel="noopener" class="btn btn-amber">Buy on Amazon →</a>
-          <a href="https://github.com/thebardchat/you-probably-think-this-book-is-about-you" target="_blank" rel="noopener" class="btn btn-outline">Repo →</a>
+    <h2 class="sec-title reveal">The Books</h2>
+    <div class="book-grid">
+      <div class="book-card reveal">
+        <img class="book-cover-img" src="book/cover-ebook.png" alt="You Probably Think This Book Is About You — cover" loading="lazy"/>
+        <div class="book-content">
+          <div class="book-sub">Book I · Noir Vignettes · Published 2025</div>
+          <div class="book-title">You Probably Think This Book Is About You</div>
+          <p class="book-desc">
+            Fifty-five noir vignettes set in the American South. Each one a portrait — a dispatcher at 4 AM,
+            a man who can't leave a town that never held him, a woman deciding what to do with what's left.
+            Paperback, ebook, and audiobook.
+          </p>
+          <div class="book-links">
+            <a href="https://www.amazon.com/Probably-Think-This-Book-About/dp/B0GT25R5FD" target="_blank" rel="noopener" class="btn btn-amber">Buy on Amazon →</a>
+            <a href="https://github.com/thebardchat/you-probably-think-this-book-is-about-you" target="_blank" rel="noopener" class="btn btn-outline">Repo →</a>
+          </div>
+        </div>
+      </div>
+      <div class="book-card glow-border reveal">
+        <div class="book-cover song">YOU<br/>PROBABLY<br/>THINK<br/>THIS<br/>SONG IS<br/>ABOUT<br/>YOU TOO</div>
+        <div class="book-content">
+          <div class="book-sub">Book II · 17 Tracks · In Production</div>
+          <div class="book-title">You Probably Think This Song Is About You Too</div>
+          <p class="book-desc">
+            The follow-up. Seventeen tracks, locked architecture, built song by song the same way the
+            first book was built story by story. Currently in demo status — being written right now,
+            sessions logged to the same brain that remembers everything else.
+          </p>
+          <div class="book-links">
+            <span class="pbadge pb-new" style="align-self:center;">Coming Soon</span>
+          </div>
         </div>
       </div>
     </div>
@@ -903,7 +1132,7 @@ a:hover{text-decoration:underline;}
       <div class="infra-card reveal">
         <div class="infra-title">// Data Node — neworleans</div>
         <ul class="infra-list">
-          <li><strong>Weaviate 1.36.2</strong> — 25 collections, port 8080</li>
+          <li><strong>Weaviate 1.36.2</strong> — 28 collections, port 8080</li>
           <li><strong>text2vec-transformers</strong> — MiniLM-L6-v2, 384-dim</li>
           <li><strong>N8N</strong> — automation workflows, port 5678</li>
           <li><strong>Postgres + Redis</strong> — N8N backing store</li>
@@ -913,21 +1142,22 @@ a:hover{text-decoration:underline;}
       <div class="infra-card reveal">
         <div class="infra-title">// Services on Pi</div>
         <ul class="infra-list">
-          <li><strong>MCP Server v2.3</strong> — 42 tools, port 8100, Docker</li>
+          <li><strong>MCP Server</strong> — 44 tools, port 8100, Docker</li>
           <li><strong>Mega Dashboard</strong> — 24 panels, port 8300</li>
           <li><strong>Angel Cloud Gateway</strong> — FastAPI, port 4200</li>
-          <li><strong>MEGA Crew</strong> — 17 bot containers, docker-compose</li>
-          <li><strong>ShaneBrain Alerter</strong> — 5 AM briefing, Discord DM</li>
-          <li><strong>Open WebUI</strong> — port 3000 · Portainer — port 9000</li>
+          <li><strong>MEGA Crew</strong> — 18 bot containers, docker-compose</li>
+          <li><strong>ShaneBrain Agents</strong> — 7 specialists, port 8400</li>
+          <li><strong>Pulsar Sentinel PQC</strong> — port 8250 · Voice Dump — 8200</li>
+          <li><strong>Portainer</strong> — port 9000 · InfluxDB — 8086</li>
         </ul>
       </div>
       <div class="infra-card reveal">
-        <div class="infra-title">// Cluster Nodes</div>
+        <div class="infra-title">// Mesh Nodes</div>
         <ul class="infra-list">
-          <li><strong>Pulsar00100</strong> — Priority 1, fastest inference</li>
-          <li><strong>Bullfrog-R2D2</strong> — Priority 2 overflow</li>
-          <li><strong>Jaxton Laptop</strong> — Priority 3, Ollama only</li>
-          <li><strong>gulfshores</strong> — Surface 1, dev/build node, Node.js v24</li>
+          <li><strong>gulfshores</strong> — Surface Pro, Linux Mint, primary dev box</li>
+          <li><strong>bullfrog</strong> — TrueNAS Scale, 8TB ZFS pool "tank"</li>
+          <li><strong>pulsar00100</strong> — Windows cockpit / jump box</li>
+          <li><strong>iPhone 13</strong> — Taildrop file drops, on-mesh</li>
           <li><strong>Tailscale mesh</strong> — all nodes, no raw IPs anywhere</li>
         </ul>
         <div class="infra-note">Pulsar Sentinel (PQC) runs on every node — Kyber-1024 + Dilithium3 binding security layer</div>
@@ -1043,6 +1273,25 @@ a:hover{text-decoration:underline;}
     hue: Math.random() > .5 ? 195 : 45,
   }));
 
+  // Shooting stars
+  const shoots = [];
+  function spawnShoot(){
+    shoots.push({x:Math.random()*W, y:Math.random()*H*0.45, vx:-(6+Math.random()*8), vy:3+Math.random()*3, life:1});
+    setTimeout(spawnShoot, 2200+Math.random()*5000);
+  }
+  setTimeout(spawnShoot, 1500);
+
+  // Mouse sparks
+  const sparks = [];
+  window.addEventListener('mousemove', e=>{
+    for(let i=0;i<2;i++) sparks.push({
+      x:e.clientX, y:e.clientY,
+      vx:(Math.random()-.5)*1.8, vy:(Math.random()-.5)*1.8-.4,
+      life:1, hue:Math.random()>.5?195:45,
+    });
+    if(sparks.length>140) sparks.splice(0,sparks.length-140);
+  },{passive:true});
+
   function drawFrame(ts){
     const t = ts * 0.001;
     ctx.fillStyle='rgba(3,8,16,.18)';
@@ -1073,6 +1322,29 @@ a:hover{text-decoration:underline;}
       ctx.fillStyle=`hsl(${p.hue},100%,65%)`;ctx.fill();
       ctx.globalAlpha=1;
     });
+
+    // shooting stars
+    for(let i=shoots.length-1;i>=0;i--){
+      const s=shoots[i];
+      s.x+=s.vx; s.y+=s.vy; s.life-=0.012;
+      if(s.life<=0||s.x<-120||s.y>H+120){shoots.splice(i,1);continue;}
+      const g=ctx.createLinearGradient(s.x,s.y,s.x-s.vx*10,s.y-s.vy*10);
+      g.addColorStop(0,`rgba(200,240,255,${s.life})`);
+      g.addColorStop(1,'rgba(200,240,255,0)');
+      ctx.strokeStyle=g;ctx.lineWidth=1.6;
+      ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*10,s.y-s.vy*10);ctx.stroke();
+    }
+
+    // mouse sparks
+    for(let i=sparks.length-1;i>=0;i--){
+      const p=sparks[i];
+      p.x+=p.vx; p.y+=p.vy; p.life-=0.03;
+      if(p.life<=0){sparks.splice(i,1);continue;}
+      ctx.globalAlpha=p.life*.7;
+      ctx.beginPath();ctx.arc(p.x,p.y,1.4,0,Math.PI*2);
+      ctx.fillStyle=`hsl(${p.hue},100%,70%)`;ctx.fill();
+      ctx.globalAlpha=1;
+    }
 
     requestAnimationFrame(drawFrame);
   }
@@ -1111,6 +1383,82 @@ a:hover{text-decoration:underline;}
     });
   }, {threshold: 0.5});
   counters.forEach(c => obs.observe(c));
+})();
+
+// ── TICKER (seamless loop + live sober count) ──
+(function(){
+  const t = document.getElementById('ticker');
+  if(!t) return;
+  const days = Math.floor((Date.now() - new Date('2023-11-27').getTime()) / 86400000);
+  const el = document.getElementById('tick-sober');
+  if(el) el.textContent = days;
+  t.innerHTML += t.innerHTML; // duplicate for -50% loop
+})();
+
+// ── HERO TYPEWRITER ROTATION ──
+(function(){
+  const el = document.getElementById('tagline');
+  if(!el) return;
+  const lines = [
+    'AI Infrastructure · Aerospace Engineering · Built in Alabama',
+    'Claude + Weaviate + MCP = ShaneBrain',
+    '18 Bots · 44 Tools · 28 Collections · One Pi',
+    'Faith · Family · Sobriety · Local AI',
+    'Noir Fiction · 55 Vignettes · Book II Loading…',
+  ];
+  let li = 0;
+  function type(str, i, cb){
+    el.textContent = str.slice(0, i);
+    if(i < str.length) setTimeout(()=>type(str, i+1, cb), 26);
+    else setTimeout(cb, 3600);
+  }
+  function erase(cb){
+    const s = el.textContent;
+    if(s.length){ el.textContent = s.slice(0,-1); setTimeout(()=>erase(cb), 11); }
+    else cb();
+  }
+  function loop(){
+    erase(()=>{ li = (li+1) % lines.length; type(lines[li], 0, loop); });
+  }
+  setTimeout(loop, 4200);
+})();
+
+// ── Q-DAY COUNTDOWN (Planck resolution) ──
+(function(){
+  const d = document.getElementById('qday-digits');
+  const p = document.getElementById('qday-planck');
+  if(!d) return;
+  const target = Date.UTC(2030, 0, 1);     // est. Q-Day horizon
+  const PLANCK = 5.391247e-44;             // seconds
+  function tick(){
+    let ms = target - Date.now(); if(ms < 0) ms = 0;
+    const days = Math.floor(ms/86400000);
+    const h = String(Math.floor(ms/3600000)%24).padStart(2,'0');
+    const m = String(Math.floor(ms/60000)%60).padStart(2,'0');
+    const s = String(Math.floor(ms/1000)%60).padStart(2,'0');
+    const mm = String(ms%1000).padStart(3,'0');
+    d.textContent = `${days}d ${h}:${m}:${s}.${mm}`;
+    const e = ((ms/1000)/PLANCK).toExponential(3).split('e+');
+    p.innerHTML = `≈ <b>${e[0]} × 10<sup>${e[1]}</sup></b> Planck times remaining`;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+// ── 3D CARD TILT ──
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(matchMedia('(hover: none)').matches) return;
+  document.querySelectorAll('.proj-card,.repo-card,.now-card,.mcp-card').forEach(card=>{
+    card.classList.add('tilt');
+    card.addEventListener('mousemove', e=>{
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left)/r.width - .5;
+      const y = (e.clientY - r.top)/r.height - .5;
+      card.style.transform = `perspective(700px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateY(-2px)`;
+    });
+    card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
+  });
 })();
 
 // ── SCROLL REVEAL ──
