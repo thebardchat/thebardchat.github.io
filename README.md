@@ -35,9 +35,10 @@ The GitHub Pages site at [thebardchat.github.io](https://thebardchat.github.io) 
 |---------|------|--------|
 | **you-probably-think-this-book-is-about-you** | [thebardchat.github.io/book](https://thebardchat.github.io/book) | Published |
 | **shanebrain-core** | [github.com/thebardchat](https://github.com/thebardchat) | Active |
-| **angel-cloud** | [thebardchat/angel-cloud](https://github.com/thebardchat/angel-cloud) | Active |
+| **angel-cloud** | [thebardchat/angel-cloud](https://github.com/thebardchat/angel-cloud) | Paused |
 | **shanebrain-mcp** | [thebardchat/shanebrain_mcp](https://github.com/thebardchat/shanebrain_mcp) | Active |
 | **pulsar-sentinel** | [thebardchat/pulsar_sentinel](https://github.com/thebardchat/pulsar_sentinel) | Active |
+| **read-books** | [thebardchat.github.io/read-books](https://thebardchat.github.io/read-books/) | Live reading desk |
 | **mega-crew-stories** | [thebardchat.github.io/mega-crew-stories](https://thebardchat.github.io/mega-crew-stories/) | Live |
 | **thebardchat Twitch** | [twitch.tv/thebardchat](https://twitch.tv/thebardchat) | Live |
 | **BGKPJR-Core-Simulations** | [thebardchat/BGKPJR-Core-Simulations](https://github.com/thebardchat/BGKPJR-Core-Simulations) | Active |
