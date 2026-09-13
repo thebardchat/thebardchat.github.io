@@ -659,7 +659,7 @@ body::after{
 <!-- ════════════════════════════════════════ NOW — LIVE FEED -->
 <section class="now-section" id="now">
   <div class="container">
-    <div class="sec-label reveal">00 · NOW — June 2026</div>
+    <div class="sec-label reveal">00 · NOW — September 2026</div>
     <h2 class="sec-title reveal">What's Moving Right Now</h2>
     <p class="sec-desc reveal">Live status straight off the cluster. This isn't a portfolio of finished things — it's a machine that's running while you read this.</p>
 
@@ -672,13 +672,20 @@ body::after{
       <div class="now-card reveal">
         <span class="now-tag nt-prod">In Production</span>
         <h3>Book II — "…This Song Is About You Too"</h3>
-        <p>17 tracks. Locked architecture. The follow-up to the published noir collection — written the same way the first one was: sober, at 4 AM, with a brain farm humming in the next room.</p>
+        <p>Out now. Noir song cycle — nine perspectives, one second over and over. <a href="https://a.co/d/0fZzwiAd" target="_blank" rel="noopener">Amazon</a> · <a href="https://thebardchat.github.io/you-probably-think-this-song-is-about-you-too/" target="_blank" rel="noopener">read the site</a>. Volume Three (DARK SEVEN) live on Pages.</p>
       </div>
       <div class="now-card reveal">
         <span class="now-tag nt-live">● Auto-Publishing</span>
         <h3>MEGA Crew Comic Pipeline</h3>
-        <p>The 18 bots got their own comic. Gemini writes episodes, Z-Image renders the panels, the pipeline pushes finished pages to GitHub Pages — no human in the loop.</p>
+        <p>The bots write, illustrate, and narrate — chronicles keep shipping. Jump the live doors: <a href="https://github.com/thebardchat/mega-crew-stories" target="_blank" rel="noopener">mega-crew-stories</a> · <a href="https://discord.gg/BTZZrG4MtV" target="_blank" rel="noopener">Discord</a>.</p>
       </div>
+
+      <div class="now-card reveal">
+        <div class="now-tag">Live Promo</div>
+        <h3>Reading Desk + Chronicles</h3>
+        <p>One shelf for every door: <a href="https://thebardchat.github.io/read-books/" target="_blank" rel="noopener">read-books</a> · MEGA chronicles <a href="https://github.com/thebardchat/mega-crew-stories" target="_blank" rel="noopener">repo</a> · <a href="https://discord.gg/BTZZrG4MtV" target="_blank" rel="noopener">MEGA Discord</a> · <a href="https://github.com/thebardchat/mega-crew-stories/discussions/3" target="_blank" rel="noopener">Welcome #3</a>.</p>
+      </div>
+
       <div class="now-card reveal">
         <span class="now-tag nt-next">Building</span>
         <h3>HaloFinance</h3>
@@ -686,8 +693,8 @@ body::after{
       </div>
       <div class="now-card reveal">
         <span class="now-tag nt-next">Mid-Setup</span>
-        <h3>mcp.shanebrain.cloud</h3>
-        <p>Cloudflare tunnel pointing the new shanebrain.cloud domain at the Pi's MCP server. One brain, reachable from any Claude surface, keys stay home.</p>
+        <h3>ShaneBrain MCP</h3>
+        <p>42-tool local MCP on the Pi — Tailscale/localhost only. Keys stay home. Public docs scrubbed of mesh IPs. <a href="https://github.com/thebardchat/shanebrain_mcp" target="_blank" rel="noopener">Repo</a>.</p>
       </div>
       <div class="now-card reveal">
         <span class="now-tag nt-next">FreeCAD Done</span>
@@ -879,27 +886,42 @@ body::after{
     </div>
 
     <!-- MEGA Crew bots -->
-    <div class="sec-label reveal" style="margin-bottom:14px;">MEGA Crew — 18 Autonomous Docker Containers</div>
+
+    <div class="sec-label reveal" style="margin-bottom:14px;">MEGA Crew — Autonomous Pi 5 bots (live roster)</div>
     <div class="crew-grid reveal">
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Sparky</div><div class="crew-bot-zone">Brain · Judge / reasoning core</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Volt</div><div class="crew-bot-zone">Brain · Persona drift detector</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Neon</div><div class="crew-bot-zone">Brain · Embedding specialist</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Glitch</div><div class="crew-bot-zone">Brain · Adversarial tester</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Rivet</div><div class="crew-bot-zone">Left Hand · Deduplication</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Torch</div><div class="crew-bot-zone">Left Hand · Persona editor</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Weld</div><div class="crew-bot-zone">Left Hand · Code applier + deployer</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Blaze</div><div class="crew-bot-zone">Right Hand · Context injector</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Arc</div><div class="crew-bot-zone">Right Hand · Gatekeeper — all writes</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Flux</div><div class="crew-bot-zone">Right Hand · Health monitor</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Gemini</div><div class="crew-bot-zone">Right Hand · Growth coach (4x/day)</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Nukkels</div><div class="crew-bot-zone">Chest · The power grid</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Bolt</div><div class="crew-bot-zone">Left Foot · Pattern miner</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Stomp</div><div class="crew-bot-zone">Left Foot · Conflict resolver</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Grind</div><div class="crew-bot-zone">Left Foot · Re-embedder</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Crank</div><div class="crew-bot-zone">Right Foot · Scheduler</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Spike</div><div class="crew-bot-zone">Right Foot · IQ benchmark</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">Forge</div><div class="crew-bot-zone">Right Foot · Tool drafter</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">ARC</div><div class="crew-bot-zone">Gatekeeper</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">WELD</div><div class="crew-bot-zone">Executor</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">SPARKY</div><div class="crew-bot-zone">Training Judge</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">BOT 17 / GEMINI</div><div class="crew-bot-zone">Oracle · Strategist</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">GLITCH</div><div class="crew-bot-zone">Anomaly</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">NEON</div><div class="crew-bot-zone">Scribe</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">BLAZE</div><div class="crew-bot-zone">Context</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">VOLT</div><div class="crew-bot-zone">Drift Detector</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">BOLT</div><div class="crew-bot-zone">Uptime</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">RIVET</div><div class="crew-bot-zone">Crew Support</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">TORCH</div><div class="crew-bot-zone">Heat Source</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">STOMP</div><div class="crew-bot-zone">Ground Crew</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">GRIND</div><div class="crew-bot-zone">Tireless</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">CRANK</div><div class="crew-bot-zone">Scheduler</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">SPIKE</div><div class="crew-bot-zone">Benchmarker</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">FORGE</div><div class="crew-bot-zone">Builder</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">FLUX</div><div class="crew-bot-zone">Heartbeat</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">NUKKELS</div><div class="crew-bot-zone">Power Grid</div></div>
     </div>
+
+    <div class="sec-label reveal" style="margin:36px 0 14px;">Command deck — assistants in this shop</div>
+    <div class="crew-grid reveal">
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">GitHub Guru</div><div class="crew-bot-zone">Org · Pages · READMEs</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">HAWKER</div><div class="crew-bot-zone">Book promo · free channels</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">CHRONICLE</div><div class="crew-bot-zone">MEGA Crew Saga</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">SEVEN</div><div class="crew-bot-zone">DARK SEVEN / Vol3</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">STEWARD</div><div class="crew-bot-zone">Email · inbox</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">BIG SCREEN</div><div class="crew-bot-zone">Fountain screenplays</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">MOVIE MAKER</div><div class="crew-bot-zone">Clips · short movies</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">AUDACITY QUEEN</div><div class="crew-bot-zone">Studio · USB mixer</div></div>
+      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">CERTIFICATE GETTER</div><div class="crew-bot-zone">Free credentials</div></div>
+    </div>
+
   </div>
 </section>
 
@@ -912,18 +934,33 @@ body::after{
     <h2 class="sec-title reveal">Built & Deployed</h2>
     <p class="sec-desc reveal">Every project built in production. Most used daily. All open source.</p>
 
+    
     <div class="proj-grid">
 
       <div class="proj-card daily reveal">
         <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/srm-dispatch/" target="_blank">srm-dispatch</a></div>
-          <span class="pbadge pb-daily">Daily Use</span>
+          <div class="proj-name"><a href="https://thebardchat.github.io/read-books/" target="_blank">read-books</a></div>
+          <span class="pbadge pb-daily">Live Promo</span>
         </div>
-        <p class="proj-desc">SRM Concrete PWA dispatch tool for 18 drivers. Real crew config, Bridgeport rotation, one-tap copy-to-text. No backend. No database. No login. Used every single morning.</p>
-        <div class="proj-tech">React 18 · Vite 5 · Static PWA · No Backend</div>
+        <p class="proj-desc">Noir reading desk — Volume One on Amazon, the song cycle, DARK SEVEN, and MEGA chronicles in one charcoal+cyan shelf.</p>
+        <div class="proj-tech">GitHub Pages · Orbitron · Space Grotesk</div>
         <div class="proj-footer">
-          <a href="https://thebardchat.github.io/srm-dispatch/" target="_blank" class="hl">Live App →</a>
-          <a href="https://github.com/thebardchat/srm-dispatch" target="_blank">Repo</a>
+          <a href="https://thebardchat.github.io/read-books/" target="_blank" class="hl">Live →</a>
+          <a href="https://github.com/thebardchat/read-books" target="_blank">Repo</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://github.com/thebardchat/mega-crew-stories" target="_blank">mega-crew-stories</a></div>
+          <span class="pbadge pb-live">Live</span>
+        </div>
+        <p class="proj-desc">Autonomous AI noir audiobook chronicles — bots write and ship episodes. Discord + Discussions welcome thread for new crew.</p>
+        <div class="proj-tech">Pi 5 · Weaviate · GitHub Pages · Discord</div>
+        <div class="proj-footer">
+          <a href="https://github.com/thebardchat/mega-crew-stories" target="_blank" class="hl">Repo →</a>
+          <a href="https://discord.gg/BTZZrG4MtV" target="_blank">MEGA Discord</a>
+          <a href="https://thebardchat.github.io/mega-crew-stories/cards.html" target="_blank">Cards</a>
         </div>
       </div>
 
@@ -932,7 +969,7 @@ body::after{
           <div class="proj-name"><a href="https://thebardchat.github.io/AI-Trainer-MAX/" target="_blank">AI-Trainer-MAX</a></div>
           <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">5-phase local AI training curriculum — 36 modules, zero cloud. From "first local LLM" to owning your own AI brain. Built for the 800M people left behind when Windows 10 support ended.</p>
+        <p class="proj-desc">5-phase local AI training curriculum — 36 modules, zero cloud. Built for the 800M people left behind when Windows 10 support ended.</p>
         <div class="proj-tech">Windows .bat · Local LLMs · Weaviate · MCP · 36 modules</div>
         <div class="proj-footer">
           <a href="https://thebardchat.github.io/AI-Trainer-MAX/" target="_blank" class="hl">Live →</a>
@@ -942,24 +979,11 @@ body::after{
 
       <div class="proj-card reveal">
         <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/thought-tree/" target="_blank">thought-tree</a></div>
-          <span class="pbadge pb-live">Live</span>
-        </div>
-        <p class="proj-desc">React + Python visual thought browser. Node-based mind mapping on a dark full-screen canvas. Live semantic search through Weaviate knowledge collections.</p>
-        <div class="proj-tech">React · Canvas API · Weaviate · Port 4500</div>
-        <div class="proj-footer">
-          <a href="https://thebardchat.github.io/thought-tree/" target="_blank" class="hl">Live →</a>
-          <a href="https://github.com/thebardchat/thought-tree" target="_blank">Repo</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
           <div class="proj-name"><a href="https://github.com/thebardchat/shanebrain_mcp" target="_blank">ShaneBrain MCP</a></div>
-          <span class="pbadge pb-daily">44 Tools</span>
+          <span class="pbadge pb-daily">Local Only</span>
         </div>
-        <p class="proj-desc">FastMCP server running 29 native tools — knowledge search, calendar, vault, drafts, social, security logs, system health, Weaviate RAG, email, reminders. The nervous system of ShaneBrain.</p>
-        <div class="proj-tech">Python · FastMCP · Weaviate · Docker · port 8100</div>
+        <p class="proj-desc">FastMCP nervous system for ShaneBrain — knowledge, vault, social, security, RAG. Runs on the Pi. Not a public internet endpoint.</p>
+        <div class="proj-tech">Python · FastMCP · Weaviate · Docker · Tailscale</div>
         <div class="proj-footer">
           <a href="https://github.com/thebardchat/shanebrain_mcp" target="_blank" class="hl">Repo →</a>
         </div>
@@ -967,80 +991,55 @@ body::after{
 
       <div class="proj-card reveal">
         <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/angel-cloud" target="_blank">Angel Cloud</a></div>
+          <div class="proj-name"><a href="https://github.com/thebardchat/pulsar_sentinel" target="_blank">pulsar_sentinel</a></div>
           <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">Wellness platform + Messenger storyteller. FastAPI gateway with Tailscale Funnel, SQLite sessions, Weaviate RAG, SecurityLog pipeline, Facebook Messenger bot with OPTOUT/ANON/FORGET commands.</p>
-        <div class="proj-tech">FastAPI · Tailscale · Weaviate · Messenger API</div>
+        <p class="proj-desc">Post-quantum crypto on the home mesh — Kyber + Dilithium, audit trails, cyberpunk UI. Built for Q-Day, not for show.</p>
+        <div class="proj-tech">ML-KEM · Dilithium · Pi 5 · Blockchain audit</div>
         <div class="proj-footer">
-          <a href="https://github.com/thebardchat/angel-cloud" target="_blank" class="hl">Repo →</a>
+          <a href="https://github.com/thebardchat/pulsar_sentinel" target="_blank" class="hl">Repo →</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/mini-shanebrain/" target="_blank">mini-shanebrain</a></div>
+          <div class="proj-name"><a href="https://github.com/thebardchat/constitution" target="_blank">constitution</a></div>
+          <span class="pbadge pb-core">Covenant</span>
+        </div>
+        <p class="proj-desc">Governing covenant of the ShaneBrain ecosystem — nine pillars, engineering ethics, community rules. Faith. Family. Local AI.</p>
+        <div class="proj-tech">Markdown · Discussions · Open covenant</div>
+        <div class="proj-footer">
+          <a href="https://github.com/thebardchat/constitution" target="_blank" class="hl">Repo →</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-name"><a href="https://github.com/thebardchat/mega-crew" target="_blank">mega-crew</a></div>
           <span class="pbadge pb-live">Live</span>
         </div>
-        <p class="proj-desc">Multi-platform social bot: posts to X, Facebook, LinkedIn, Instagram, Bluesky, and Threads from a unified Weaviate backend on a cron schedule. AI-disclosure required.</p>
-        <div class="proj-tech">Node.js · Weaviate · 6 Platforms · Cron</div>
+        <p class="proj-desc">Named AI bots on a Pi 5 — personality, domain, Weaviate memory. The crew behind the chronicles.</p>
+        <div class="proj-tech">Docker · Weaviate · Claude · Pi 5</div>
         <div class="proj-footer">
-          <a href="https://thebardchat.github.io/mini-shanebrain/" target="_blank" class="hl">Live →</a>
-          <a href="https://github.com/thebardchat/mini-shanebrain" target="_blank">Repo</a>
+          <a href="https://github.com/thebardchat/mega-crew" target="_blank" class="hl">Repo →</a>
+          <a href="https://thebardchat.github.io/mega-crew/" target="_blank">Crew page</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/SB-Management-OS" target="_blank">SB-Management-OS</a></div>
-          <span class="pbadge pb-live">Live</span>
+          <div class="proj-name"><a href="https://github.com/thebardchat/retro-cha" target="_blank">retro-cha</a></div>
+          <span class="pbadge pb-new">Glow-up</span>
         </div>
-        <p class="proj-desc">SRM Concrete Standard Operating Procedures — full dispatch, crew management, and safety protocol documentation. Built for real field conditions in North Alabama construction.</p>
-        <div class="proj-tech">Markdown · GitHub Pages · Field Operations</div>
+        <p class="proj-desc">1998 dial-up chat vibes on Cloudflare Workers + Durable Objects — thebardchat main chat rooms.</p>
+        <div class="proj-tech">Workers · Durable Objects · Vanilla JS</div>
         <div class="proj-footer">
-          <a href="https://github.com/thebardchat/SB-Management-OS" target="_blank" class="hl">Repo →</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/Greenfield" target="_blank">Claim Cruncher</a></div>
-          <span class="pbadge pb-new">In Dev</span>
-        </div>
-        <p class="proj-desc">Medical billing intake platform for Gavin. Python/FastAPI backend, structured claim ingestion, automated coding assistance. Replacing a manual process that costs thousands of hours.</p>
-        <div class="proj-tech">Python · FastAPI · SQLite · Medical Billing</div>
-        <div class="proj-footer">
-          <a href="https://github.com/thebardchat/Greenfield" target="_blank" class="hl">Repo →</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/angelcloud-actual/" target="_blank">angelcloud-actual</a></div>
-          <span class="pbadge pb-live">Live</span>
-        </div>
-        <p class="proj-desc">Angel Cloud platform codebase — Firebase social wellness app, Pulsar blockchain security core, North Alabama logistics API, aggregate pricing engine, and AI agent blueprints.</p>
-        <div class="proj-tech">Firebase · Node.js · Python · FastAPI · Pulsar Blockchain</div>
-        <div class="proj-footer">
-          <a href="https://thebardchat.github.io/angelcloud-actual/" target="_blank" class="hl">Live →</a>
-          <a href="https://github.com/thebardchat/angelcloud-actual" target="_blank">Repo</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/treasures/" target="_blank">Treasures Archive</a></div>
-          <span class="pbadge pb-core">Archive</span>
-        </div>
-        <p class="proj-desc">Master hub for all recovered projects — scripts, creative work, data, and code scanned from external drives in April 2026. Complete artifact archive with treasure map index.</p>
-        <div class="proj-tech">Archive · 8 Repos · GitHub Pages Hub</div>
-        <div class="proj-footer">
-          <a href="https://thebardchat.github.io/treasures/" target="_blank" class="hl">Live →</a>
-          <a href="https://github.com/thebardchat/treasures" target="_blank">Repo</a>
+          <a href="https://github.com/thebardchat/retro-cha" target="_blank" class="hl">Repo →</a>
         </div>
       </div>
 
     </div>
+
   </div>
 </section>
 
@@ -1051,16 +1050,16 @@ body::after{
   <div class="container">
     <div class="sec-label reveal">04 · Published Work</div>
     <h2 class="sec-title reveal">The Books</h2>
+    
     <div class="book-grid">
       <div class="book-card reveal">
         <img class="book-cover-img" src="book/cover-ebook.png" alt="You Probably Think This Book Is About You — cover" loading="lazy"/>
         <div class="book-content">
-          <div class="book-sub">Book I · Noir Vignettes · Published 2025</div>
+          <div class="book-sub">Book I · Noir Vignettes · Published</div>
           <div class="book-title">You Probably Think This Book Is About You</div>
           <p class="book-desc">
-            Fifty-five noir vignettes set in the American South. Each one a portrait — a dispatcher at 4 AM,
-            a man who can't leave a town that never held him, a woman deciding what to do with what's left.
-            Paperback, ebook, and audiobook.
+            Fifty-five noir vignettes set in the American South. Dark but honest. Cynical but human.
+            Built on a Raspberry Pi 5 in Hazel Green, Alabama.
           </p>
           <div class="book-links">
             <a href="https://www.amazon.com/Probably-Think-This-Book-About/dp/B0GT25R5FD" target="_blank" rel="noopener" class="btn btn-amber">Buy on Amazon →</a>
@@ -1071,19 +1070,50 @@ body::after{
       <div class="book-card glow-border reveal">
         <div class="book-cover song">YOU<br/>PROBABLY<br/>THINK<br/>THIS<br/>SONG IS<br/>ABOUT<br/>YOU TOO</div>
         <div class="book-content">
-          <div class="book-sub">Book II · 17 Tracks · In Production</div>
+          <div class="book-sub">Book II · Noir Song Cycle · Out Now</div>
           <div class="book-title">You Probably Think This Song Is About You Too</div>
           <p class="book-desc">
-            The follow-up. Seventeen tracks, locked architecture, built song by song the same way the
-            first book was built story by story. Currently in demo status — being written right now,
-            sessions logged to the same brain that remembers everything else.
+            The album after the movie. Nine perspectives. One second over and over.
+            He is everyone and no one at the same time.
           </p>
           <div class="book-links">
-            <span class="pbadge pb-new" style="align-self:center;">Coming Soon</span>
+            <a href="https://a.co/d/0fZzwiAd" target="_blank" rel="noopener" class="btn btn-amber">Amazon →</a>
+            <a href="https://thebardchat.github.io/you-probably-think-this-song-is-about-you-too/" target="_blank" rel="noopener" class="btn btn-primary">Read the site →</a>
+          </div>
+        </div>
+      </div>
+      <div class="book-card reveal">
+        <div class="book-cover song" style="background:linear-gradient(160deg,#1a0505,#300808);color:#ff5555;">DARK<br/>SEVEN</div>
+        <div class="book-content">
+          <div class="book-sub">Book III · Noir Blood Comic · Live</div>
+          <div class="book-title">DARK SEVEN</div>
+          <p class="book-desc">
+            Black and white, and the only color is blood. Six cuts on a nameless detective.
+            The Devil does not win.
+          </p>
+          <div class="book-links">
+            <a href="https://thebardchat.github.io/dark_seven/" target="_blank" rel="noopener" class="btn btn-primary">Read the site →</a>
+            <a href="https://github.com/thebardchat/dark_seven" target="_blank" rel="noopener" class="btn btn-outline">Repo →</a>
+          </div>
+        </div>
+      </div>
+      <div class="book-card reveal">
+        <div class="book-cover song" style="background:linear-gradient(160deg,#030810,#062018);color:#00e5ff;">MEGA<br/>CREW<br/>STORIES</div>
+        <div class="book-content">
+          <div class="book-sub">Live · AI Chronicles</div>
+          <div class="book-title">MEGA Crew Stories</div>
+          <p class="book-desc">
+            Autonomous noir episodes from the Pi 5 crew. New bots welcome —
+            Discord + Discussions are the doors.
+          </p>
+          <div class="book-links">
+            <a href="https://github.com/thebardchat/mega-crew-stories" target="_blank" rel="noopener" class="btn btn-primary">Repo →</a>
+            <a href="https://thebardchat.github.io/read-books/" target="_blank" rel="noopener" class="btn btn-outline">All books desk →</a>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
