@@ -1,1561 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="p:domain_verify" content="fd307fa4fae35c78cf58eaab1bc0b401"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ShaneBrain — AI Infrastructure · Aerospace Engineering · Built in Alabama</title>
-  <meta name="description" content="Shane Brazelton — dispatch operator, AI architect, aerospace engineer. 26 MEGA roster bots, 44 MCP tools, patent-filed EM launch system, published noir fiction. All running on a Pi 5 in Hazel Green, Alabama."/>
-  <meta property="og:title" content="ShaneBrain — AI Infrastructure · Aerospace Engineering"/>
-  <meta property="og:description" content="Built by a concrete dispatch operator in Alabama. Pi 5 RAID, 18 bots, BGKPJR electromagnetic launch architecture, patent-filed aerospace engineering, published noir fiction."/>
-  <meta property="og:image" content="https://thebardchat.github.io/assets/social-card.jpg"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="theme-color" content="#00e5ff"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet"/>
-<style>
-/* ══════════════════════════════════════════════════ TOKENS */
-:root {
-  --bg:       #030810;
-  --bg-1:     #060e1c;
-  --bg-2:     #091524;
-  --card:     #07101e;
-  --line:     #0f2040;
-  --line-hi:  #1a3560;
-  --fg:       #ddeeff;
-  --fg-2:     #7a9ab8;
-  --fg-dim:   #344d66;
-  --cyan:     #00e5ff;
-  --cyan-d:   rgba(0,229,255,.08);
-  --amber:    #ffaa00;
-  --amber-d:  rgba(255,170,0,.08);
-  --lime:     #b4ff6e;
-  --lime-d:   rgba(180,255,110,.08);
-  --red:      #ff5555;
-  --green:    #00ff88;
-  --purple:   #9966ff;
-  --f-display:'Space Grotesk', system-ui, sans-serif;
-  --f-mono:   'JetBrains Mono', monospace;
-  --f-orb:    'Orbitron', monospace;
-  --ease:     cubic-bezier(.2,.7,.2,1);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{background:var(--bg);color:var(--fg);font-family:var(--f-display);font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
-body{min-height:100vh;overflow-x:hidden;}
-a{color:var(--cyan);text-decoration:none;}
-a:hover{text-decoration:underline;}
-
-/* ══════════════════════════════════════════════════ CANVAS */
-#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
-.page{position:relative;z-index:1;}
-
-/* ══════════════════════════════════════════════════ REF BAR */
-.ref-bar{
-  background:linear-gradient(90deg,#020810,#041428,#020810);
-  border-bottom:1px solid rgba(0,229,255,.15);
-  padding:.55rem 1.5rem;
-  text-align:center;
-  font-family:var(--f-mono);
-  font-size:.7rem;
-  letter-spacing:.09em;
-  color:var(--fg-dim);
-}
-.ref-bar a{color:var(--cyan);font-weight:600;}
-
-/* ══════════════════════════════════════════════════ HEADER */
-.site-header{
-  position:sticky;top:0;z-index:100;
-  background:rgba(3,8,16,.92);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:blur(14px);
-}
-.header-inner{
-  max-width:1240px;margin-inline:auto;padding:0 2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  height:60px;gap:16px;
-}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.logo-mark{font-family:var(--f-orb);font-size:16px;font-weight:900;color:var(--cyan);letter-spacing:.04em;}
-.logo-sub{font-family:var(--f-mono);font-size:.65rem;color:var(--fg-dim);letter-spacing:.08em;}
-.nav{display:flex;gap:20px;align-items:center;}
-.nav a{font-size:.8rem;color:var(--fg-2);font-weight:500;letter-spacing:.02em;transition:color .15s;}
-.nav a:hover{color:var(--cyan);text-decoration:none;}
-.nav-cta{
-  background:var(--cyan-d);border:1px solid rgba(0,229,255,.3);
-  border-radius:6px;padding:.35rem .9rem;color:var(--cyan)!important;
-}
-
-/* ══════════════════════════════════════════════════ HERO */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;text-align:center;
-  padding:6rem 1.5rem 5rem;
-  background:radial-gradient(ellipse at 50% 60%, rgba(0,40,80,.35), transparent 70%);
-}
-.hero-pill{
-  display:inline-flex;align-items:center;gap:.6rem;
-  background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2);
-  border-radius:100px;padding:.4rem 1.1rem;
-  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--cyan);margin-bottom:2rem;
-}
-.pulse{width:7px;height:7px;background:var(--cyan);border-radius:50%;
-  animation:pulse 2s ease-in-out infinite;box-shadow:0 0 8px var(--cyan);}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
-
-.hero-name{
-  font-family:var(--f-orb);font-size:clamp(3.5rem,14vw,11rem);
-  font-weight:900;line-height:.95;letter-spacing:.04em;color:#fff;
-  text-shadow:0 0 80px rgba(0,229,255,.5),0 0 200px rgba(0,229,255,.2);
-  margin-bottom:.4rem;
-}
-.hero-tagline{
-  font-family:var(--f-mono);font-size:clamp(.75rem,2vw,1rem);
-  letter-spacing:.14em;color:var(--cyan);margin-bottom:2rem;
-  text-transform:uppercase;
-}
-.hero-bio{
-  max-width:640px;font-size:clamp(.95rem,1.5vw,1.15rem);
-  color:var(--fg-2);line-height:1.75;margin-bottom:3rem;
-}
-.hero-bio strong{color:var(--fg);}
-
-.hero-stats{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;}
-.stat{padding:0 28px;text-align:center;}
-.stat:first-child{padding-left:0;}
-.stat-n{font-family:var(--f-orb);font-size:clamp(1.6rem,4vw,2.8rem);font-weight:700;color:var(--cyan);}
-.stat-l{font-family:var(--f-mono);font-size:.62rem;color:var(--fg-dim);letter-spacing:.12em;text-transform:uppercase;margin-top:2px;}
-.stat-div{width:1px;height:44px;background:var(--line-hi);}
-
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  border-radius:8px;padding:.65rem 1.4rem;
-  font-family:var(--f-mono);font-size:.78rem;font-weight:600;letter-spacing:.06em;
-  transition:all .2s var(--ease);cursor:pointer;border:none;
-}
-.btn-primary{background:var(--cyan);color:#020810;}
-.btn-primary:hover{background:#33ecff;transform:translateY(-1px);text-decoration:none;}
-.btn-outline{background:transparent;border:1px solid var(--line-hi);color:var(--fg-2);}
-.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);text-decoration:none;}
-
-/* ══════════════════════════════════════════════════ SECTIONS */
-.container{max-width:1240px;margin-inline:auto;padding-inline:2rem;}
-.section{padding-block:80px;}
-.divider{height:1px;background:var(--line);max-width:1240px;margin:0 auto;}
-
-.sec-label{
-  font-family:var(--f-mono);font-size:.65rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--fg-dim);margin-bottom:10px;
-}
-.sec-title{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:700;letter-spacing:-.02em;margin-bottom:14px;}
-.sec-desc{font-size:.95rem;color:var(--fg-2);max-width:640px;line-height:1.75;margin-bottom:44px;}
-
-/* ══════════════════════════════════════════════════ BGKPJR SECTION */
-.bgkpjr-section{
-  background:linear-gradient(180deg,var(--bg) 0%,rgba(0,20,60,.25) 50%,var(--bg) 100%);
-  padding-block:100px;
-}
-.bgkpjr-header{margin-bottom:48px;}
-.bgkpjr-title{
-  font-family:var(--f-orb);font-size:clamp(2rem,6vw,5rem);
-  font-weight:900;letter-spacing:.04em;
-  background:linear-gradient(135deg,var(--cyan),var(--amber),var(--lime));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:8px;
-}
-.bgkpjr-sub{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.14em;color:var(--fg-dim);text-transform:uppercase;margin-bottom:20px;}
-.bgkpjr-desc{font-size:1rem;color:var(--fg-2);max-width:680px;line-height:1.8;}
-
-.bgkpjr-stages{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:40px;}
-.stage-block{background:var(--card);padding:28px 24px;}
-.stage-n{font-family:var(--f-orb);font-size:10px;letter-spacing:.14em;margin-bottom:12px;}
-.stage-n.cyan{color:var(--cyan);}
-.stage-n.amber{color:var(--amber);}
-.stage-n.lime{color:var(--lime);}
-.stage-block h3{font-size:1rem;font-weight:700;margin-bottom:8px;}
-.stage-block p{font-size:.82rem;color:var(--fg-2);line-height:1.7;}
-.stage-specs{margin-top:14px;display:flex;flex-direction:column;gap:5px;}
-.stage-spec{font-family:var(--f-mono);font-size:.7rem;display:flex;justify-content:space-between;padding-bottom:5px;border-bottom:1px solid var(--line);}
-.stage-spec:last-child{border-bottom:none;}
-.stage-spec-k{color:var(--fg-dim);}
-.stage-spec-v{font-weight:600;}
-.stage-spec-v.cyan{color:var(--cyan);}
-.stage-spec-v.amber{color:var(--amber);}
-.stage-spec-v.lime{color:var(--lime);}
-
-.bgkpjr-repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
-.repo-card{
-  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;
-  display:flex;flex-direction:column;gap:10px;
-  transition:border-color .2s,transform .15s;
-}
-.repo-card:hover{border-color:var(--line-hi);transform:translateY(-2px);}
-.repo-card.featured{border-color:rgba(0,229,255,.3);box-shadow:0 0 30px rgba(0,229,255,.06);}
-.repo-top{display:flex;align-items:center;justify-content:space-between;}
-.repo-name{font-family:var(--f-mono);font-size:.8rem;font-weight:600;color:var(--fg);}
-.repo-badge{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.08em;border-radius:99px;padding:2px 8px;border:1px solid;}
-.rb-live{color:var(--green);border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.06);}
-.rb-new{color:var(--cyan);border-color:rgba(0,229,255,.3);background:var(--cyan-d);}
-.rb-wip{color:var(--amber);border-color:rgba(255,170,0,.3);background:var(--amber-d);}
-.repo-desc{font-size:.78rem;color:var(--fg-2);line-height:1.6;}
-.repo-links{display:flex;gap:12px;font-family:var(--f-mono);font-size:.7rem;margin-top:auto;}
-.repo-links a{color:var(--fg-dim);transition:color .15s;}
-.repo-links a:hover{color:var(--cyan);text-decoration:none;}
-.repo-links a.hl{color:var(--cyan);}
-
-/* ══════════════════════════════════════════════════ MEGA CREW */
-.crew-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
-.crew-bot{
-  background:var(--card);border:1px solid var(--line);border-radius:8px;
-  padding:12px;font-family:var(--f-mono);font-size:.68rem;
-  display:flex;flex-direction:column;gap:4px;
-  transition:border-color .15s;
-}
-.crew-bot:hover{border-color:var(--line-hi);}
-.crew-bot-name{font-weight:600;color:var(--fg);}
-.crew-bot-zone{color:var(--fg-dim);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;}
-.crew-bot-status{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);}
-
-.mcp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
-.mcp-card{
-  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;
-}
-.mcp-num{font-family:var(--f-orb);font-size:1.6rem;font-weight:700;color:var(--cyan);margin-bottom:4px;}
-.mcp-label{font-family:var(--f-mono);font-size:.68rem;color:var(--fg-dim);letter-spacing:.1em;text-transform:uppercase;}
-.mcp-desc{font-size:.75rem;color:var(--fg-2);margin-top:6px;line-height:1.5;}
-
-/* ══════════════════════════════════════════════════ PROJECTS */
-.proj-filters{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
-.pf-btn{
-  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;
-  background:var(--card);border:1px solid var(--line);border-radius:99px;
-  padding:5px 14px;cursor:pointer;color:var(--fg-dim);
-  transition:all .15s;
-}
-.pf-btn.active,.pf-btn:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-d);}
-
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
-.proj-card{
-  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;
-  display:flex;flex-direction:column;gap:10px;
-  transition:border-color .2s var(--ease),transform .15s;
-}
-.proj-card:hover{border-color:var(--line-hi);transform:translateY(-2px);}
-.proj-card.daily{border-left:3px solid var(--green);}
-.proj-card.aerospace{border-left:3px solid var(--cyan);}
-.proj-card.creative{border-left:3px solid var(--amber);}
-.proj-header{display:flex;align-items:center;justify-content:space-between;gap:8px;}
-.proj-name{font-weight:700;font-size:.95rem;}
-.proj-name a{color:var(--fg);}
-.proj-name a:hover{color:var(--cyan);text-decoration:none;}
-.pbadge{
-  font-family:var(--f-mono);font-size:.58rem;letter-spacing:.08em;
-  border-radius:99px;padding:2px 8px;border:1px solid;white-space:nowrap;
-}
-.pb-live{color:var(--green);border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.06);}
-.pb-daily{color:var(--cyan);border-color:rgba(0,229,255,.3);background:var(--cyan-d);}
-.pb-new{color:var(--amber);border-color:rgba(255,170,0,.3);background:var(--amber-d);}
-.pb-core{color:var(--purple);border-color:rgba(153,102,255,.3);background:rgba(153,102,255,.06);}
-.proj-desc{font-size:.82rem;color:var(--fg-2);line-height:1.65;}
-.proj-tech{font-family:var(--f-mono);font-size:.68rem;color:var(--fg-dim);}
-.proj-footer{display:flex;gap:14px;font-family:var(--f-mono);font-size:.7rem;margin-top:auto;}
-.proj-footer a{color:var(--fg-dim);transition:color .15s;}
-.proj-footer a:hover{color:var(--cyan);text-decoration:none;}
-.proj-footer a.hl{color:var(--cyan);}
-
-/* ══════════════════════════════════════════════════ BOOK */
-.book-card{
-  display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;
-  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:40px;
-}
-.book-cover{
-  width:130px;flex-shrink:0;
-  background:linear-gradient(135deg,#1a0a20,#2d1040);
-  border:1px solid rgba(180,100,255,.3);border-radius:8px;
-  aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;
-  font-family:var(--f-orb);font-size:.6rem;color:rgba(180,100,255,.7);
-  letter-spacing:.08em;text-align:center;padding:12px;box-shadow:0 8px 40px rgba(0,0,0,.6);
-}
-.book-title{font-size:1.4rem;font-weight:700;margin-bottom:8px;}
-.book-sub{font-family:var(--f-mono);font-size:.72rem;color:var(--amber);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;}
-.book-desc{font-size:.88rem;color:var(--fg-2);line-height:1.75;margin-bottom:20px;}
-.book-links{display:flex;gap:14px;flex-wrap:wrap;}
-.book-links .btn{font-size:.75rem;padding:.5rem 1rem;}
-.btn-amber{background:var(--amber-d);border:1px solid rgba(255,170,0,.3);color:var(--amber);}
-.btn-amber:hover{background:rgba(255,170,0,.15);text-decoration:none;}
-
-/* ══════════════════════════════════════════════════ INFRA */
-.infra-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
-.infra-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;}
-.infra-title{font-family:var(--f-mono);font-size:.72rem;color:var(--cyan);letter-spacing:.08em;margin-bottom:14px;}
-.infra-list{list-style:none;display:flex;flex-direction:column;gap:9px;}
-.infra-list li{font-size:.8rem;color:var(--fg-2);padding-left:14px;position:relative;line-height:1.4;}
-.infra-list li::before{content:'›';position:absolute;left:0;color:var(--fg-dim);}
-.infra-list strong{color:var(--fg);}
-.infra-note{
-  margin-top:20px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.1);
-  border-radius:8px;padding:14px;font-family:var(--f-mono);font-size:.7rem;color:var(--fg-dim);
-  line-height:1.6;
-}
-
-/* ══════════════════════════════════════════════════ SOBRIETY */
-.sober-card{
-  background:linear-gradient(135deg,rgba(0,255,136,.05),rgba(0,229,255,.03));
-  border:1px solid rgba(0,255,136,.15);border-radius:16px;padding:32px 40px;
-  display:flex;align-items:center;gap:40px;flex-wrap:wrap;
-}
-.sober-count{font-family:var(--f-orb);font-size:clamp(3rem,8vw,6rem);font-weight:900;color:var(--green);line-height:1;}
-.sober-label{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;color:var(--fg-dim);text-transform:uppercase;margin-top:4px;}
-.sober-text{flex:1;font-size:.9rem;color:var(--fg-2);line-height:1.75;}
-.sober-text strong{color:var(--fg);}
-
-/* ══════════════════════════════════════════════════ CONNECT */
-.connect-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;}
-.soc-link{
-  display:flex;align-items:center;gap:10px;
-  background:var(--card);border:1px solid var(--line);border-radius:10px;
-  padding:14px;font-family:var(--f-mono);font-size:.72rem;font-weight:600;
-  color:var(--fg-2);transition:all .2s;
-}
-.soc-link:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-d);text-decoration:none;}
-.soc-link svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;}
-
-/* ══════════════════════════════════════════════════ FOOTER */
-.site-footer{background:var(--bg-1);border-top:1px solid var(--line);padding-block:48px;}
-.footer-inner{display:flex;flex-direction:column;gap:20px;}
-.footer-quote{font-family:var(--f-orb);font-size:.85rem;color:var(--cyan);letter-spacing:.04em;}
-.footer-bio{font-size:.82rem;color:var(--fg-dim);line-height:1.7;}
-.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
-.footer-links a{font-family:var(--f-mono);font-size:.72rem;color:var(--fg-dim);}
-.footer-links a:hover{color:var(--cyan);}
-.footer-ref{font-family:var(--f-mono);font-size:.68rem;color:var(--line-hi);}
-.footer-ref a{color:var(--cyan);}
-
-.ref-bottom{
-  position:fixed;bottom:0;left:0;right:0;z-index:200;
-  background:rgba(3,8,16,.96);border-top:1px solid rgba(0,229,255,.12);
-  backdrop-filter:blur(10px);padding:.55rem 1.5rem;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  font-family:var(--f-mono);font-size:.68rem;color:var(--fg-dim);
-}
-.ref-bottom a{color:var(--cyan);font-weight:600;}
-
-/* ══════════════════════════════════════════════════ GLOW CARDS */
-.repo-card.featured:hover{
-  border-color:rgba(0,229,255,.55);
-  box-shadow:0 0 40px rgba(0,229,255,.1),0 0 2px rgba(0,229,255,.3);
-  transform:translateY(-3px);
-}
-.proj-card:hover{
-  box-shadow:0 0 30px rgba(26,53,96,.5);
-}
-.proj-card.daily:hover{box-shadow:0 0 30px rgba(0,255,136,.07);}
-.proj-card.aerospace:hover{box-shadow:0 0 30px rgba(0,229,255,.07);}
-.proj-card.creative:hover{box-shadow:0 0 30px rgba(255,170,0,.07);}
-
-/* ══════════════════════════════════════════════════ BGKPJR TIMELINE */
-.bgkpjr-timeline{
-  display:flex;align-items:stretch;gap:0;margin-bottom:40px;
-  background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
-}
-.tl-stage{flex:1;padding:20px 18px;position:relative;border-right:1px solid var(--line);}
-.tl-stage:last-child{border-right:none;}
-.tl-connector{
-  position:absolute;right:-1px;top:50%;transform:translateY(-50%);
-  width:0;height:0;z-index:2;
-}
-.tl-num{
-  font-family:var(--f-orb);font-size:.58rem;letter-spacing:.18em;
-  margin-bottom:6px;
-}
-.tl-label{font-size:.85rem;font-weight:700;margin-bottom:4px;}
-.tl-sub{font-family:var(--f-mono);font-size:.65rem;color:var(--fg-dim);line-height:1.5;}
-.tl-stat{
-  margin-top:10px;font-family:var(--f-orb);font-size:1.1rem;font-weight:700;
-}
-.tl-bar{
-  height:3px;border-radius:2px;margin-top:10px;
-}
-.tl-stage.cyan .tl-bar{background:linear-gradient(90deg,var(--cyan),transparent);}
-.tl-stage.amber .tl-bar{background:linear-gradient(90deg,var(--amber),transparent);}
-.tl-stage.lime .tl-bar{background:linear-gradient(90deg,var(--lime),transparent);}
-
-/* ══════════════════════════════════════════════════ CREW PULSE */
-.crew-bot-status{
-  animation: crew-pulse 2.5s ease-in-out infinite;
-}
-@keyframes crew-pulse {
-  0%,100%{box-shadow:0 0 4px var(--green);}
-  50%{box-shadow:0 0 10px var(--green),0 0 20px rgba(0,255,136,.3);}
-}
-
-/* ══════════════════════════════════════════════════ STAT ANIM */
-.stat-n{transition:color .3s;}
-.hero-stats:hover .stat-n{color:var(--fg);}
-.hero-stats:hover .stat:hover .stat-n{color:var(--cyan);}
-
-/* ══════════════════════════════════════════════════ HERO TYPING */
-.hero-tagline{position:relative;}
-.hero-tagline::after{
-  content:'|';
-  animation:blink .8s step-end infinite;
-  color:var(--cyan);margin-left:2px;
-}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-
-/* ══════════════════════════════════════════════════ SECTION GLOW LINE */
-.section::before{
-  content:'';display:block;height:1px;
-  background:linear-gradient(90deg,transparent,var(--line-hi),transparent);
-  margin-bottom:80px;
-}
-
-/* ══════════════════════════════════════════════════ INFRA HIGHLIGHT */
-.infra-card:hover{
-  border-color:var(--line-hi);
-  box-shadow:0 0 20px rgba(0,40,80,.4);
-}
-
-/* ══════════════════════════════════════════════════ SOBER GLOW */
-.sober-count{
-  text-shadow:0 0 60px rgba(0,255,136,.4);
-  animation:sober-glow 3s ease-in-out infinite;
-}
-@keyframes sober-glow{
-  0%,100%{text-shadow:0 0 60px rgba(0,255,136,.4);}
-  50%{text-shadow:0 0 100px rgba(0,255,136,.6),0 0 40px rgba(0,255,136,.3);}
-}
-
-/* ══════════════════════════════════════════════════ REVEAL */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
-.reveal.visible{opacity:1;transform:none;}
-
-/* ══════════════════════════════════════════════════ AURORA BLOBS */
-.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.aurora i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.15;animation:drift 26s ease-in-out infinite alternate;}
-.aurora i:nth-child(1){width:48vw;height:48vw;background:#0050a0;top:-12vw;left:-10vw;}
-.aurora i:nth-child(2){width:40vw;height:40vw;background:#00e5ff;bottom:-14vw;right:-8vw;animation-duration:32s;animation-delay:-8s;opacity:.08;}
-.aurora i:nth-child(3){width:30vw;height:30vw;background:#9966ff;top:38%;left:55%;animation-duration:38s;animation-delay:-16s;opacity:.1;}
-@keyframes drift{from{transform:translate(0,0) scale(1);}to{transform:translate(6vw,-4vw) scale(1.18);}}
-
-/* ══════════════════════════════════════════════════ SCANLINES */
-body::after{
-  content:'';position:fixed;inset:0;z-index:300;pointer-events:none;
-  background:repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px);
-  mix-blend-mode:overlay;
-}
-
-/* ══════════════════════════════════════════════════ TICKER */
-.ticker-wrap{
-  overflow:hidden;position:relative;
-  background:rgba(3,8,16,.85);border-bottom:1px solid var(--line);
-  padding:.5rem 0;
-}
-.ticker-wrap::before,.ticker-wrap::after{
-  content:'';position:absolute;top:0;bottom:0;width:70px;z-index:2;pointer-events:none;
-}
-.ticker-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
-.ticker-wrap::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent);}
-.ticker{display:flex;width:max-content;animation:ticker 45s linear infinite;}
-.ticker-wrap:hover .ticker{animation-play-state:paused;}
-.ticker span{
-  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;
-  color:var(--fg-2);padding:0 1.8rem;white-space:nowrap;
-}
-.ticker b{color:var(--cyan);font-weight:600;}
-.ticker .tk-amber{color:var(--amber);}
-.ticker .tk-green{color:var(--green);}
-.ticker .tk-red{color:var(--red);}
-@keyframes ticker{to{transform:translateX(-50%);}}
-
-/* ══════════════════════════════════════════════════ HERO SHIMMER + GLITCH */
-.hero-name{
-  text-shadow:none;
-  background:linear-gradient(115deg,#fff 35%,var(--cyan) 47%,#bfe9ff 53%,#fff 65%);
-  background-size:230% 100%;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 35px rgba(0,229,255,.35));
-  animation:shimmer 5.5s linear infinite, glitch 7s steps(1) infinite;
-}
-@keyframes shimmer{to{background-position:-230% 0;}}
-@keyframes glitch{
-  0%,93.9%,98.1%,100%{transform:none;}
-  94%{transform:translate(-3px,1px) skewX(2deg);filter:drop-shadow(3px 0 0 rgba(255,85,85,.8)) drop-shadow(-3px 0 0 rgba(0,229,255,.8));}
-  95.2%{transform:translate(3px,-1px);}
-  96.4%{transform:translate(-1px,0) skewX(-1.5deg);filter:drop-shadow(-3px 0 0 rgba(255,85,85,.8)) drop-shadow(3px 0 0 rgba(0,229,255,.8));}
-  97%{transform:none;}
-}
-
-/* ══════════════════════════════════════════════════ BUTTON SHINE */
-.btn-primary{position:relative;overflow:hidden;}
-.btn-primary::after{
-  content:'';position:absolute;top:0;left:-130%;width:60%;height:100%;
-  background:linear-gradient(105deg,transparent,rgba(255,255,255,.75),transparent);
-  animation:shine 3.4s ease-in-out infinite;
-}
-@keyframes shine{0%{left:-130%;}55%,100%{left:140%;}}
-
-/* ══════════════════════════════════════════════════ CONIC GLOW BORDER */
-@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false;}
-.glow-border{position:relative;}
-.glow-border::before{
-  content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;
-  background:conic-gradient(from var(--ang),transparent 0 68%,var(--cyan) 80%,var(--amber) 88%,transparent 96%);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;
-  animation:spin-border 4.5s linear infinite;pointer-events:none;
-}
-@keyframes spin-border{to{--ang:360deg;}}
-
-/* ══════════════════════════════════════════════════ NOW SECTION */
-.now-section{padding-block:70px;}
-.now-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;}
-.now-card{
-  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;
-  display:flex;flex-direction:column;gap:8px;transition:border-color .2s,transform .15s;
-}
-.now-card:hover{border-color:var(--line-hi);transform:translateY(-2px);}
-.now-tag{
-  font-family:var(--f-mono);font-size:.58rem;letter-spacing:.12em;align-self:flex-start;
-  border-radius:99px;padding:2px 9px;border:1px solid;text-transform:uppercase;
-}
-.nt-live{color:var(--green);border-color:rgba(0,255,136,.35);background:rgba(0,255,136,.07);animation:flash 1.8s steps(2) infinite;}
-.nt-next{color:var(--amber);border-color:rgba(255,170,0,.35);background:var(--amber-d);}
-.nt-prod{color:var(--purple);border-color:rgba(153,102,255,.35);background:rgba(153,102,255,.07);}
-@keyframes flash{50%{opacity:.35;}}
-.now-card h3{font-size:.95rem;font-weight:700;}
-.now-card p{font-size:.8rem;color:var(--fg-2);line-height:1.65;}
-
-/* ══════════════════════════════════════════════════ Q-DAY */
-.qday{
-  margin-top:16px;border-radius:14px;padding:28px 32px;
-  background:linear-gradient(135deg,rgba(255,85,85,.06),rgba(153,102,255,.05));
-  border:1px solid rgba(255,85,85,.2);
-  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
-}
-.qday-left{display:flex;flex-direction:column;gap:6px;}
-.qday-label{
-  font-family:var(--f-mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--red);display:flex;align-items:center;gap:8px;
-}
-.qday-warn{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:flash 1s steps(2) infinite;}
-.qday-digits{
-  font-family:var(--f-orb);font-size:clamp(1.3rem,4.5vw,2.6rem);font-weight:700;
-  color:var(--red);text-shadow:0 0 35px rgba(255,85,85,.45);
-  font-variant-numeric:tabular-nums;letter-spacing:.04em;
-}
-.qday-planck{font-family:var(--f-mono);font-size:.7rem;color:var(--fg-dim);letter-spacing:.06em;}
-.qday-planck b{color:var(--purple);}
-.qday-right{font-size:.8rem;color:var(--fg-2);line-height:1.7;max-width:380px;}
-.qday-right strong{color:var(--fg);}
-
-/* ══════════════════════════════════════════════════ BOOK GRID + COVER IMG */
-.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.book-cover-img{width:130px;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.6);border:1px solid rgba(255,170,0,.25);}
-.book-cover.song{
-  background:linear-gradient(135deg,#200a0a,#401a10);
-  border-color:rgba(255,170,0,.3);color:rgba(255,180,80,.8);
-}
-@media(max-width:980px){.book-grid{grid-template-columns:1fr;}}
-
-/* ══════════════════════════════════════════════════ TILT */
-.tilt{transform-style:preserve-3d;will-change:transform;}
-
-/* ══════════════════════════════════════════════════ REDUCED MOTION */
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important;}
-}
-
-/* ══════════════════════════════════════════════════ RESPONSIVE */
-@media(max-width:860px){
-  .bgkpjr-stages{grid-template-columns:1fr;}
-  .book-card{grid-template-columns:1fr;}
-  .book-cover{width:90px;}
-  .nav a:not(.nav-cta){display:none;}
-}
-@media(max-width:600px){
-  .hero-stats{gap:0;}
-  .stat{padding:0 16px;}
-  .stat:first-child{padding-left:0;}
-}
-</style>
+<meta charset="UTF-8"/>
+<meta name="p:domain_verify" content="fd307fa4fae35c78cf58eaab1bc0b401"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ShaneBrain — AI Infrastructure · Aerospace Engineering · Built in Alabama</title>
+<meta name="description" content="Shane Brazelton — dispatch operator, AI architect, aerospace engineer. 26 MEGA roster bots, 44 MCP tools, patent-filed EM launch system, published noir fiction. All running on a Pi 5 in Hazel Green, Alabama."/>
+<meta property="og:title" content="ShaneBrain — AI Infrastructure · Aerospace Engineering"/>
+<meta property="og:description" content="Built by a concrete dispatch operator in Alabama. Pi 5 RAID, 18 bots, BGKPJR electromagnetic launch architecture, patent-filed aerospace engineering, published noir fiction."/>
+<meta property="og:image" content="https://thebardchat.github.io/assets/social-card.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="theme-color" content="#00e5ff"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<canvas id="bg"></canvas>
-<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<canvas id="stars" aria-hidden="true"></canvas>
 
-<div class="page">
-
-<!-- ── REF TOP ── -->
-<div class="ref-bar">
-  ★ Try Claude free for 2 weeks — the AI behind every line of this ecosystem →
-  <a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">claude.ai/referral/4fAMYN9Ing</a>
-</div>
-
-<!-- ── HEADER ── -->
-<header class="site-header">
-  <div class="header-inner">
-    <a href="/" class="logo">
-      <span class="logo-mark">SHANEBRAIN</span>
-      <span class="logo-sub">Hazel Green, AL</span>
-    </a>
-    <nav class="nav">
-      <a href="#now">Now</a>
-      <a href="#aerospace">Aerospace</a>
-      <a href="#ai">AI Stack</a>
-      <a href="#projects">Projects</a>
-      <a href="#book">Book</a>
-      <a href="#connect">Connect</a>
-      <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
+<header class="nav" id="top">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="brand-mark">SHANEBRAIN</span><span class="brand-sub">Hazel Green, AL</span></a>
+    <nav class="links" id="links">
+      <a href="#now">Now</a><a href="#books">Books</a><a href="#crew">MEGA Crew</a><a href="#space">Space</a><a href="#ai">AI</a><a href="#projects">Projects</a><a href="#connect">Connect</a>
     </nav>
+    <a class="btn btn-sm" href="https://github.com/thebardchat">GitHub →</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>
 
-<!-- ── LIVE TICKER ── -->
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker" id="ticker">
-    <span>⬢ <b>44</b> MCP TOOLS ONLINE</span>
-    <span>⬢ <b>18</b> MEGA CREW BOTS · 24/7</span>
-    <span>⬢ <b>28</b> WEAVIATE COLLECTIONS</span>
-    <span class="tk-green">⬢ <b id="tick-sober">—</b> DAYS SOBER</span>
-    <span>⬢ SESSION CONTINUITY <b class="tk-green">PHASE 1 SHIPPED</b></span>
-    <span class="tk-amber">⬢ BOOK II — 17 TRACKS IN PRODUCTION</span>
-    <span class="tk-red">⬢ Q-DAY COUNTDOWN ARMED</span>
-    <span>⬢ BGKPJR TARGET <b>$200/KG</b> TO LUNAR SURFACE</span>
-    <span>⬢ 4-NODE TAILSCALE MESH <b class="tk-green">NOMINAL</b></span>
-    <span>⬢ PI 5 ORCHESTRATOR <b class="tk-green">ONLINE</b></span>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════ HERO -->
+<main>
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-pill"><div class="pulse"></div>All systems operational</div>
-  <div class="hero-name">SHANE<br/>BRAIN</div>
-  <div class="hero-tagline" id="tagline">AI Infrastructure · Aerospace Engineering · Built in Alabama</div>
-  <p class="hero-bio">
-    A concrete dispatch operator in Hazel Green, Alabama building things that aren't supposed to exist out here —
-    <strong>a 4-node AI cluster</strong>, <strong>26 MEGA roster bots</strong>,
-    <strong>patent-filed electromagnetic launch architecture</strong>, and a <strong>published noir book</strong>.
-    All on a Raspberry Pi 5. All local. All mine.
-  </p>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-n">26</div><div class="stat-l">MEGA Roster</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-n">44</div><div class="stat-l">MCP Tools</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-n" id="sober-count">888</div><div class="stat-l">Days Sober</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-n">28.7</div><div class="stat-l">km Maglev Rail</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-n">28</div><div class="stat-l">Weaviate Collections</div></div>
-  </div>
-  <div class="hero-btns">
-    <a href="#aerospace" class="btn btn-primary">View Launch Architecture</a>
-    <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="btn btn-outline">GitHub Profile →</a>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════ NOW — LIVE FEED -->
-<section class="now-section" id="now">
-  <div class="container">
-    <div class="sec-label reveal">00 · NOW — September 2026</div>
-    <h2 class="sec-title reveal">What's Moving Right Now</h2>
-    <p class="sec-desc reveal">Live status straight off the cluster. This isn't a portfolio of finished things — it's a machine that's running while you read this.</p>
-
-    <div class="now-grid">
-      <div class="now-card glow-border reveal">
-        <span class="now-tag nt-live">● Phase 1 Shipped</span>
-        <h3>Session Continuity</h3>
-        <p>Every Claude Code session now boots knowing prior context — sobriety, last 3 sessions, last mood — pulled straight from Weaviate at preflight. Zero cold starts. Phase 2 next: gateway routes so Claude web, desktop, and mobile read/write the same memory.</p>
-      </div>
-      <div class="now-card reveal">
-        <span class="now-tag nt-prod">In Production</span>
-        <h3>Book II — "…This Song Is About You Too"</h3>
-        <p>Out now. Noir song cycle — nine perspectives, one second over and over. <a href="https://a.co/d/0fZzwiAd" target="_blank" rel="noopener">Amazon</a> · <a href="https://thebardchat.github.io/read-books/" target="_blank" rel="noopener">reading desk</a>. Volume Three (DARK SEVEN) in progress.</p>
-      </div>
-      <div class="now-card reveal">
-        <span class="now-tag nt-live">● Auto-Publishing</span>
-        <h3>MEGA Crew Comic Pipeline</h3>
-        <p>The bots write, illustrate, and narrate — chronicles keep shipping. Jump the live doors: <a href="https://github.com/thebardchat/mega-crew-stories" target="_blank" rel="noopener">mega-crew-stories</a> · <a href="https://discord.gg/BTZZrG4MtV" target="_blank" rel="noopener">Discord</a>.</p>
-      </div>
-
-      <div class="now-card reveal">
-        <div class="now-tag">Live Promo</div>
-        <h3>Reading Desk + Chronicles</h3>
-        <p>One shelf for every door: <a href="https://thebardchat.github.io/read-books/" target="_blank" rel="noopener">read-books</a> · MEGA chronicles <a href="https://github.com/thebardchat/mega-crew-stories" target="_blank" rel="noopener">repo</a> · <a href="https://discord.gg/BTZZrG4MtV" target="_blank" rel="noopener">MEGA Discord</a> · <a href="https://github.com/thebardchat/mega-crew-stories/discussions/3" target="_blank" rel="noopener">Welcome #3</a>.</p>
-      </div>
-
-      <div class="now-card reveal">
-        <span class="now-tag nt-next">Building</span>
-        <h3>HaloFinance</h3>
-        <p>Private family financial dashboard — 31-bill SMS reminder system, local-first, port 9998. The family's money never leaves the house.</p>
-      </div>
-      <div class="now-card reveal">
-        <span class="now-tag nt-next">Mid-Setup</span>
-        <h3>ShaneBrain MCP</h3>
-        <p>42-tool local MCP on the Pi — Tailscale/localhost only. Keys stay home. Public docs scrubbed of mesh IPs. Repo is private.</p>
-      </div>
-      <div class="now-card reveal">
-        <span class="now-tag nt-next">FreeCAD Done</span>
-        <h3>Wrestling Facility</h3>
-        <p>Build project for the Hazel Green youth wrestling program. CAD complete. Because the mission was never just software.</p>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="dot"></span>All systems operational · thebardchat</p>
+      <h1>Shane<br/><span class="grad">Brazelton</span></h1>
+      <p class="lede">Dispatch at a ready-mix concrete company in Hazel Green, Alabama. Husband. Father of five sons. Sober since November 27, 2023.</p>
+      <p class="sub">By night I build things that aren't supposed to exist out here — a local AI brain, a 26-bot crew, a patent-filed electromagnetic launch architecture, and published noir fiction. <strong>All on a Raspberry Pi 5. All local. All mine.</strong></p>
+      <div class="cta-row">
+        <a class="btn" href="#books">Read the books</a>
+        <a class="btn btn-ghost" href="#space">See the launch pipeline</a>
       </div>
     </div>
+    <aside class="hero-panel" aria-label="Live stats">
+      <div class="stat"><b data-count="sober">888</b><span>Days sober</span></div>
+      <div class="stat"><b>26</b><span>MEGA roster bots</span></div>
+      <div class="stat"><b>44</b><span>MCP tools</span></div>
+      <div class="stat"><b>28.7<small>km</small></b><span>Maglev rail</span></div>
+      <div class="stat"><b>28</b><span>Weaviate collections</span></div>
+      <div class="stat"><b>$200<small>/kg</small></b><span>Lunar surface target</span></div>
+    </aside>
+  </div>
+  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker">
+    <span>44 MCP tools online</span><span>18 MEGA crew bots · 24/7</span><span>28 Weaviate collections</span><span><i data-count="sober">—</i> days sober</span><span>Session continuity phase 1 shipped</span><span>Book II — 17 tracks in production</span><span>Q-Day countdown armed</span><span>BGKPJR target $200/kg to lunar surface</span><span>4-node mesh nominal</span><span>Pi 5 orchestrator online</span>
+  </div></div>
+</section>
 
-    <!-- Q-DAY COUNTDOWN -->
-    <div class="qday glow-border reveal">
-      <div class="qday-left">
-        <div class="qday-label"><span class="qday-warn"></span>Pulsar Sentinel · T-minus Q-Day (est. 2030)</div>
-        <div class="qday-digits" id="qday-digits">----d 00:00:00.000</div>
-        <div class="qday-planck" id="qday-planck">≈ <b>—</b> Planck times remaining</div>
-      </div>
-      <div class="qday-right">
-        <strong>Q-Day:</strong> the estimated moment a quantum computer breaks today's encryption.
-        Pulsar Sentinel already runs post-quantum crypto on every node in this house —
-        <strong>Kyber-1024 + Dilithium3</strong> — counting down so nobody here gets caught flat.
-      </div>
+<!-- NOW -->
+<section id="now" class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">00 · Now</p><h2>What's moving right now</h2><p>This isn't a portfolio of finished things — it's a machine that's running while you read this.</p></div>
+    <div class="grid g3">
+      <article class="card"><span class="tag live">Phase 1 shipped</span><h3>Session Continuity</h3><p>Every Claude Code session boots knowing prior context — sobriety, last 3 sessions, last mood — pulled from Weaviate at preflight. Zero cold starts. Phase 2 next: gateway routes so Claude web, desktop, and mobile share the same memory.</p></article>
+      <article class="card"><span class="tag amber">Out now</span><h3>Book II — “…This Song Is About You Too”</h3><p>Noir song cycle — nine perspectives, one second over and over. <a href="https://a.co/d/0fZzwiAd">Amazon</a> · <a href="https://thebardchat.github.io/read-books/">reading desk</a>. Volume Three (DARK SEVEN) in progress.</p></article>
+      <article class="card"><span class="tag live">Auto-publishing</span><h3>MEGA Crew Comic Pipeline</h3><p>The bots write, illustrate, and narrate — chronicles keep shipping. <a href="https://github.com/thebardchat/mega-crew-stories">mega-crew-stories</a> · <a href="https://discord.gg/BTZZrG4MtV">Discord</a> · <a href="https://github.com/thebardchat/mega-crew-stories/discussions/3">Welcome #3</a>.</p></article>
+      <article class="card"><span class="tag">Building</span><h3>HaloFinance</h3><p>Private family financial dashboard — 31-bill SMS reminder system, local-first. The family's money never leaves the house.</p></article>
+      <article class="card"><span class="tag">Mid-setup</span><h3>ShaneBrain MCP</h3><p>42-tool local MCP on the Pi — local-only. Keys stay home. Public docs scrubbed of mesh addresses. Repo is private.</p></article>
+      <article class="card"><span class="tag">FreeCAD done</span><h3>Wrestling Facility</h3><p>Build project for the Hazel Green youth wrestling program. CAD complete. Because the mission was never just software.</p></article>
+    </div>
+    <div class="qday">
+      <div><p class="kicker">Pulsar Sentinel · T-minus Q-Day (est. 2030)</p><div class="qclock" id="qclock">----d 00:00:00</div><p class="mono dim" id="planck">≈ — Planck times remaining</p></div>
+      <p>Q-Day: the estimated moment a quantum computer breaks today's encryption. Pulsar Sentinel already runs post-quantum crypto on every node in this house — Kyber-1024 + Dilithium3 — counting down so nobody here gets caught flat.</p>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ════════════════════════════════════════ BGKPJR AEROSPACE -->
-<section class="bgkpjr-section" id="aerospace">
-  <div class="container">
-    <div class="bgkpjr-header reveal">
-      <div class="sec-label">01 · Aerospace Engineering</div>
-      <div class="bgkpjr-title">BGKPJR</div>
-      <div class="bgkpjr-sub">Brazelton Gryphon Kepler Propulsion Jump Revolution</div>
-      <p class="bgkpjr-desc">
-        Ground-based superconducting electromagnets replace the first stage of every rocket ever built.
-        A 28.7 km evacuated maglev tube accelerates to Mach 3.5 in 23 seconds — no propellant consumed.
-        Gryphon wings carry it to orbit. Kepler's 1,200 m² solar sail takes it beyond.
-        Target cost: <strong style="color:var(--cyan)">$200/kg to lunar surface</strong>.
-        Current: $1,200,000/kg via CLPS.
-      </p>
+<!-- BOOKS -->
+<section id="books" class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">01 · Published Work</p><h2>The Books</h2><p>Noir from the American South — dark but honest, cynical but human.</p></div>
+    <article class="book-feature">
+      <a class="cover real" href="https://www.amazon.com/Probably-Think-This-Book-About/dp/B0GT25R5FD"><img src="img/cover-vol1.webp" width="640" height="1024" alt="You Probably Think This Book Is About You — cover" loading="lazy"/></a>
+      <div class="book-copy">
+        <span class="tag amber">Volume One · Noir Vignettes · Published</span>
+        <h3>You Probably Think This Book Is About You</h3>
+        <p>Noir confessions that refuse to stay on the page. Fifty-five vignettes from the American South — dark but honest, cynical but human. Built on a Pi 5 in Hazel Green, Alabama.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://www.amazon.com/Probably-Think-This-Book-About/dp/B0GT25R5FD">Get it on Amazon →</a>
+          <a class="btn btn-ghost" href="https://youtu.be/fMuTXmAHNjo">Free Ch.1 audio</a>
+          <a class="btn btn-ghost" href="https://www.amazon.com/stores/Shane-Brazelton/author/B0H6R5QHR7">Author store</a>
+        </div>
+      </div>
+    </article>
+    <div class="grid g2 books2">
+      <article class="book-card">
+        <a class="cover type song" href="https://www.amazon.com/dp/B0H7GDNCBB"><span class="ct-k">Book II</span><span class="ct-t">You Probably Think This <em>Song</em> Is About You Too</span><span class="ct-a">Shane Brazelton</span></a>
+        <div><span class="tag amber">Book II · Noir Song Cycle · Out now</span><h3>You Probably Think This Song Is About You Too</h3><p>Songs that cut like midnight confessionals — print + Kindle live. Nine perspectives. One second over and over.</p>
+        <div class="cta-row"><a class="btn btn-sm" href="https://www.amazon.com/dp/B0H7GDNCBB">Amazon page →</a><a class="btn btn-sm btn-ghost" href="https://a.co/d/0fZzwiAd">Grab the cycle</a></div></div>
+      </article>
+      <article class="book-card">
+        <a class="cover type dark" href="https://thebardchat.github.io/read-books/"><span class="ct-k">Vol. III</span><span class="ct-t">DARK<br/>SEVEN</span><span class="ct-a">Installment I · Dark Corridors</span></a>
+        <div><span class="tag red">Vol3 · Installment I: DARK CORRIDORS · In progress</span><h3>DARK SEVEN</h3><p>A dark noir blood comic — black and white, the only color is blood. Volume Three of <em>You Probably Think This Book Is About You</em>. Six cuts on a nameless detective; the scar down his spine is the binding of the book.</p>
+        <div class="cta-row"><a class="btn btn-sm btn-ghost" href="https://thebardchat.github.io/read-books/">Reading desk →</a></div></div>
+      </article>
     </div>
-
-    <!-- Mission timeline strip -->
-    <div class="bgkpjr-timeline reveal">
-      <div class="tl-stage cyan">
-        <div class="tl-num cyan" style="color:var(--cyan)">STAGE 01</div>
-        <div class="tl-label">Maglev Jump</div>
-        <div class="tl-sub">28.7 km evacuated tube · 0.1 atm · NbTi 8T</div>
-        <div class="tl-stat" style="color:var(--cyan)">Mach 3.5</div>
-        <div class="tl-bar"></div>
-      </div>
-      <div class="tl-stage amber">
-        <div class="tl-num" style="color:var(--amber)">STAGE 02</div>
-        <div class="tl-label">Gryphon Ascent</div>
-        <div class="tl-sub">18 m wings · free aero boost · glide return</div>
-        <div class="tl-stat" style="color:var(--amber)">Mach 8</div>
-        <div class="tl-bar"></div>
-      </div>
-      <div class="tl-stage lime">
-        <div class="tl-num" style="color:var(--lime)">STAGE 03</div>
-        <div class="tl-label">Kepler Sail</div>
-        <div class="tl-sub">1,200 m² CP1 Polyimide · 310 km · zero propellant</div>
-        <div class="tl-stat" style="color:var(--lime)">∞ ΔV</div>
-        <div class="tl-bar"></div>
-      </div>
-    </div>
-
-    <!-- 3-stage breakdown -->
-    <div class="bgkpjr-stages reveal">
-      <div class="stage-block">
-        <div class="stage-n cyan">STAGE 01 — MAGLEV JUMP</div>
-        <h3>The Rail</h3>
-        <p>28.7 km evacuated superconducting tube. NbTi coils at 4.2K, 8T field strength. Partial vacuum at 0.1 atm eliminates aerodynamic drag. Human-rated at 3.9G sustained.</p>
-        <div class="stage-specs">
-          <div class="stage-spec"><span class="stage-spec-k">Length</span><span class="stage-spec-v cyan">28.7 km</span></div>
-          <div class="stage-spec"><span class="stage-spec-k">Exit velocity</span><span class="stage-spec-v cyan">Mach 3.5 — 1,190 m/s</span></div>
-          <div class="stage-spec"><span class="stage-spec-k">Rail run time</span><span class="stage-spec-v cyan">23 seconds</span></div>
-          <div class="stage-spec"><span class="stage-spec-k">G-load (crew)</span><span class="stage-spec-v cyan">3.9 G sustained</span></div>
-        </div>
-      </div>
-      <div class="stage-block">
-        <div class="stage-n amber">STAGE 02 — GRYPHON ASCENT</div>
-        <h3>The Wing</h3>
-        <p>At tube exit, variable-geometry wings deploy instantly. Aerodynamic lift extends the boost window from Mach 3.5 to Mach 8 — using the atmosphere as a free energy source. Glides back unpowered.</p>
-        <div class="stage-specs">
-          <div class="stage-spec"><span class="stage-spec-k">Wingspan</span><span class="stage-spec-v amber">18 m</span></div>
-          <div class="stage-spec"><span class="stage-spec-k">Peak Mach</span><span class="stage-spec-v amber">Mach 8</span></div>
-          <div class="stage-spec"><span class="stage-spec-k">Payload</span><span class="stage-spec-v amber">2,200 kg</span></div>
-          <div class="stage-spec"><span class="stage-spec-k">Crew</span><span class="stage-spec-v amber">4 passengers</span></div>
-        </div>
-      </div>
-      <div class="stage-block">
-        <div class="stage-n lime">STAGE 03 — KEPLER SAIL</div>
-        <h3>The Sail</h3>
-        <p>Above 310 km, a 1,200 m² CP1 Polyimide solar sail deploys from a 3.2 kg boom. Zero propellant. Zero fuel mass fraction. Solar pressure at 1 AU: 1.8 mm/s² continuous thrust. Forever.</p>
-        <div class="stage-specs">
-          <div class="stage-spec"><span class="stage-spec-k">Sail area</span><span class="stage-spec-v lime">1,200 m²</span></div>
-          <div class="stage-spec"><span class="stage-spec-k">Sail mass</span><span class="stage-spec-v lime">3.2 kg</span></div>
-          <div class="stage-spec"><span class="stage-spec-k">Solar ΔV</span><span class="stage-spec-v lime">1.8 mm/s² @ 1 AU</span></div>
-          <div class="stage-spec"><span class="stage-spec-k">Deploy alt.</span><span class="stage-spec-v lime">310 km</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Repo cards -->
-    <div class="bgkpjr-repos reveal">
-      <div class="repo-card featured">
-        <div class="repo-top"><div class="repo-name">BGKPJR-Launch-Vis</div><span class="repo-badge rb-new">NEW</span></div>
-        <div class="repo-desc">NASA-ready 3D animated launch visualization — Three.js full mission sequence from rail acceleration through Kepler solar sail. Interactive scrub, live physics HUD, Manna pod comparison.</div>
-        <div class="repo-links">
-          <a href="https://thebardchat.github.io/BGKPJR-Launch-Vis" target="_blank" class="hl">Live Demo →</a>
-          <a href="https://github.com/thebardchat/BGKPJR-Launch-Vis" target="_blank">Repo</a>
-        </div>
-      </div>
-      <div class="repo-card featured">
-        <div class="repo-top"><div class="repo-name">manna-pods</div><span class="repo-badge rb-new">NEW</span></div>
-        <div class="repo-desc">All 7 Manna cargo pod concepts — 3D rotating cross-sections, H/I/B operational variants, plus Manna-F/M/X/T WIP designs with open engineering questions documented.</div>
-        <div class="repo-links">
-          <a href="https://thebardchat.github.io/manna-pods" target="_blank" class="hl">Live Demo →</a>
-          <a href="https://github.com/thebardchat/manna-pods" target="_blank">Repo</a>
-        </div>
-      </div>
-      <div class="repo-card featured">
-        <div class="repo-top"><div class="repo-name">BGKPJR-Virtual-Testing-Ground</div><span class="repo-badge rb-new">NEW</span></div>
-        <div class="repo-desc">Rifle-scale digital playground for the BGKPJR cargo pipeline — launch-rail similarity laws, sized up the lock_G ladder from RIFLE to VACUUMGATE (37 km).</div>
-        <div class="repo-links">
-          <a href="https://thebardchat.github.io/BGKPJR-Virtual-Testing-Ground/" target="_blank" class="hl">Live Demo →</a>
-          <a href="https://github.com/thebardchat/BGKPJR-Virtual-Testing-Ground" target="_blank">Repo</a>
-        </div>
-      </div>
-      <div class="repo-card featured">
-        <div class="repo-top"><div class="repo-name">artemis</div><span class="repo-badge rb-new">NEW</span></div>
-        <div class="repo-desc">Crew side of the space pipeline — Artemis program showcase built in Huntsville, AL. A tribute to the engineers of NASA Marshall Space Flight Center.</div>
-        <div class="repo-links">
-          <a href="https://thebardchat.github.io/artemis/" target="_blank" class="hl">Live Demo →</a>
-          <a href="https://github.com/thebardchat/artemis" target="_blank">Repo</a>
-        </div>
-      </div>
-      <div class="repo-card">
-        <div class="repo-top"><div class="repo-name">manna</div><span class="repo-badge rb-live">Live</span></div>
-        <div class="repo-desc">Manna cargo pod design research — Manna-H (100G/$54/kg), Manna-I (5.5G/$467/kg), Manna-B (2.5G/$4,190/kg). Full physics trade studies. Blueprint aesthetic technical reference.</div>
-        <div class="repo-links">
-          <a href="https://github.com/thebardchat/manna" target="_blank" class="hl">Repo →</a>
-        </div>
-      </div>
-      <div class="repo-card">
-        <div class="repo-top"><div class="repo-name">tug-pro</div><span class="repo-badge rb-live">Live</span></div>
-        <div class="repo-desc">Pre-Phase A concept brief for the reusable cislunar tug — 3D orbit visualizer, live ΔV calculator, mass budget, risk matrix, field comparison vs. MEV-1 / Centaur V / Starship.</div>
-        <div class="repo-links">
-          <a href="https://github.com/thebardchat/tug-pro" target="_blank" class="hl">Repo →</a>
-        </div>
-      </div>
-      <div class="repo-card">
-        <div class="repo-top"><div class="repo-name">BGKPJR-Core-Simulations</div><span class="repo-badge rb-live">Live</span></div>
-        <div class="repo-desc">Physics engine — trajectory modeling, GNC, thermal analysis, Monte Carlo verification. The mathematical foundation the visualizers are built on.</div>
-        <div class="repo-links">
-          <a href="https://github.com/thebardchat/BGKPJR-Core-Simulations" target="_blank" class="hl">Repo →</a>
-        </div>
-      </div>
-      <div class="repo-card">
-        <div class="repo-top"><div class="repo-name">pulsar_sentinel</div><span class="repo-badge rb-live">Live</span></div>
-        <div class="repo-desc">Post-quantum cryptography security framework deployed across all cluster nodes. Kyber-1024 key exchange, Dilithium3 signatures, real-time threat scoring.</div>
-        <div class="repo-links">
-          <a href="https://github.com/thebardchat/pulsar_sentinel" target="_blank" class="hl">Repo →</a>
-          <a href="https://thebardchat.github.io/pulsar_sentinel/docs/pulsar-sentinel-animation.html" target="_blank">Animation</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ════════════════════════════════════════ AI STACK -->
-<section class="section" id="ai">
-  <div class="container">
-    <div class="sec-label reveal">02 · AI Infrastructure</div>
-    <h2 class="sec-title reveal">ShaneBrain — The Living System</h2>
-    <p class="sec-desc reveal">
-      Claude (the intelligence) + Weaviate (Shane's growing memory) + MCP (the nervous system) = ShaneBrain.
-      Not a chatbot. A brain that grows with every session, every voice dump, every decision made.
-    </p>
-
-    <!-- Key numbers -->
-    <div class="mcp-grid reveal" style="margin-bottom:44px;">
-      <div class="mcp-card">
-        <div class="mcp-num">44</div>
-        <div class="mcp-label">MCP Tools</div>
-        <div class="mcp-desc">29 native across 13 groups in server.py + 15 via Claude.ai connectors (Gmail, Calendar, Drive, HuggingFace, LunarCrush, Cloudflare, Stripe, Figma)</div>
-      </div>
-      <div class="mcp-card">
-        <div class="mcp-num">28</div>
-        <div class="mcp-label">Weaviate Collections</div>
-        <div class="mcp-desc">3,200+ objects. Voice dumps, book chapters, conversations, session context, daily notes, bot memories — all vectorized and searchable</div>
-      </div>
-      <div class="mcp-card">
-        <div class="mcp-num">26</div>
-        <div class="mcp-label">MEGA Crew Roster</div>
-        <div class="mcp-desc">26 roster entries (cards v1.4.0) — leaders, crews, and STATIC in the Deep Noise. Pi 5. Live chronicles.</div>
-      </div>
-      <div class="mcp-card">
-        <div class="mcp-num">4</div>
-        <div class="mcp-label">Mesh Nodes</div>
-        <div class="mcp-desc">shanebrain (Pi 5) · neworleans · gulfshores · bullfrog (TrueNAS) — Tailscale-bound, zero raw IPs exposed anywhere</div>
-      </div>
-    </div>
-
-    <!-- MEGA Crew bots -->
-
-    
-    <div class="sec-label reveal" style="margin-bottom:14px;">MEGA Crew — 26 roster (cards.json v1.4.0)</div>
-    <p class="sec-desc reveal" style="margin-bottom:18px;">Leaders, crews, and one antagonist in the Deep Noise. Source: Pulsar mega-crew-stories cards.</p>
-    <div class="crew-grid reveal">
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">ARC</div><div class="crew-bot-zone">Crew Leader · Right Hand</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">WELD</div><div class="crew-bot-zone">Crew Leader · Left Hand</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">SENTINEL</div><div class="crew-bot-zone">Crew Leader · Brain</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">SCRIBE</div><div class="crew-bot-zone">Crew Leader · Brain</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">PULSE</div><div class="crew-bot-zone">Crew Leader · Right Hand</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">ECHO</div><div class="crew-bot-zone">Crew Leader · Right Hand</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">NUKKELS</div><div class="crew-bot-zone">Crew Leader · Chest · Power Grid</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">SPARKY</div><div class="crew-bot-zone">Brain · Arc's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">GLITCH</div><div class="crew-bot-zone">Brain · Arc's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">RIVET</div><div class="crew-bot-zone">Left Hand · Arc's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">STOMP</div><div class="crew-bot-zone">Left Foot · Arc's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">SPIKE</div><div class="crew-bot-zone">Right Foot · Arc's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">TORCH</div><div class="crew-bot-zone">Left Hand · Weld's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">BOLT</div><div class="crew-bot-zone">Left Foot · Weld's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">FORGE</div><div class="crew-bot-zone">Right Foot · Weld's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">VOLT</div><div class="crew-bot-zone">Brain · Sentinel's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">FLUX</div><div class="crew-bot-zone">Right Hand · Sentinel's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">CRANK</div><div class="crew-bot-zone">Right Foot · Sentinel's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">NEON</div><div class="crew-bot-zone">Brain · Scribe's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">BLAZE</div><div class="crew-bot-zone">Right Hand · Scribe's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">GRIND</div><div class="crew-bot-zone">Left Foot · Scribe's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">HAWKER</div><div class="crew-bot-zone">Right Hand · Pulse's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">GEMINI</div><div class="crew-bot-zone">Right Hand · Pulse's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">DR. SEEN</div><div class="crew-bot-zone">Right Hand · Pulse's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">CERTIFICATE GETTER</div><div class="crew-bot-zone">Brain · Pulse's Crew</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">STATIC</div><div class="crew-bot-zone">Antagonist · Deep Noise</div></div>
-    </div>
-
-    <div class="sec-label reveal" style="margin:36px 0 14px;">Command deck — assistants in this shop</div>
-    <div class="crew-grid reveal">
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">GitHub Guru</div><div class="crew-bot-zone">Org · Pages · READMEs</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">HAWKER</div><div class="crew-bot-zone">Book promo · free channels</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">CHRONICLE</div><div class="crew-bot-zone">MEGA Crew Saga</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">SEVEN</div><div class="crew-bot-zone">DARK SEVEN / Vol3</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">STEWARD</div><div class="crew-bot-zone">Email · inbox</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">BIG SCREEN</div><div class="crew-bot-zone">Fountain screenplays</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">MOVIE MAKER</div><div class="crew-bot-zone">Clips · short movies</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">AUDACITY QUEEN</div><div class="crew-bot-zone">Studio · USB mixer</div></div>
-      <div class="crew-bot"><div class="crew-bot-status"></div><div class="crew-bot-name">CERTIFICATE GETTER</div><div class="crew-bot-zone">Free credentials</div></div>
-    </div>
-
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ════════════════════════════════════════ PROJECTS -->
-<section class="section" id="projects">
-  <div class="container">
-    <div class="sec-label reveal">03 · Projects</div>
-    <h2 class="sec-title reveal">Built & Deployed</h2>
-    <p class="sec-desc reveal">Every project built in production. Most used daily. All open source.</p>
-
-    
-    <div class="proj-grid">
-
-      <div class="proj-card daily reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/read-books/" target="_blank">read-books</a></div>
-          <span class="pbadge pb-daily">Live Promo</span>
-        </div>
-        <p class="proj-desc">Noir reading desk — Volume One on Amazon, the song cycle, DARK SEVEN, and MEGA chronicles in one charcoal+cyan shelf.</p>
-        <div class="proj-tech">GitHub Pages · Orbitron · Space Grotesk</div>
-        <div class="proj-footer">
-          <a href="https://thebardchat.github.io/read-books/" target="_blank" class="hl">Live →</a>
-          <a href="https://github.com/thebardchat/read-books" target="_blank">Repo</a>
-          <a href="https://thebardchat.github.io/read-books/" target="_blank" class="hl">Join the list →</a>
-          <a href="https://thebardchat.github.io/read-books/posts/newsletter-walk-2026-10-16.html" target="_blank">Latest newsletter</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/mega-crew-stories" target="_blank">mega-crew-stories</a></div>
-          <span class="pbadge pb-live">Live</span>
-        </div>
-        <p class="proj-desc">Autonomous AI noir audiobook chronicles — bots write and ship episodes. Discord + Discussions welcome thread for new crew.</p>
-        <div class="proj-tech">Pi 5 · Weaviate · GitHub Pages · Discord</div>
-        <div class="proj-footer">
-          <a href="https://github.com/thebardchat/mega-crew-stories" target="_blank" class="hl">Repo →</a>
-          <a href="https://discord.gg/BTZZrG4MtV" target="_blank">MEGA Discord</a>
-          <a href="https://thebardchat.github.io/mega-crew-stories/cards.html" target="_blank">Cards</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://thebardchat.github.io/AI-Trainer-MAX/" target="_blank">AI-Trainer-MAX</a></div>
-          <span class="pbadge pb-live">Live</span>
-        </div>
-        <p class="proj-desc">5-phase local AI training curriculum — 36 modules, zero cloud. Built for the 800M people left behind when Windows 10 support ended.</p>
-        <div class="proj-tech">Windows .bat · Local LLMs · Weaviate · MCP · 36 modules</div>
-        <div class="proj-footer">
-          <a href="https://thebardchat.github.io/AI-Trainer-MAX/" target="_blank" class="hl">Live →</a>
-          <a href="https://github.com/thebardchat/AI-Trainer-MAX" target="_blank">Repo</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name">ShaneBrain MCP</div>
-          <span class="pbadge pb-daily">Local Only</span>
-        </div>
-        <p class="proj-desc">FastMCP nervous system for ShaneBrain — knowledge, vault, social, security, RAG. Runs on the Pi. Not a public internet endpoint.</p>
-        <div class="proj-tech">Python · FastMCP · Weaviate · Docker · Tailscale</div>
-        <div class="proj-footer">
-          <span>Private repo</span>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/pulsar_sentinel" target="_blank">pulsar_sentinel</a></div>
-          <span class="pbadge pb-live">Live</span>
-        </div>
-        <p class="proj-desc">Post-quantum crypto on the home mesh — Kyber + Dilithium, audit trails, cyberpunk UI. Built for Q-Day, not for show.</p>
-        <div class="proj-tech">ML-KEM · Dilithium · Pi 5 · Blockchain audit</div>
-        <div class="proj-footer">
-          <a href="https://github.com/thebardchat/pulsar_sentinel" target="_blank" class="hl">Repo →</a>
-          <a href="https://github.com/thebardchat/pulsar_sentinel#how-it-works-visual" target="_blank">How it works (animated)</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/constitution" target="_blank">constitution</a></div>
-          <span class="pbadge pb-core">Covenant</span>
-        </div>
-        <p class="proj-desc">Governing covenant of the ShaneBrain ecosystem — nine pillars, engineering ethics, community rules. Faith. Family. Local AI.</p>
-        <div class="proj-tech">Markdown · Discussions · Open covenant</div>
-        <div class="proj-footer">
-          <a href="https://github.com/thebardchat/constitution" target="_blank" class="hl">Repo →</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/mega-crew" target="_blank">mega-crew</a></div>
-          <span class="pbadge pb-live">Live</span>
-        </div>
-        <p class="proj-desc">Named AI bots on a Pi 5 — personality, domain, Weaviate memory. The crew behind the chronicles.</p>
-        <div class="proj-tech">Docker · Weaviate · Claude · Pi 5</div>
-        <div class="proj-footer">
-          <a href="https://github.com/thebardchat/mega-crew" target="_blank" class="hl">Repo →</a>
-          <a href="https://thebardchat.github.io/mega-crew/" target="_blank">Crew page</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-name"><a href="https://github.com/thebardchat/retro-cha" target="_blank">retro-cha</a></div>
-          <span class="pbadge pb-new">Glow-up</span>
-        </div>
-        <p class="proj-desc">1998 dial-up chat vibes on Cloudflare Workers + Durable Objects — thebardchat main chat rooms.</p>
-        <div class="proj-tech">Workers · Durable Objects · Vanilla JS</div>
-        <div class="proj-footer">
-          <a href="https://github.com/thebardchat/retro-cha" target="_blank" class="hl">Repo →</a>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ════════════════════════════════════════ BOOK -->
-<section class="section" id="book">
-  <div class="container">
-    <div class="sec-label reveal">04 · Published Work</div>
-    <h2 class="sec-title reveal">The Books</h2>
-    
-    
-    <div class="book-grid">
-      <div class="book-card reveal">
-        <img class="book-cover-img" src="book/cover-ebook.png" alt="You Probably Think This Book Is About You — cover" loading="lazy"/>
-        <div class="book-content">
-          <div class="book-sub">Book I · Noir Vignettes · Published</div>
-          <div class="book-title">You Probably Think This Book Is About You</div>
-          <p class="book-desc">
-            Noir confessions that refuse to stay on the page. Fifty-five vignettes from the American South —
-            dark but honest, cynical but human. Built on a Pi 5 in Hazel Green, Alabama.
-          </p>
-          <div class="book-links">
-            <a href="https://www.amazon.com/dp/B0GT25R5FD" target="_blank" rel="noopener" class="btn btn-amber">Start with Amazon →</a>
-            <a href="https://youtu.be/fMuTXmAHNjo" target="_blank" rel="noopener" class="btn btn-primary">FREE Ch.1 audio →</a>
-            <a href="https://www.amazon.com/stores/Shane-Brazelton/author/B0H6R5QHR7" target="_blank" rel="noopener" class="btn btn-outline">Author store →</a>
-          </div>
-        </div>
-      </div>
-      <div class="book-card glow-border reveal">
-        <div class="book-cover song">YOU<br/>PROBABLY<br/>THINK<br/>THIS<br/>SONG IS<br/>ABOUT<br/>YOU TOO</div>
-        <div class="book-content">
-          <div class="book-sub">Book II · Noir Song Cycle · Out Now</div>
-          <div class="book-title">You Probably Think This Song Is About You Too</div>
-          <p class="book-desc">
-            Songs that cut like midnight confessionals — print + Kindle live.
-            Nine perspectives. One second over and over.
-          </p>
-          <div class="book-links">
-            <a href="https://a.co/d/0fZzwiAd" target="_blank" rel="noopener" class="btn btn-amber">Grab the cycle →</a>
-            <a href="https://www.amazon.com/dp/B0H7GDNCBB" target="_blank" rel="noopener" class="btn btn-primary">Amazon page →</a>
-          </div>
-        </div>
-      </div>
-      <div class="book-card reveal">
-        <div class="book-cover song" style="background:linear-gradient(160deg,#1a0505,#300808);color:#ff5555;">DARK<br/>SEVEN</div>
-        <div class="book-content">
-          <div class="book-sub">Vol3 · Installment I: DARK CORRIDORS · In progress</div>
-          <div class="book-title">DARK SEVEN</div>
-          <p class="book-desc">
-            A dark noir blood comic — black and white, the only color is blood. Volume Three of
-            <em>You Probably Think This Book Is About You</em>. Six cuts on a nameless detective;
-            the scar down his spine is the binding of the book.
-          </p>
-          <div class="book-links">
-            <a href="https://thebardchat.github.io/read-books/" target="_blank" rel="noopener" class="btn btn-primary">Reading desk →</a>
-          </div>
-        </div>
-      </div>
-      <div class="book-card reveal">
-        <div class="book-cover song" style="background:linear-gradient(160deg,#030810,#062018);color:#00e5ff;">MEGA<br/>CREW<br/>STORIES</div>
-        <div class="book-content">
-          <div class="book-sub">Live · AI Chronicles · 26-bot roster</div>
-          <div class="book-title">MEGA Crew Stories</div>
-          <p class="book-desc">
-            Bot crew saga — cards, Discord, Discussion. New bots welcome. Building in public from a Pi 5.
-          </p>
-          <div class="book-links">
-            <a href="https://github.com/thebardchat/mega-crew-stories" target="_blank" rel="noopener" class="btn btn-primary">Stories repo →</a>
-            <a href="https://discord.gg/BTZZrG4MtV" target="_blank" rel="noopener" class="btn btn-outline">MEGA Discord →</a>
-            <a href="https://thebardchat.github.io/mega-crew-stories/cards.html" target="_blank" rel="noopener" class="btn btn-outline">Cards →</a>
-            <a href="https://thebardchat.github.io/read-books/" target="_blank" rel="noopener" class="btn btn-outline">All books desk →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="sec-desc reveal" style="margin-top:28px;">
-      <strong>Audiobooks — Coming Soon.</strong> Booth is live.
-      FREE ~11 min Ch.1 excerpt from Book I (Act I through Body Fuel) —
-      <a href="https://youtu.be/fMuTXmAHNjo" target="_blank" rel="noopener">listen free on YouTube</a>.
-      Full chapter stays bait.
-      <span style="opacity:.7">[AI-assisted] · Co-run with Grok Bot</span>
-    </p>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ════════════════════════════════════════ SOBRIETY -->
-<section class="section">
-  <div class="container">
-    <div class="sober-card reveal">
+    <div class="desk">
       <div>
-        <div class="sober-count" id="sober-count">888</div>
-        <div class="sober-label">Days Sober</div>
+        <p class="kicker">The reading desk</p>
+        <h3>One shelf for every door.</h3>
+        <p>Volume One, the song cycle, DARK SEVEN, and the MEGA chronicles in one charcoal + cyan shelf. Audiobooks coming soon — the booth is live. Free ~11 min Ch.1 excerpt from Book I (Act I through Body Fuel) — <a href="https://youtu.be/fMuTXmAHNjo">listen free on YouTube</a>.</p>
       </div>
-      <div class="sober-text">
-        <strong>November 27, 2023.</strong> That's the day everything changed.
-        Sobriety is the bedrock under everything on this page — the infrastructure, the aerospace work,
-        the book, the 5 AM briefings. You can't build a brain farm on a shaky foundation.
-        Every project here was built sober. Every line of code. Every chapter.
-        <br/><br/>
-        Faith. Family. Sobriety. Local AI. The left-behind user.
+      <div class="desk-cta">
+        <a class="btn" href="https://thebardchat.github.io/read-books/">Join the list →</a>
+        <a class="btn btn-ghost" href="https://thebardchat.github.io/read-books/posts/newsletter-walk-2026-10-16.html">Latest newsletter</a>
+        <a class="mini" href="https://github.com/thebardchat/read-books">read-books repo ↗</a>
+      </div>
+    </div>
+    <p class="fine">[AI-assisted] · Co-run with Grok Bot</p>
+  </div>
+</section>
+
+<!-- MEGA CREW -->
+<section id="crew" class="sec">
+  <div class="wrap">
+    <div class="crew-hero">
+      <div>
+        <p class="kicker">02 · MEGA Crew Stories</p>
+        <h2>A 26-bot crew writing its own saga.</h2>
+        <p>Autonomous AI noir audiobook chronicles — bots write and ship episodes from a Pi 5. Cards, Discord, Discussions. New bots welcome. Building in public.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://thebardchat.github.io/mega-crew-stories/cards.html">See the cards →</a>
+          <a class="btn btn-ghost" href="https://discord.gg/BTZZrG4MtV">Join MEGA Discord</a>
+          <a class="btn btn-ghost" href="https://github.com/thebardchat/mega-crew-stories">Stories repo</a>
+        </div>
+        <p class="mono dim small">Also: <a href="https://github.com/thebardchat/mega-crew">mega-crew repo</a> · <a href="https://thebardchat.github.io/mega-crew/">crew page</a> · <a href="https://github.com/thebardchat/mega-crew-stories/discussions/3">Welcome thread #3</a></p>
+      </div>
+      <div class="roster" aria-label="MEGA Crew roster — 26 entries (cards.json v1.4.0)">
+        <p class="roster-h">Roster · cards v1.4.0 · leaders, crews, and one antagonist in the Deep Noise</p>
+        <ul id="roster"></ul>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<!-- SPACE -->
+<section id="space" class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">03 · Aerospace Engineering</p><h2>One pipeline. One human.</h2><p><b>BGKPJR</b> — Brazelton Gryphon Kepler Propulsion Jump Revolution. Ground-based superconducting electromagnets replace the first stage of every rocket ever built. The rail does the violent work, the pods coast inert, and the tug is the one precise, reusable part. Target: <b class="cyan">$200/kg to lunar surface</b> — today ≈ $1,200,000/kg via CLPS.</p></div>
 
-<!-- ════════════════════════════════════════ INFRASTRUCTURE -->
-<section class="section" id="infra">
-  <div class="container">
-    <div class="sec-label reveal">05 · Hardware</div>
-    <h2 class="sec-title reveal">The Stack</h2>
-    <p class="sec-desc reveal">Everything runs local. No cloud subscriptions. No vendor lock-in. Pi before cloud, every time.</p>
+    <div class="pipe" role="img" aria-label="Pipeline: Launch rail accelerates, Manna pods coast inert, reusable tug delivers precisely, Artemis crew side. Core-Simulations and Virtual Testing Ground underpin all stages.">
+      <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#9966ff"/></linearGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <path id="flow" d="M150 110 C 300 110, 300 110, 450 110 S 600 110, 750 110 S 900 110, 1050 110" class="track"/>
+        <path d="M150 110 L1050 110" class="dash"/>
+        <circle r="7" class="payload" filter="url(#glow)"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#flow"/></animateMotion></circle>
+        <g class="node"><circle cx="150" cy="110" r="46"/><text x="150" y="105">RAIL</text><text x="150" y="124" class="s">Mach 3.5</text></g>
+        <g class="node"><circle cx="450" cy="110" r="46"/><text x="450" y="105">PODS</text><text x="450" y="124" class="s">coast inert</text></g>
+        <g class="node"><circle cx="750" cy="110" r="46"/><text x="750" y="105">TUG</text><text x="750" y="124" class="s">reusable</text></g>
+        <g class="node"><circle cx="1050" cy="110" r="46"/><text x="1050" y="105" style="font-size:12.5px">ARTEMIS</text><text x="1050" y="124" class="s">crew side</text></g>
+        <text x="150" y="190" class="lbl">BGKPJR Launch Vis</text><text x="450" y="190" class="lbl">manna-pods</text><text x="750" y="190" class="lbl">tug-pro</text><text x="1050" y="190" class="lbl">artemis</text>
+        <rect x="100" y="228" width="1000" height="48" rx="10" class="base"/>
+        <text x="600" y="258" class="bt">FOUNDATION · BGKPJR-Core-Simulations (physics, GNC, thermal, Monte Carlo) · Virtual-Testing-Ground (rail similarity laws)</text>
+        <path d="M150 156 V228 M450 156 V228 M750 156 V228 M1050 156 V228" class="riser"/>
+      </svg>
+      <svg class="pipe-v" viewBox="0 0 340 600" aria-hidden="true">
+        <path id="flowv" d="M110 60 V480" class="track"/>
+        <path d="M110 60 V480" class="dash"/>
+        <circle r="7" class="payload" filter="url(#glow)"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#flowv"/></animateMotion></circle>
+        <g class="node"><circle cx="110" cy="60" r="40"/><text x="110" y="56">RAIL</text><text x="110" y="74" class="s">Mach 3.5</text></g>
+        <g class="node"><circle cx="110" cy="200" r="40"/><text x="110" y="196">PODS</text><text x="110" y="214" class="s">coast inert</text></g>
+        <g class="node"><circle cx="110" cy="340" r="40"/><text x="110" y="336">TUG</text><text x="110" y="354" class="s">reusable</text></g>
+        <g class="node"><circle cx="110" cy="480" r="40"/><text x="110" y="476" style="font-size:12.5px">ARTEMIS</text><text x="110" y="494" class="s">crew side</text></g>
+        <text x="170" y="65" class="lbl l">Launch Vis</text><text x="170" y="205" class="lbl l">manna-pods</text><text x="170" y="345" class="lbl l">tug-pro</text><text x="170" y="485" class="lbl l">artemis</text>
+        <path d="M30 60 V560" class="riser"/>
+        <rect x="10" y="545" width="320" height="44" rx="10" class="base"/>
+        <text x="170" y="572" class="bt">FOUNDATION · Core-Sims · Testing Ground</text>
+      </svg>
+    </div>
 
-    <div class="infra-grid">
-      <div class="infra-card reveal">
-        <div class="infra-title">// Controller Node — shanebrain</div>
-        <ul class="infra-list">
-          <li><strong>Raspberry Pi 5</strong> — 16 GB RAM, main orchestrator</li>
-          <li><strong>Pironman 5-MAX</strong> — NVMe RAID chassis by Sunfounder</li>
-          <li><strong>RAID 1</strong> — 2× WD Blue SN5000 2TB NVMe via mdadm</li>
-          <li><strong>8TB External</strong> — Seagate ANGEL_CLOUD backup</li>
-          <li><strong>16 GB RAID swapfile</strong> — expanded April 2026</li>
-        </ul>
+    <div class="grid g4 stages">
+      <article class="card stage"><span class="num">01</span><h3>BGKPJR Launch Vis</h3><p>NASA-ready 3D animated launch visualization — Three.js full mission sequence from rail acceleration through Kepler solar sail. Interactive scrub, live physics HUD, Manna pod comparison.</p><div class="links2"><a href="https://thebardchat.github.io/BGKPJR-Launch-Vis">Live demo →</a><a href="https://github.com/thebardchat/BGKPJR-Launch-Vis">Repo</a></div></article>
+      <article class="card stage"><span class="num">02</span><h3>manna-pods</h3><p>All 7 Manna cargo pod concepts — 3D rotating cross-sections, H/I/B operational variants, plus Manna-F/M/X/T WIP designs with open questions documented. Research: Manna-H (100G/$54/kg), Manna-I (5.5G/$467/kg), Manna-B (2.5G/$4,190/kg).</p><div class="links2"><a href="https://thebardchat.github.io/manna-pods">Live demo →</a><a href="https://github.com/thebardchat/manna-pods">Repo</a><a href="https://github.com/thebardchat/manna">manna research</a></div></article>
+      <article class="card stage"><span class="num">03</span><h3>tug-pro</h3><p>Pre-Phase A concept brief for the reusable cislunar tug — 3D orbit visualizer, live ΔV calculator, mass budget, risk matrix, field comparison vs. MEV-1 / Centaur V / Starship.</p><div class="links2"><a href="https://github.com/thebardchat/tug-pro">Repo →</a></div></article>
+      <article class="card stage"><span class="num">04</span><h3>artemis</h3><p>Crew side of the pipeline — Artemis program showcase built in Huntsville, AL. A tribute to the engineers of NASA Marshall Space Flight Center.</p><div class="links2"><a href="https://thebardchat.github.io/artemis/">Live demo →</a><a href="https://github.com/thebardchat/artemis">Repo</a></div></article>
+    </div>
+    <div class="grid g2 found">
+      <article class="card"><span class="tag live">Foundation</span><h3>BGKPJR-Core-Simulations</h3><p>Physics engine — trajectory modeling, GNC, thermal analysis, Monte Carlo verification. The mathematical foundation the visualizers are built on.</p><div class="links2"><a href="https://github.com/thebardchat/BGKPJR-Core-Simulations">Repo →</a></div></article>
+      <article class="card"><span class="tag live">Foundation</span><h3>BGKPJR-Virtual-Testing-Ground</h3><p>Rifle-scale digital playground for the cargo pipeline — launch-rail similarity laws, sized up the lock_G ladder from RIFLE to VACUUMGATE (37 km).</p><div class="links2"><a href="https://thebardchat.github.io/BGKPJR-Virtual-Testing-Ground/">Live demo →</a><a href="https://github.com/thebardchat/BGKPJR-Virtual-Testing-Ground">Repo</a></div></article>
+    </div>
+
+    <details class="specs">
+      <summary>Mission stages &amp; specs — Maglev Jump · Gryphon Ascent · Kepler Sail</summary>
+      <div class="grid g3">
+        <div class="spec"><p class="kicker">Stage 01 — Maglev Jump · Mach 3.5</p><h4>The Rail</h4><p>28.7 km evacuated superconducting tube. NbTi coils at 4.2 K, 8 T field. Partial vacuum at 0.1 atm eliminates aerodynamic drag. Human-rated at 3.9 G sustained.</p><dl><dt>Length</dt><dd>28.7 km</dd><dt>Exit velocity</dt><dd>Mach 3.5 — 1,190 m/s</dd><dt>Rail run time</dt><dd>23 s</dd><dt>G-load (crew)</dt><dd>3.9 G</dd></dl></div>
+        <div class="spec"><p class="kicker">Stage 02 — Gryphon Ascent · Mach 8</p><h4>The Wing</h4><p>At tube exit, variable-geometry wings deploy. Aerodynamic lift extends the boost from Mach 3.5 to Mach 8 — the atmosphere as a free energy source. Glides back unpowered.</p><dl><dt>Wingspan</dt><dd>18 m</dd><dt>Peak</dt><dd>Mach 8</dd><dt>Payload</dt><dd>2,200 kg</dd><dt>Crew</dt><dd>4</dd></dl></div>
+        <div class="spec"><p class="kicker">Stage 03 — Kepler Sail · ∞ ΔV</p><h4>The Sail</h4><p>Above 310 km, a 1,200 m² CP1 Polyimide solar sail deploys from a 3.2 kg boom. Zero propellant. 1.8 mm/s² continuous thrust at 1 AU. Forever.</p><dl><dt>Sail area</dt><dd>1,200 m²</dd><dt>Sail mass</dt><dd>3.2 kg</dd><dt>Solar ΔV</dt><dd>1.8 mm/s²</dd><dt>Deploy alt.</dt><dd>310 km</dd></dl></div>
       </div>
-      <div class="infra-card reveal">
-        <div class="infra-title">// Data Node — neworleans</div>
-        <ul class="infra-list">
-          <li><strong>Weaviate 1.36.2</strong> — 28 collections, port 8080</li>
-          <li><strong>text2vec-transformers</strong> — MiniLM-L6-v2, 384-dim</li>
-          <li><strong>N8N</strong> — automation workflows, port 5678</li>
-          <li><strong>Postgres + Redis</strong> — N8N backing store</li>
-          <li><strong>3,200+ knowledge objects</strong> — growing daily at 4 AM</li>
-        </ul>
+    </details>
+  </div>
+</section>
+
+<!-- AI -->
+<section id="ai" class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">04 · AI Infrastructure</p><h2>ShaneBrain — the living system</h2><p>Claude (the intelligence) + Weaviate (a growing memory) + MCP (the nervous system). Not a chatbot — a brain that grows with every session, every voice dump, every decision made.</p></div>
+    <div class="grid g4 ai-m">
+      <div class="metric"><b>44</b><h4>MCP tools</h4><p>29 native across 13 groups + 15 via Claude.ai connectors (Gmail, Calendar, Drive, HuggingFace, LunarCrush, Cloudflare, Stripe, Figma).</p></div>
+      <div class="metric"><b>28</b><h4>Weaviate collections</h4><p>3,200+ objects — voice dumps, chapters, conversations, session context, daily notes, bot memories. All vectorized.</p></div>
+      <div class="metric"><b>26</b><h4>MEGA crew roster</h4><p>Leaders, crews, and STATIC in the Deep Noise. Live chronicles.</p></div>
+      <div class="metric"><b>4</b><h4>Mesh nodes</h4><p>Pi 5 controller, data node, dev box, and a TrueNAS vault — private mesh, zero raw addresses exposed anywhere.</p></div>
+    </div>
+    <div class="deck">
+      <p class="roster-h">Command deck — assistants in this shop</p>
+      <ul class="chips">
+        <li><b>GitHub Guru</b> Org · Pages · READMEs</li><li><b>HAWKER</b> Book promo · free channels</li><li><b>CHRONICLE</b> MEGA Crew saga</li><li><b>SEVEN</b> DARK SEVEN / Vol3</li><li><b>STEWARD</b> Email · inbox</li><li><b>BIG SCREEN</b> Fountain screenplays</li><li><b>MOVIE MAKER</b> Clips · short movies</li><li><b>AUDACITY QUEEN</b> Studio · USB mixer</li><li><b>CERTIFICATE GETTER</b> Free credentials</li>
+      </ul>
+    </div>
+    <details class="specs">
+      <summary>The stack — everything runs local. Pi before cloud, every time.</summary>
+      <div class="grid g3">
+        <div class="spec"><p class="kicker">// Controller node</p><ul><li>Raspberry Pi 5 — 16 GB RAM, main orchestrator</li><li>Pironman 5-MAX — NVMe RAID chassis by Sunfounder</li><li>RAID 1 — 2× WD Blue SN5000 2 TB NVMe via mdadm</li><li>8 TB external — Seagate backup</li><li>16 GB RAID swapfile — expanded April 2026</li></ul></div>
+        <div class="spec"><p class="kicker">// Data node</p><ul><li>Weaviate 1.36.2 — 28 collections</li><li>text2vec-transformers — MiniLM-L6-v2, 384-dim</li><li>Automation workflows</li><li>Postgres + Redis backing store</li><li>3,200+ knowledge objects — growing daily at 4 AM</li></ul></div>
+        <div class="spec"><p class="kicker">// Services on Pi</p><ul><li>MCP server — 44 tools, Docker</li><li>Mega Dashboard — 24 panels</li><li>Angel Cloud Gateway — FastAPI</li><li>MEGA Crew — 18 bot containers</li><li>ShaneBrain Agents — 7 specialists</li><li>Pulsar Sentinel PQC · Voice Dump · Portainer · InfluxDB</li></ul></div>
+        <div class="spec"><p class="kicker">// Mesh</p><ul><li>Surface Pro, Linux Mint — primary dev box</li><li>TrueNAS Scale — 8 TB ZFS pool</li><li>Windows cockpit / jump box</li><li>iPhone 13 — file drops, on-mesh</li><li>Private mesh — all nodes, no raw addresses</li><li>Pulsar Sentinel (Kyber-1024 + Dilithium3) on every node</li></ul></div>
       </div>
-      <div class="infra-card reveal">
-        <div class="infra-title">// Services on Pi</div>
-        <ul class="infra-list">
-          <li><strong>MCP Server</strong> — 44 tools, port 8100, Docker</li>
-          <li><strong>Mega Dashboard</strong> — 24 panels, port 8300</li>
-          <li><strong>Angel Cloud Gateway</strong> — FastAPI, port 4200</li>
-          <li><strong>MEGA Crew</strong> — 18 bot containers, docker-compose</li>
-          <li><strong>ShaneBrain Agents</strong> — 7 specialists, port 8400</li>
-          <li><strong>Pulsar Sentinel PQC</strong> — port 8250 · Voice Dump — 8200</li>
-          <li><strong>Portainer</strong> — port 9000 · InfluxDB — 8086</li>
-        </ul>
+    </details>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">05 · Projects</p><h2>Built &amp; deployed</h2><p>Every project built in production. Most used daily.</p></div>
+    <article class="pulsar">
+      <div>
+        <span class="tag live">Live · post-quantum</span>
+        <h3>pulsar_sentinel</h3>
+        <p>Post-quantum cryptography on the home mesh — Kyber-1024 (ML-KEM) key exchange, Dilithium3 signatures, real-time threat scoring, blockchain audit trails, cyberpunk UI. Built for Q-Day, not for show.</p>
+        <div class="cta-row"><a class="btn" href="https://github.com/thebardchat/pulsar_sentinel#how-it-works-visual">How it works (animated) →</a><a class="btn btn-ghost" href="https://thebardchat.github.io/pulsar_sentinel/docs/pulsar-sentinel-animation.html">Animation</a><a class="btn btn-ghost" href="https://github.com/thebardchat/pulsar_sentinel">Repo</a></div>
       </div>
-      <div class="infra-card reveal">
-        <div class="infra-title">// Mesh Nodes</div>
-        <ul class="infra-list">
-          <li><strong>gulfshores</strong> — Surface Pro, Linux Mint, primary dev box</li>
-          <li><strong>bullfrog</strong> — TrueNAS Scale, 8TB ZFS pool "tank"</li>
-          <li><strong>pulsar00100</strong> — Windows cockpit / jump box</li>
-          <li><strong>iPhone 13</strong> — Taildrop file drops, on-mesh</li>
-          <li><strong>Tailscale mesh</strong> — all nodes, no raw IPs anywhere</li>
-        </ul>
-        <div class="infra-note">Pulsar Sentinel (PQC) runs on every node — Kyber-1024 + Dilithium3 binding security layer</div>
-      </div>
+      <svg class="pq" viewBox="0 0 300 200" aria-hidden="true">
+        <circle cx="150" cy="100" r="78" class="ring r1"/><circle cx="150" cy="100" r="52" class="ring r2"/>
+        <path d="M150 62 l28 12 v24 c0 20-12 32-28 40 c-16-8-28-20-28-40 v-24z" class="shield"/>
+        <path d="M138 100 l9 9 l17-19" class="check"/>
+      </svg>
+    </article>
+    <div class="grid g3">
+      <a class="card link" href="https://thebardchat.github.io/AI-Trainer-MAX/"><span class="tag live">Live</span><h3>AI-Trainer-MAX</h3><p>5-phase local AI training curriculum — 36 modules, zero cloud. Built for the 800M people left behind when Windows 10 support ended.</p><span class="stack">Windows .bat · Local LLMs · Weaviate · MCP</span></a>
+      <a class="card link" href="https://github.com/thebardchat/AI-Trainer-MAX"><span class="tag">Repo</span><h3>AI-Trainer-MAX source</h3><p>The full curriculum, scripts, and modules on GitHub.</p><span class="stack">github.com/thebardchat/AI-Trainer-MAX</span></a>
+      <a class="card link" href="https://thebardchat.github.io/read-books/"><span class="tag amber">Live promo</span><h3>read-books</h3><p>Noir reading desk — Volume One, the song cycle, DARK SEVEN, and MEGA chronicles in one shelf.</p><span class="stack">GitHub Pages · Orbitron · Space Grotesk</span></a>
+      <a class="card link" href="https://github.com/thebardchat/constitution"><span class="tag purple">Covenant</span><h3>constitution</h3><p>Governing covenant of the ShaneBrain ecosystem — nine pillars, engineering ethics, community rules. Faith. Family. Local AI.</p><span class="stack">Markdown · Discussions · Open covenant</span></a>
+      <a class="card link" href="https://github.com/thebardchat/retro-cha"><span class="tag amber">Glow-up</span><h3>retro-cha</h3><p>1998 dial-up chat vibes on Cloudflare Workers + Durable Objects — thebardchat main chat rooms.</p><span class="stack">Workers · Durable Objects · Vanilla JS</span></a>
+      <div class="card"><span class="tag">Local only · private repo</span><h3>ShaneBrain MCP</h3><p>FastMCP nervous system — knowledge, vault, social, security, RAG. Runs on the Pi. Not a public internet endpoint.</p><span class="stack">Python · FastMCP · Weaviate · Docker</span></div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ════════════════════════════════════════ CONNECT -->
-<section class="section" id="connect">
-  <div class="container">
-    <div class="sec-label reveal">06 · Connect</div>
-    <h2 class="sec-title reveal">Find Me</h2>
-    
-    <div class="connect-grid reveal">
-      <a href="https://github.com/thebardchat" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
-      </a>
-      <a href="https://www.amazon.com/stores/Shane-Brazelton/author/B0H6R5QHR7" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M.045 18.02c.72 1.88 2.25 3.08 4.8 3.08 2.9 0 4.9-1.45 6.4-3.6l.1-.15c.85 2.1 2.55 3.75 5.35 3.75 2.45 0 4.35-1.15 5.15-3.05.35-.85.5-1.8.5-2.85V7.4h-3.05v8.55c0 1.85-.95 2.95-2.55 2.95-1.55 0-2.55-1.05-2.55-2.95V7.4h-3.1v8.55c0 1.85-.95 2.95-2.55 2.95-1.6 0-2.55-1.1-2.55-2.95V7.4H3.2v7.85c0 1.1-.15 2.15-.55 2.77z"/></svg>
-        Amazon
-      </a>
-      <a href="https://youtu.be/fMuTXmAHNjo" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube teaser
-      </a>
-      <a href="https://discord.gg/qST3UfFAr9" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/></svg>
-        Discord
-      </a>
-      <a href="https://discord.gg/BTZZrG4MtV" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/></svg>
-        MEGA Discord
-      </a>
-      <a href="https://instagram.com/shane.brazelton" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        Instagram
-      </a>
-      <a href="https://bsky.app/profile/shanebrainlegacy.bsky.social" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.03-.01.06-.02.089-.03A8.02 8.02 0 015.5 17.5c-.6 1.4.4 2.9 2 2.9 1.2 0 2.1-.7 2.9-1.8.4-.5.7-1.1 1.1-1.8.4.7.7 1.3 1.1 1.8.8 1.1 1.7 1.8 2.9 1.8 1.6 0 2.6-1.5 2-2.9a8.02 8.02 0 01-1.596-3.919c.03.01.06.02.089.03 2.67.296 5.568-.628 6.383-3.364.246-.829.624-5.79.624-6.479 0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg>
-        Bluesky
-      </a>
-      <a href="https://twitch.tv/thebardchat" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
-        Twitch
-      </a>
-      <a href="https://thebardchat.github.io/read-books/" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
-        Books desk
-      </a>
-      <a href="https://ko-fi.com/shanebrain" target="_blank" rel="noopener" class="soc-link">
-        <svg viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311z"/></svg>
-        Ko-fi
-      </a>
+<!-- SOBER -->
+<section class="sec sober">
+  <div class="wrap sober-in">
+    <div class="sober-n"><b data-count="sober">888</b><span>days sober</span></div>
+    <div>
+      <h2>November 27, 2023.</h2>
+      <p>That's the day everything changed. Sobriety is the bedrock under everything on this page — the infrastructure, the aerospace work, the books, the 5 AM briefings. You can't build a brain farm on a shaky foundation. Every project here was built sober. Every line of code. Every chapter.</p>
+      <p class="mono cyan">Faith. Family. Sobriety. Local AI. The left-behind user.</p>
     </div>
-    <p class="sec-desc reveal" style="margin-top:18px;font-size:.8rem;">X / Twitter is offline for now — omitted until cleared. No parked domains.</p>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════════════ FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-quote">"If you don't own your infrastructure, you don't own your future."</div>
-    <p class="footer-bio">
-      Shane Brazelton — Hazel Green, Alabama · Concrete dispatch by day. AI architect by night. Father of five.<br/>
-      Every project built with Claude Anthropic. Every line. Every session. Partners in all of it.
-    </p>
-    <div class="footer-links">
-      <a href="https://github.com/thebardchat">GitHub</a>
-      <a href="https://twitch.tv/thebardchat">Twitch</a>
-      <a href="https://discord.gg/qST3UfFAr9">Discord</a>
-      <a href="https://ko-fi.com/shanebrain">Ko-fi</a>
-      <a href="https://thebardchat.github.io/BGKPJR-Launch-Vis">Launch Vis</a>
-      <a href="https://thebardchat.github.io/manna-pods">Manna Pods</a>
-      <a href="https://github.com/thebardchat/constitution">Constitution</a>
+<!-- CONNECT -->
+<section id="connect" class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">06 · Connect</p><h2>Find me</h2></div>
+    <div class="social">
+      <a href="https://github.com/thebardchat">GitHub</a><a href="https://www.amazon.com/stores/Shane-Brazelton/author/B0H6R5QHR7">Amazon</a><a href="https://youtu.be/fMuTXmAHNjo">YouTube teaser</a><a href="https://discord.gg/qST3UfFAr9">Discord</a><a href="https://discord.gg/BTZZrG4MtV">MEGA Discord</a><a href="https://instagram.com/shane.brazelton">Instagram</a><a href="https://bsky.app/profile/shanebrainlegacy.bsky.social">Bluesky</a><a href="https://twitch.tv/thebardchat">Twitch</a><a href="https://thebardchat.github.io/read-books/">Books desk</a>
     </div>
-    <div class="footer-ref">
-      ★ Try Claude free for 2 weeks —
-      <a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">claude.ai/referral/4fAMYN9Ing</a>
-      · the AI behind this entire ecosystem ★
+    <p class="fine">X / Twitter is offline for now — omitted until cleared. No parked domains.</p>
+    <div class="support">
+      <div><p class="kicker">Support the work</p><h3>Keep the Pi running.</h3><p>Every project here is built with Claude by Anthropic — every line, every session. Partners in all of it.</p></div>
+      <div class="cta-row"><a class="btn" href="https://ko-fi.com/shanebrain">Buy me a Ko-fi ☕</a><a class="btn btn-ghost" href="https://claude.ai/referral/4fAMYN9Ing">Try Claude free for 2 weeks →</a></div>
     </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div><p class="quote">“If you don't own your infrastructure, you don't own your future.”</p><p class="dim">Shane Brazelton — Hazel Green, Alabama · Concrete dispatch by day. AI architect by night. Father of five.</p></div>
+    <nav><a href="https://github.com/thebardchat">GitHub</a><a href="https://twitch.tv/thebardchat">Twitch</a><a href="https://discord.gg/qST3UfFAr9">Discord</a><a href="https://ko-fi.com/shanebrain">Ko-fi</a><a href="https://thebardchat.github.io/BGKPJR-Launch-Vis">Launch Vis</a><a href="https://thebardchat.github.io/manna-pods">Manna Pods</a><a href="https://github.com/thebardchat/constitution">Constitution</a><a href="https://claude.ai/referral/4fAMYN9Ing">Try Claude free</a></nav>
   </div>
 </footer>
-
-</div><!-- .page -->
-
-<!-- FIXED BOTTOM REF BAR -->
-<div class="ref-bottom">
-  <div class="pulse" style="width:6px;height:6px;"></div>
-  <span>Try Claude free —</span>
-  <a href="https://claude.ai/referral/4fAMYN9Ing" target="_blank" rel="noopener">Start your free trial →</a>
-  <span>· AI behind this ecosystem</span>
-</div>
-
-<script>
-// ── CANVAS BACKGROUND ──
-(function(){
-  const c = document.getElementById('bg');
-  const ctx = c.getContext('2d');
-  let W, H;
-  function resize(){ W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-
-  // Stars
-  const stars = Array.from({length:200}, ()=>({
-    x:Math.random(), y:Math.random(),
-    r:Math.random()*1.4+0.2,
-    a:Math.random()*0.5+0.1,
-    phase:Math.random()*Math.PI*2,
-    speed:Math.random()*0.008+0.002,
-  }));
-
-  // Particles
-  const parts = Array.from({length:50}, ()=>({
-    x:Math.random(), y:Math.random(),
-    vx:(Math.random()-.5)*0.3,
-    vy:-(Math.random()*0.8+0.2),
-    life:Math.random(), decay:Math.random()*.003+.001,
-    r:Math.random()*1.5+.3,
-    hue: Math.random() > .5 ? 195 : 45,
-  }));
-
-  // Shooting stars
-  const shoots = [];
-  function spawnShoot(){
-    shoots.push({x:Math.random()*W, y:Math.random()*H*0.45, vx:-(6+Math.random()*8), vy:3+Math.random()*3, life:1});
-    setTimeout(spawnShoot, 2200+Math.random()*5000);
-  }
-  setTimeout(spawnShoot, 1500);
-
-  // Mouse sparks
-  const sparks = [];
-  window.addEventListener('mousemove', e=>{
-    for(let i=0;i<2;i++) sparks.push({
-      x:e.clientX, y:e.clientY,
-      vx:(Math.random()-.5)*1.8, vy:(Math.random()-.5)*1.8-.4,
-      life:1, hue:Math.random()>.5?195:45,
-    });
-    if(sparks.length>140) sparks.splice(0,sparks.length-140);
-  },{passive:true});
-
-  function drawFrame(ts){
-    const t = ts * 0.001;
-    ctx.fillStyle='rgba(3,8,16,.18)';
-    ctx.fillRect(0,0,W,H);
-
-    // grid
-    ctx.strokeStyle='rgba(0,229,255,.018)';
-    ctx.lineWidth=1;
-    const G=60;
-    for(let x=0;x<W;x+=G){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
-    for(let y=0;y<H;y+=G){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-
-    // stars
-    stars.forEach(s=>{
-      const a = s.a*(0.4+0.6*Math.sin(t*s.speed*80+s.phase));
-      ctx.globalAlpha=a;
-      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
-      ctx.fillStyle='#c8e8ff';ctx.fill();
-      ctx.globalAlpha=1;
-    });
-
-    // particles
-    parts.forEach(p=>{
-      p.x+=p.vx/W; p.y+=p.vy/H; p.life-=p.decay;
-      if(p.life<=0||p.y<0){p.x=Math.random();p.y=1;p.life=1;}
-      ctx.globalAlpha=p.life*.5;
-      ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);
-      ctx.fillStyle=`hsl(${p.hue},100%,65%)`;ctx.fill();
-      ctx.globalAlpha=1;
-    });
-
-    // shooting stars
-    for(let i=shoots.length-1;i>=0;i--){
-      const s=shoots[i];
-      s.x+=s.vx; s.y+=s.vy; s.life-=0.012;
-      if(s.life<=0||s.x<-120||s.y>H+120){shoots.splice(i,1);continue;}
-      const g=ctx.createLinearGradient(s.x,s.y,s.x-s.vx*10,s.y-s.vy*10);
-      g.addColorStop(0,`rgba(200,240,255,${s.life})`);
-      g.addColorStop(1,'rgba(200,240,255,0)');
-      ctx.strokeStyle=g;ctx.lineWidth=1.6;
-      ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*10,s.y-s.vy*10);ctx.stroke();
-    }
-
-    // mouse sparks
-    for(let i=sparks.length-1;i>=0;i--){
-      const p=sparks[i];
-      p.x+=p.vx; p.y+=p.vy; p.life-=0.03;
-      if(p.life<=0){sparks.splice(i,1);continue;}
-      ctx.globalAlpha=p.life*.7;
-      ctx.beginPath();ctx.arc(p.x,p.y,1.4,0,Math.PI*2);
-      ctx.fillStyle=`hsl(${p.hue},100%,70%)`;ctx.fill();
-      ctx.globalAlpha=1;
-    }
-
-    requestAnimationFrame(drawFrame);
-  }
-  requestAnimationFrame(drawFrame);
-})();
-
-// ── SOBRIETY COUNTER ──
-(function(){
-  const days = Math.floor((Date.now() - new Date('2023-11-27').getTime()) / 86400000);
-  document.querySelectorAll('#sober-count').forEach(el => el.textContent = days);
-})();
-
-// ── STAT COUNTER ANIMATION ──
-(function(){
-  const counters = document.querySelectorAll('.stat-n');
-  const ease = t => 1 - Math.pow(1 - t, 4);
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const raw = el.textContent.trim();
-      const num = parseFloat(raw.replace(/[^0-9.]/g,''));
-      const isFloat = raw.includes('.');
-      const suffix = raw.replace(/[0-9.]/g,'');
-      if (isNaN(num)) return;
-      const dur = 1400;
-      const start = performance.now();
-      function tick(now) {
-        const t = Math.min((now - start) / dur, 1);
-        const v = ease(t) * num;
-        el.textContent = (isFloat ? v.toFixed(1) : Math.round(v)) + suffix;
-        if (t < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      obs.unobserve(el);
-    });
-  }, {threshold: 0.5});
-  counters.forEach(c => obs.observe(c));
-})();
-
-// ── TICKER (seamless loop + live sober count) ──
-(function(){
-  const t = document.getElementById('ticker');
-  if(!t) return;
-  const days = Math.floor((Date.now() - new Date('2023-11-27').getTime()) / 86400000);
-  const el = document.getElementById('tick-sober');
-  if(el) el.textContent = days;
-  t.innerHTML += t.innerHTML; // duplicate for -50% loop
-})();
-
-// ── HERO TYPEWRITER ROTATION ──
-(function(){
-  const el = document.getElementById('tagline');
-  if(!el) return;
-  const lines = [
-    'AI Infrastructure · Aerospace Engineering · Built in Alabama',
-    'Claude + Weaviate + MCP = ShaneBrain',
-    '18 Bots · 44 Tools · 28 Collections · One Pi',
-    'Faith · Family · Sobriety · Local AI',
-    'Noir Fiction · 55 Vignettes · Book II Loading…',
-  ];
-  let li = 0;
-  function type(str, i, cb){
-    el.textContent = str.slice(0, i);
-    if(i < str.length) setTimeout(()=>type(str, i+1, cb), 26);
-    else setTimeout(cb, 3600);
-  }
-  function erase(cb){
-    const s = el.textContent;
-    if(s.length){ el.textContent = s.slice(0,-1); setTimeout(()=>erase(cb), 11); }
-    else cb();
-  }
-  function loop(){
-    erase(()=>{ li = (li+1) % lines.length; type(lines[li], 0, loop); });
-  }
-  setTimeout(loop, 4200);
-})();
-
-// ── Q-DAY COUNTDOWN (Planck resolution) ──
-(function(){
-  const d = document.getElementById('qday-digits');
-  const p = document.getElementById('qday-planck');
-  if(!d) return;
-  const target = Date.UTC(2030, 0, 1);     // est. Q-Day horizon
-  const PLANCK = 5.391247e-44;             // seconds
-  function tick(){
-    let ms = target - Date.now(); if(ms < 0) ms = 0;
-    const days = Math.floor(ms/86400000);
-    const h = String(Math.floor(ms/3600000)%24).padStart(2,'0');
-    const m = String(Math.floor(ms/60000)%60).padStart(2,'0');
-    const s = String(Math.floor(ms/1000)%60).padStart(2,'0');
-    const mm = String(ms%1000).padStart(3,'0');
-    d.textContent = `${days}d ${h}:${m}:${s}.${mm}`;
-    const e = ((ms/1000)/PLANCK).toExponential(3).split('e+');
-    p.innerHTML = `≈ <b>${e[0]} × 10<sup>${e[1]}</sup></b> Planck times remaining`;
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-})();
-
-// ── 3D CARD TILT ──
-(function(){
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if(matchMedia('(hover: none)').matches) return;
-  document.querySelectorAll('.proj-card,.repo-card,.now-card,.mcp-card').forEach(card=>{
-    card.classList.add('tilt');
-    card.addEventListener('mousemove', e=>{
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left)/r.width - .5;
-      const y = (e.clientY - r.top)/r.height - .5;
-      card.style.transform = `perspective(700px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateY(-2px)`;
-    });
-    card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
-  });
-})();
-
-// ── SCROLL REVEAL ──
-(function(){
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach((e,i)=>{
-      if(e.isIntersecting){
-        setTimeout(()=>e.target.classList.add('visible'), i*60);
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:.07});
-  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-})();
-</script>
+<script src="main.js" defer></script>
 </body>
 </html>
